@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/heimdallr/ros1_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages",
+        "/usr/local/lib",
+        "/usr/local/lib/python3.6/pyrealsense2"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/heimdallr/ros1_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages",
+        "/usr/local/lib",
+        "/usr/local/lib/python3.6/pyrealsense2"
+    ]
+}

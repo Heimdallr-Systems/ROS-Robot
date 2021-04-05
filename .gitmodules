@@ -1,0 +1,3 @@
+[submodule "src/ros-imu-bno055"]
+	path = src/ros-imu-bno055
+	url = https://github.com/Heimdallr-Systems/ros-imu-bno055.git

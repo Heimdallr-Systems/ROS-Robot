@@ -1,0 +1,4 @@
+<launch>
+  <remap from="/goal" to="/rtabmap/goal"/> 
+  <node name="goal_set" pkg="robot_goal_gen" type="setTargetPos.py" output="screen"/>  
+</launch>
