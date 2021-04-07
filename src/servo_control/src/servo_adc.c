@@ -3,7 +3,7 @@
 
 static uint8_t bits = 8;
 static uint32_t speed = 8000000;
-static const char *device = "/dev/spidev0.1";
+static const char *device = "/dev/spidev0.0";
 static uint8_t mode = SPI_MODE_3;
 
 uint8_t rxBuffer[30];
@@ -81,11 +81,11 @@ ADC_ERRORS_T readADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio, uint16_t adcVals[
     int waitStatus;
     // uint16_t adcVals[15];
     uint8_t delay = 0;
-
+	
     struct spi_ioc_transfer adcTxCMD = {
         .tx_buf = (unsigned long)txBuffer,
-        // .rx_buf = (unsigned long)rxBuffer,
-        .rx_buf = NULL,
+        .rx_buf = (unsigned long)NULL,
+       // .rx_buf = NULL,
         .len = 3,
         .delay_usecs = delay,
         .speed_hz = speed,
@@ -93,10 +93,19 @@ ADC_ERRORS_T readADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio, uint16_t adcVals[
     };
     if (ioctl(*adc_spi, SPI_IOC_MESSAGE(1), &adcTxCMD) < 1)
     {
+	printf("SPI ERROR");
+	
         return ADC_WRITE_ERROR;
     }
 
-    switch (gpiod_line_event_wait(adc_gpio->line, NULL))
+struct timespec adc_wait_time = {0, 100000000};
+
+//adc_wait_time.tv_sec=0;
+//adc_wait_time.tv_nsec=100000000;
+int event = gpiod_line_event_wait(adc_gpio->line, &adc_wait_time);
+//int event=gpiod_line_event_wait(adc_gpio->line, NULL);
+printf("EVENT: %i\n", event);
+ /*switch ())
     {
     case 0:
         return ADC_GPIO_TIMEOUT;
@@ -108,10 +117,10 @@ ADC_ERRORS_T readADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio, uint16_t adcVals[
         break;
     }
 
-
-    struct spi_ioc_transfer adcRxCMD = {
+*/
+   struct spi_ioc_transfer adcRxCMD = {
         // .tx_buf = (unsigned long)txBuffer,
-        .tx_buf = (unsigned long)txBuffer,
+        //.tx_buf = (unsigned long)txBuffer,
         .rx_buf = (unsigned long)rxBuffer,
         .len = 30,
         .delay_usecs = delay,

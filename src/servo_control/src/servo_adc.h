@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <gpiod.h>
+#include <time.h>
 // #include <gpiod.h>
 
 #ifndef SERVO_ADC_H

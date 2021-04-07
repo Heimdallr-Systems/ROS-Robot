@@ -33,8 +33,23 @@ def servo_target_listener():
 if __name__ == '__main__':
   print("Note: Initializing PCA9685 servo driver...")
   pwm=pca.init_pca9685()
+  pi=3.1415926535
+  servo_poses=[pi/4.0,-pi/4.0, -pi/4.0, pi/4.0, pi/6.0,pi/6.0, pi/6.0,pi/6.0,pi/3.0, -pi/3.0,pi/3.0,-pi/3.0,0,0]
+  ports=[0, 1, 2, 3,4,5,6,7,8,9,10,11,12,13]
+  for i in range(0,13):
+    q=pca.drive_servos(pwm,0,i)
+
   while(True):
-    a=pca.drive_servos(pwm,0,0)
-    time.sleep(.1)
-    print("Driving servo to zero")
+    a=str(input("Press 1 to initialize port zero, 2 to stand up: "))
+    if(a=='1'):
+      print("driving servo 1 to zero")
+      q=pca.drive_servos(pwm,-pi/4,0)
+      time.sleep(2)
+      print("at initial pose")
+    elif(a=='2'):
+      print("driving robot to an initial position")
+      for i in range(0,len(ports)):
+        a=pca.drive_servos(pwm,servo_poses[i],ports[i])
+      time.sleep(5)
+      print("done")
 #  servo_target_listener()
