@@ -1,0 +1,15 @@
+## GPIO Udev Rules
+## By Gabriel Roper for the ERAU-PC 2021 EE-Robotics Capstone
+## Allows the user to write programs that access GPIO without needing to run as root
+## The Jetson's GPIO can be accessed with libgpiod through the /dev/gpiochip0 device
+## However, this device is owned by root and is in the group root, with only RW access
+## for the owner. This udev rule runs as root when the device are added to /dev during
+## the boot process. It changes /dev/gpiochip0 (the device that the 40pin header is on)
+## to be in the gpio group, and then it adds RW permissions for that group. It does not
+## change the group/permissions for /dev/gpiochip1, as that seems to be for some
+## power regulator, which I don't need to modify, so I left it as is.  
+
+## This is probably not correct, and really bad, but I don't know enough about Linux 
+## device setup to find a better way. Besides, this works, so I don't care!
+
+SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", PROGRAM="/bin/sh -c 'chown root:gpio /dev/gpiochip0; chmod 660 /dev/gpiochip0'"

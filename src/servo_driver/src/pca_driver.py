@@ -33,4 +33,8 @@ def servo_target_listener():
 if __name__ == '__main__':
   print("Note: Initializing PCA9685 servo driver...")
   pwm=pca.init_pca9685()
-  servo_target_listener()
+  while(True):
+    a=pca.drive_servos(pwm,0,0)
+    time.sleep(.1)
+    print("Driving servo to zero")
+#  servo_target_listener()
