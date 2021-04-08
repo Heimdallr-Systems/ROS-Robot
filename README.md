@@ -9,13 +9,11 @@ All ROS nodes are found under [/src](/src)
 
 ### pose_measure
 
-Does something regarding the robot pose. 
-TODO: Get Trevor to add details
+Complementary filter for determining robot orientation and position. 
 
 ### robot_goal_gen
 
-Used to get and generate the robot goal
-TODO: Get Trevor to add more details
+Generates the trajectory for the robot to follow. 
 
 ### robotkinematics
 
@@ -30,7 +28,7 @@ _Note: This is implemented as a git submodule, and will require submodule initia
 
 ### servo_control
 
-Main servo control code, including determining positions to set to, and reading from ADC.
+Main servo feedback control. 
 
 **IMPORTANT** This module requires extra steps to set up. See the [node's README](/src/servo_control/README.md) for more details
 
