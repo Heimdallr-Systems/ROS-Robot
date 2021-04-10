@@ -34,4 +34,4 @@ jobs:
           workspace: '$GITHUB_WORKSPACE'
           
       - name: Try building the workspace
-      - run: catkin_make
+        run: catkin_make
