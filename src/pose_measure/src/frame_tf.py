@@ -5,6 +5,7 @@ from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import Imu
 from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Vector3
+from servo_control.msg import MotorVector
 from scipy.spatial.transform import Rotation as R
 import numpy as np
 have_imu_data=0
@@ -13,7 +14,11 @@ imu_position = [0,0,0]
 imu_orien=R.from_matrix(np.eye(3))
 RTAB_orien=R.from_matrix(np.eye(3))
 RTAB_position=[0,0,0]
-
+alpha=0
+beta=0
+r_bb_1=[0;0;.1]
+r_11_2=[.1;.1;.1]
+r_22_cam=[.1;0;.1]
 def RTAB_callback(data):
   global RTAB_orien
   global have_RTAB_data
@@ -32,14 +37,33 @@ def IMU_callback(data):
   quat=data.orientation
   imu_orien=R.from_quat(quat)
   have_imu_data=1
+def feedbackCB(data):
+  global alpha
+  global beta
+  alpha=data.data[12]
+  beta=data.data[13]
+
 def combine_orientation():
+  global alpha
+  global beta
+  r_BB_cam=[0,0,0]
   position = RTAB_position
   orien_rtab = RTAB_orien.as_quat
   orien_imu=imu_orien.as_rotvec
   angle=math.sqrt(orien_imu[0]**2 + orien_imu[0]**2 + orien_imu[0]**2)
   orien_imu=[orien_imu[0]/angle,orien_imu[1]/angle,orien_imu[2]/angle]
-  
-  
+  T_cam_b=np.array([[math.cos(alpha)*math.cos(beta),math.cos(beta)*math.sin(alpha),-math.sin(beta)],
+                   [-math.sin(alpha),math.cos(alpha),0],
+                   [math.cos(alpha)*math.sin(beta),math.sin(alpha)*math.sin(beta),math.cos(beta)]])
+  r_BB_cam[0]=r_BB_1[0]+r_11_2[0]*math.cos(alpha)+r_22_cam[0]*math.cos(beta)-r_11_2[1]*math.sin(alpha)+r_22_cam[3]*math.sin(beta)
+  r_BB_cam[1]=r_22_cam[1]+r_BB_1[1]+r_11_2[1]*math.cos(alpha)+r_11_2[0]*math.sin(alpha)
+  r_BB_cam[3]=r_11_2[2]+r_BB_1[2]+r_22_cam[2]*math.cos(beta)-r_22_cam[0]*math.sin(beta)
+  position[0]=position[0]-r_BB_cam[0]
+  position[1]=position[1]-r_BB_cam[1]
+  position[2]=position[2]-r_BB_cam[2]
+  orien=np.matmul(np.asarray(RTAB_orien),T_cam_b)
+  orien=R.from_matrix(orien)
+  orien_imu=orien.as_quat;
   return [position, orien_imu]
 
 if(__name__=='__main__'):
@@ -47,8 +71,8 @@ if(__name__=='__main__'):
     pub=rospy.Publisher('pose_combined',PoseStamped,queue_size=10)
     rospy.init_node('frame_tf',anonymous=True)
     rospy.Subscriber('/rabmap/odom',PoseStamped,RTAB_callback,queue_size=1)
-    rospy.Subscriber('/data',Imu,IMU_callback,queue_size=
-)
+    rospy.Subscriber('/data',Imu,IMU_callback,queue_size=1)
+    rospy.Subscriber('/servo_feedback',MotorVector,feedbackCB,queue_size=1)
     rate=rospy.rate(5)
     while not rospy.is_shutdown():
       if(have_imu_data!=0 and have_RTAB_data !=0):

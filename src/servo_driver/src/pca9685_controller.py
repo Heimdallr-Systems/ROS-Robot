@@ -30,7 +30,7 @@ def init_pca9685():
 def rad2pulse(rad):
     # Convert radians to servo pulses
     pstart = 150 # us
-    pend = 600 # us
+    pend = 1000 # us
     pmiddle = (pend-pstart)/2+pstart # us
     radrange=270*math.pi/180
     return int(((pend-pstart)/radrange*rad+pmiddle)/2)
@@ -39,6 +39,7 @@ def drive_servos(pwm,servo_pos,i):
     #for i in range(0,min(len(servo_pos),15)):
     pwm.set_pwm(i,0,rad2pulse(servo_pos))
     feedback = "driving port " + str(i) + " to " + str(rad2pulse(servo_pos))
+    print(feedback)
     return [pwm,feedback]
 '''pwm=init_pca9685()
 print('Moving servo on channel 0, press Ctrl-C to quit...')

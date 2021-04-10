@@ -9,6 +9,7 @@ project(servo_control)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  roscpp
   std_msgs
   message_generation
 )
@@ -105,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES servo_control
 #  CATKIN_DEPENDS rospy
 #  DEPENDS system_lib
@@ -118,7 +119,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+ include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -206,3 +207,17 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+add_executable(servo_feedback_measured src/servo_feedback_measured.cpp)
+target_link_libraries(servo_feedback_measured ${catkin_LIBRARIES})
+#add_dependencies(servo_feedback_measured )
+add_library(adc include/servo_adc.c)
+target_link_libraries(servo_feedback_measured adc)
+
+# Find the GPIOD library. Throw a warning if it is not found
+find_library(GPIOD_LIBRARY NAMES libgpiod.so)
+if(NOT GPIOD_LIBRARY)
+  message(FATAL_ERROR "gpiod library not found. Install with sudo apt install libgpiod-dev")
+endif()
+
+# Link in the GPIOD library
+target_link_libraries(servo_feedback_measured ${GPIOD_LIBRARY})
