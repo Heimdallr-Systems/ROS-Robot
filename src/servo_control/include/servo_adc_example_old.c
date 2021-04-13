@@ -21,11 +21,11 @@ int main()
         printf("ADC Read Error\n");
         return -1;
     }
-    if (closeADC(&adcDevice, &adcGPIO))
-    {
-        printf("ADC Close Error\n");
-        return -1;
-    }
+//    if (closeADC(&adcDevice, &adcGPIO))
+  //  {
+   //     printf("ADC Close Error\n");
+    //    return -1;
+    //}
 
     for (uint8_t i = 0; i < 15; i++)
     {

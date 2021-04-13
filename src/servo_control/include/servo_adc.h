@@ -14,9 +14,9 @@ extern "C"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <gpiod.h>
+//#include <gpiod.h>
 #include <time.h>
-// #include <gpiod.h>
+
 
 
 
@@ -42,25 +42,6 @@ typedef enum error_e {
     ADC_GPIO_TIMEOUT
 } ADC_ERRORS_T;
 
-struct gpiod_chip *chip;
-struct gpiod_line *line;
-
-typedef int32_t ADC_SPI_T;
-
-typedef struct gpio_s {
-    struct gpiod_chip *chip;
-    struct gpiod_line *line;
-} ADC_GPIO_T;
-
-/**
- * @brief Initialize the connection to the ADC
- *  This function initializes the SPI connection, and the GPIO pin used for EOC
- * 
- * @param adc_spi: Pointer to a variable that will store the SPI file descriptor
- * @param adc_gpio: Pointer to a variable that stores the information needed for the GPIO connection
- * @returns Error code from running the function, or 0 if successful
- */
-ADC_ERRORS_T setupADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio);
 
 /**
  * @brief Read the data from the ADC
@@ -71,17 +52,8 @@ ADC_ERRORS_T setupADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio);
  * @param adcVals: 15 element array that the raw ADC Values are stored in.
  * @returns Error code from running the function, or 0 if successful
  */
-ADC_ERRORS_T readADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio, uint16_t adcVals[15]);
-ADC_ERRORS_T closeADC(ADC_SPI_T *adc_spi, ADC_GPIO_T *adc_gpio);
+ADC_ERRORS_T readADC(uint16_t adv[15]);
 
-/**
- * @brief Close connection to the ADC
- *  This closes the SPI bus and the GPIO pin that the ADC uses
- * 
- * @param adc_spi: Pointer to a variable that will store the SPI file descriptor
- * @param adc_gpio: Pointer to a variable that stores the information needed for the GPIO connection
- * @returns Error code from running the function, or 0 if successful
- */
 #endif
 #ifdef __cplusplus
 }
