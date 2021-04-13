@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: xdot.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef XDOT_H
 #define XDOT_H
 
@@ -16,27 +17,23 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    namespace internal
-    {
-      namespace blas
-      {
-        double b_xdot(int n, const double x[36], int ix0, const double y[36],
-                      int iy0);
-        double c_xdot(int n, const double x[324], int ix0, const double y[324],
-                      int iy0);
-        double xdot(int n, const double x[108], int ix0, const double y[108],
-                    int iy0);
-      }
-    }
-  }
-}
+namespace Codegen {
+namespace coder {
+namespace internal {
+namespace blas {
+double b_xdot(int n, const double x[36], int ix0, const double y[36], int iy0);
+
+double c_xdot(int n, const double x[324], int ix0, const double y[324],
+              int iy0);
+
+double xdot(int n, const double x[108], int ix0, const double y[108], int iy0);
+
+} // namespace blas
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 #endif
-
 //
 // File trailer for xdot.h
 //

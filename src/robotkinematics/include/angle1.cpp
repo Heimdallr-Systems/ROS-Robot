@@ -4,36 +4,32 @@
 // government, commercial, or other organizational use.
 // File: angle1.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "angle1.h"
 #include "atan21.h"
-#include "rt_nonfinite.h"
 
 // Function Definitions
 //
 // Arguments    : const creal_T x
 // Return Type  : double
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+namespace internal {
+namespace scalar {
+double b_angle(const creal_T x)
 {
-  namespace coder
-  {
-    namespace internal
-    {
-      namespace scalar
-      {
-        double b_angle(const creal_T x)
-        {
-          return c_atan2(x.im, x.re);
-        }
-      }
-    }
-  }
+  return c_atan2(x.im, x.re);
 }
+
+} // namespace scalar
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for angle1.cpp

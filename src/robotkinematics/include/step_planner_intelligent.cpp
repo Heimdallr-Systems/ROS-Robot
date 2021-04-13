@@ -4,15 +4,14 @@
 // government, commercial, or other organizational use.
 // File: step_planner_intelligent.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "step_planner_intelligent.h"
 #include "isequal.h"
 #include "norm.h"
-#include "rt_nonfinite.h"
 
 // Function Definitions
 //
@@ -31,6 +30,7 @@
 //  step_tolerance: range at which a step location can deviate
 //  OUTPUTS:
 //  r_II_c: updated location of the contact points of the robot's legs.
+//
 // Arguments    : const double r_II_b_last[3]
 //                const double r_II_b[3]
 //                const double r_II_c_start[3]
@@ -38,41 +38,41 @@
 //                double r_II_c[3]
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+void step_planner_intelligent(const double r_II_b_last[3],
+                              const double r_II_b[3],
+                              const double r_II_c_start[3], double step_dist,
+                              double r_II_c[3])
 {
-  void step_planner_intelligent(const double r_II_b_last[3], const double
-    r_II_b[3], const double r_II_c_start[3], double step_dist, double r_II_c[3])
-  {
-    double b_dv[3];
-    double travel_dir_0[3];
-    double d;
-
-    //  CONSTANTS
-    //  point cloud resolution, points/mm
-    //  c_pc_res=.1;
-    //  convert travel_dir to a unit vector if it is not already.
-    travel_dir_0[0] = r_II_b[0] - r_II_b_last[0];
-    b_dv[0] = 0.0;
-    travel_dir_0[1] = r_II_b[1] - r_II_b_last[1];
-    b_dv[1] = 0.0;
-    travel_dir_0[2] = r_II_b[2] - r_II_b_last[2];
-    b_dv[2] = 0.0;
-    if (coder::isequal(travel_dir_0, b_dv)) {
-      travel_dir_0[0] = r_II_b[0] - r_II_c_start[0];
-      travel_dir_0[1] = r_II_b[1] - r_II_c_start[1];
-      travel_dir_0[2] = r_II_b[2] - r_II_c_start[2];
-    }
-
-    d = coder::b_norm(travel_dir_0);
-    r_II_c[0] = r_II_c_start[0] + ((travel_dir_0[0] / d) * step_dist);
-    r_II_c[1] = r_II_c_start[1] + ((travel_dir_0[1] / d) * step_dist);
-    r_II_c[2] = -0.001;
-
-    //  r_BB_c_target = r_II_c(:,leg_index)-r_II_b;
-    //  determine center coordinates
-    //  ideal_leg_pos=round(r_BB_c_target*c_pc_res);
+  double b_dv[3];
+  double travel_dir_0[3];
+  double d;
+  //  CONSTANTS
+  //  point cloud resolution, points/mm
+  //  c_pc_res=.1;
+  //  convert travel_dir to a unit vector if it is not already.
+  travel_dir_0[0] = r_II_b[0] - r_II_b_last[0];
+  b_dv[0] = 0.0;
+  travel_dir_0[1] = r_II_b[1] - r_II_b_last[1];
+  b_dv[1] = 0.0;
+  travel_dir_0[2] = r_II_b[2] - r_II_b_last[2];
+  b_dv[2] = 0.0;
+  if (coder::isequal(travel_dir_0, b_dv)) {
+    travel_dir_0[0] = r_II_b[0] - r_II_c_start[0];
+    travel_dir_0[1] = r_II_b[1] - r_II_c_start[1];
+    travel_dir_0[2] = r_II_b[2] - r_II_c_start[2];
   }
+  d = coder::c_norm(travel_dir_0);
+  r_II_c[0] = r_II_c_start[0] + ((travel_dir_0[0] / d) * step_dist);
+  r_II_c[1] = r_II_c_start[1] + ((travel_dir_0[1] / d) * step_dist);
+  r_II_c[2] = r_II_c_start[2] + ((travel_dir_0[2] / d) * step_dist);
+  r_II_c[2] -= 0.005;
+  //  r_BB_c_target = r_II_c(:,leg_index)-r_II_b;
+  //  determine center coordinates
+  //  ideal_leg_pos=round(r_BB_c_target*c_pc_res);
 }
+
+} // namespace Codegen
 
 //
 // File trailer for step_planner_intelligent.cpp

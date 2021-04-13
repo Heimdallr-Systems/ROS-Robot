@@ -4,44 +4,44 @@
 // government, commercial, or other organizational use.
 // File: roty.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "roty.h"
 #include "cos.h"
-#include "rt_nonfinite.h"
 #include "sin.h"
 
 // Function Definitions
 //
 // Rotation matrix around y in radians
+//
 // Arguments    : double t
 //                double A[9]
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+void roty(double t, double A[9])
 {
-  void roty(double t, double A[9])
-  {
-    double A_tmp;
-    double b_A_tmp;
-    A_tmp = t;
-    coder::b_sin(&A_tmp);
-    b_A_tmp = t;
-    coder::b_cos(&b_A_tmp);
-    A[0] = b_A_tmp;
-    A[3] = 0.0;
-    A[6] = A_tmp;
-    A[1] = 0.0;
-    A[4] = 1.0;
-    A[7] = 0.0;
-    A[2] = -A_tmp;
-    A[5] = 0.0;
-    A[8] = b_A_tmp;
-  }
+  double A_tmp;
+  double b_A_tmp;
+  A_tmp = t;
+  coder::b_sin(&A_tmp);
+  b_A_tmp = t;
+  coder::b_cos(&b_A_tmp);
+  A[0] = b_A_tmp;
+  A[3] = 0.0;
+  A[6] = A_tmp;
+  A[1] = 0.0;
+  A[4] = 1.0;
+  A[7] = 0.0;
+  A[2] = -A_tmp;
+  A[5] = 0.0;
+  A[8] = b_A_tmp;
 }
+
+} // namespace Codegen
 
 //
 // File trailer for roty.cpp

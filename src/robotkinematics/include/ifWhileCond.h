@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: ifWhileCond.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef IFWHILECOND_H
 #define IFWHILECOND_H
 
@@ -16,19 +17,16 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    namespace internal
-    {
-      bool ifWhileCond(const bool x[3]);
-    }
-  }
+namespace Codegen {
+namespace coder {
+namespace internal {
+bool ifWhileCond(const bool x[3]);
+
 }
+} // namespace coder
+} // namespace Codegen
 
 #endif
-
 //
 // File trailer for ifWhileCond.h
 //

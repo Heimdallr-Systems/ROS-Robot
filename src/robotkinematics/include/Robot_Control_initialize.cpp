@@ -4,30 +4,29 @@
 // government, commercial, or other organizational use.
 // File: Robot_Control_initialize.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "Robot_Control_initialize.h"
 #include "Robot_Control.h"
-#include "rt_nonfinite.h"
 
 // Function Definitions
 //
 // Arguments    : void
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+void Robot_Control_initialize()
 {
-  void Robot_Control_initialize()
-  {
-    endPhi_not_empty_init();
-    endPoint_not_empty_init();
-    floor_toggle_not_empty_init();
-    Robot_Control_init();
-  }
+  endPhi_not_empty_init();
+  endPoint_not_empty_init();
+  floor_toggle_not_empty_init();
+  Robot_Control_init();
 }
+
+} // namespace Codegen
 
 //
 // File trailer for Robot_Control_initialize.cpp

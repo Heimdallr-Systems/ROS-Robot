@@ -4,30 +4,28 @@
 // government, commercial, or other organizational use.
 // File: abs.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "abs.h"
 #include "abs1.h"
-#include "rt_nonfinite.h"
 
 // Function Definitions
 //
 // Arguments    : double x
 // Return Type  : double
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+double b_abs(double x)
 {
-  namespace coder
-  {
-    double b_abs(double x)
-    {
-      return internal::scalar::c_abs(x);
-    }
-  }
+  return internal::scalar::c_abs(x);
 }
+
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for abs.cpp

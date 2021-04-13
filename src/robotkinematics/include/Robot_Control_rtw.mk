@@ -2,8 +2,8 @@
 ## Makefile generated for component 'Robot_Control'. 
 ## 
 ## Makefile     : Robot_Control_rtw.mk
-## Generated on : Wed Mar 17 14:21:43 2021
-## Final product: ./Robot_Control.lib
+## Generated on : Mon Apr 12 14:32:54 2021
+## Final product: ./Robot_Control.a
 ## Product type : static-library
 ## 
 ###########################################################################
@@ -15,104 +15,70 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
-# COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
-# CMD_FILE                Command file
 # MODELLIB                Static library target
 
 PRODUCT_NAME              = Robot_Control
 MAKEFILE                  = Robot_Control_rtw.mk
-MATLAB_ROOT               = D:/Program Files/MATLAB/R2020b
-MATLAB_BIN                = D:/Program Files/MATLAB/R2020b/bin
+MATLAB_ROOT               = $(MATLAB_WORKSPACE)/D/Program_Files/MATLAB/R2021a
+MATLAB_BIN                = $(MATLAB_WORKSPACE)/D/Program_Files/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/codegen/lib/Robot_Control
+START_DIR                 = $(MATLAB_WORKSPACE)/D/Desktop/Capstone/kinematics-MATLAB/SpringProject/codegen/lib/Robot_Control
 TGT_FCN_LIB               = GNU
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 
 RELATIVE_PATH_TO_ANCHOR   = .
-COMPILER_COMMAND_FILE     = Robot_Control_rtw_comp.rsp
-CMD_FILE                  = Robot_Control_rtw.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
-MODELLIB                  = Robot_Control.lib
+MODELLIB                  = Robot_Control.a
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          GNU Tools for ARM Embedded Processors
+# Toolchain Name:          GNU GCC for NVIDIA Embedded Processors
 # Supported Version(s):    
-# ToolchainInfo Version:   2020b
+# ToolchainInfo Version:   2021a
 # Specification Revision:  1.0
 # 
-#-------------------------------------------
-# Macros assumed to be defined elsewhere
-#-------------------------------------------
-
-# TARGET_LOAD_CMD_ARGS
-# TARGET_LOAD_CMD
-# MW_GNU_ARM_TOOLS_PATH
-# FDATASECTIONS_FLG
 
 #-----------
 # MACROS
 #-----------
 
-LIBGCC                = ${shell $(MW_GNU_ARM_TOOLS_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-libgcc-file-name}
-LIBC                  = ${shell $(MW_GNU_ARM_TOOLS_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-file-name=libc.a}
-LIBM                  = ${shell $(MW_GNU_ARM_TOOLS_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-file-name=libm.a}
-PRODUCT_BIN           = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).bin
-PRODUCT_HEX           = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).hex
-CPFLAGS               = -O binary
-SHELL                 = %SystemRoot%/system32/cmd.exe
+CCOUTPUTFLAG  = --output_file=
+LDOUTPUTFLAG  = --output_file=
+XCOMPILERFLAG =  
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
-TOOLCHAIN_LIBS = -lm
+TOOLCHAIN_LIBS = -lm -lm -lstdc++
 
 #------------------------
 # BUILD TOOL COMMANDS
 #------------------------
 
-# Assembler: GNU ARM Assembler
-AS_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-AS = "$(AS_PATH)/arm-none-eabi-gcc"
+# Assembler: GNU GCC for NVIDIA Embedded Processors Assembler
+AS = as
 
-# C Compiler: GNU ARM C Compiler
-CC_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-CC = "$(CC_PATH)/arm-none-eabi-gcc"
+# C Compiler: GNU GCC for NVIDIA Embedded Processors C Compiler
+CC = gcc
 
-# Linker: GNU ARM Linker
-LD_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-LD = "$(LD_PATH)/arm-none-eabi-g++"
+# Linker: GNU GCC for NVIDIA Embedded Processors Linker
+LD = gcc
 
-# C++ Compiler: GNU ARM C++ Compiler
-CPP_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-CPP = "$(CPP_PATH)/arm-none-eabi-g++"
+# C++ Compiler: GNU GCC for NVIDIA Embedded Processors C++ Compiler
+CPP = g++
 
-# C++ Linker: GNU ARM C++ Linker
-CPP_LD_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-CPP_LD = "$(CPP_LD_PATH)/arm-none-eabi-g++"
+# C++ Linker: GNU GCC for NVIDIA Embedded Processors C++ Linker
+CPP_LD = g++
 
-# Archiver: GNU ARM Archiver
-AR_PATH = $(MW_GNU_ARM_TOOLS_PATH)
-AR = "$(AR_PATH)/arm-none-eabi-ar"
+# Archiver: GNU GCC for NVIDIA Embedded Processors Archiver
+AR = ar
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
-
-# Binary Converter: Binary Converter
-OBJCOPYPATH = $(MW_GNU_ARM_TOOLS_PATH)
-OBJCOPY = "$(OBJCOPYPATH)/arm-none-eabi-objcopy"
-
-# Hex Converter: Hex Converter
-OBJCOPYPATH = $(MW_GNU_ARM_TOOLS_PATH)
-OBJCOPY = "$(OBJCOPYPATH)/arm-none-eabi-objcopy"
-
-# Executable Size: Executable Size
-EXESIZEPATH = $(MW_GNU_ARM_TOOLS_PATH)
-EXESIZE = "$(EXESIZEPATH)/arm-none-eabi-size"
 
 # Download: Download
 DOWNLOAD =
@@ -120,9 +86,8 @@ DOWNLOAD =
 # Execute: Execute
 EXECUTE = $(PRODUCT)
 
-# Builder: GMAKE Utility
-MAKE_PATH = %MATLAB%\bin\win64
-MAKE = "$(MAKE_PATH)/gmake"
+# Builder: Make Tool
+MAKE = make
 
 
 #-------------------------
@@ -142,52 +107,39 @@ OUTPUT_FLAG         = -o
 ARDEBUG             =
 STATICLIB_OUTPUT_FLAG =
 MEX_DEBUG           = -g
-RM                  = @del /f/q
-ECHO                = @echo
-MV                  = @move
+RM                  =
+ECHO                = echo
+MV                  =
 RUN                 =
 
 #--------------------------------------
 # "Faster Runs" Build Configuration
 #--------------------------------------
 
-ARFLAGS              = ruvs
-ASFLAGS              = -MMD -MP -MF"$(@:%.o=%.dep)" -MT"$@"  \
-                       -Wall \
-                       -x assembler-with-cpp \
+ARFLAGS              = -r
+ASFLAGS              = -c \
                        $(ASFLAGS_ADDITIONAL) \
-                       $(DEFINES) \
-                       $(INCLUDES) \
-                       -c
-OBJCOPYFLAGS_BIN     = -O binary $(PRODUCT) $(PRODUCT_BIN)
-CFLAGS               = $(FDATASECTIONS_FLG) \
-                       -Wall \
+                       $(INCLUDES)
+CFLAGS               = -c \
                        -MMD -MP -MF"$(@:%.o=%.dep)" -MT"$@"  \
-                       -c \
-                       -O3
-CPPFLAGS             = -std=gnu++14 \
-                       -fno-rtti \
-                       -fno-exceptions \
-                       $(FDATASECTIONS_FLG) \
-                       -Wall \
+                       -O2
+CPPFLAGS             = -c \
                        -MMD -MP -MF"$(@:%.o=%.dep)" -MT"$@"  \
-                       -c \
-                       -O3
-CPP_LDFLAGS          = -Wl,--gc-sections \
-                       -Wl,-Map="$(PRODUCT_NAME).map"
-CPP_SHAREDLIB_LDFLAGS  =
+                       -fpermissive  \
+                       -O2
+CPP_LDFLAGS          = -lrt -pthread -ldl
+CPP_SHAREDLIB_LDFLAGS  = -shared  \
+                         -lrt -pthread -ldl
 DOWNLOAD_FLAGS       =
-EXESIZE_FLAGS        = $(PRODUCT)
 EXECUTE_FLAGS        =
-OBJCOPYFLAGS_HEX     = -O ihex $(PRODUCT) $(PRODUCT_HEX)
-LDFLAGS              = -Wl,--gc-sections \
-                       -Wl,-Map="$(PRODUCT_NAME).map"
+LDFLAGS              = -lrt -pthread -ldl
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    =
+SHAREDLIB_LDFLAGS    = -shared  \
+                       -lrt -pthread -ldl
 
 
 
@@ -195,7 +147,7 @@ SHAREDLIB_LDFLAGS    =
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = ./Robot_Control.lib
+PRODUCT = ./Robot_Control.a
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
@@ -203,7 +155,7 @@ BUILD_TYPE = "Static Library"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = 
+INCLUDES_BUILDINFO = -I$(START_DIR) -I$(MATLAB_WORKSPACE)/D/Desktop/Capstone/kinematics-MATLAB/SpringProject -I$(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/include -I$(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/sources/utils -I$(MATLAB_ROOT)/toolbox/coder/rtiostream/src/utils -I$(MATLAB_ROOT)/extern/include
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -211,7 +163,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 ## DEFINES
 ###########################################################################
 
-DEFINES_ = -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__
+DEFINES_ = -D__MW_TARGET_USE_HARDWARE_RESOURCES_H__ -DMW_DL_DATA_PATH="$(START_DIR)" -DMW_SCHED_OTHER=1
 DEFINES_CUSTOM = 
 DEFINES_SKIPFORSIL = -D__linux__ -DARM_PROJECT -D_USE_TARGET_UDP_ -D_RUNONTARGETHARDWARE_BUILD_ -DSTACK_SIZE=200000
 DEFINES_STANDARD = -DMODEL=Robot_Control
@@ -222,7 +174,7 @@ DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/Robot_Control_data.cpp $(START_DIR)/rt_nonfinite.cpp $(START_DIR)/rtGetNaN.cpp $(START_DIR)/rtGetInf.cpp $(START_DIR)/Robot_Control_initialize.cpp $(START_DIR)/Robot_Control.cpp $(START_DIR)/eye.cpp $(START_DIR)/isinf.cpp $(START_DIR)/rotz.cpp $(START_DIR)/roty.cpp $(START_DIR)/rotx.cpp $(START_DIR)/CPos_wrt_I.cpp $(START_DIR)/inpolygon.cpp $(START_DIR)/isnan.cpp $(START_DIR)/abs.cpp $(START_DIR)/abs1.cpp $(START_DIR)/manipulability.cpp $(START_DIR)/contactJacobians.cpp $(START_DIR)/recursiveKin.cpp $(START_DIR)/skew.cpp $(START_DIR)/svd.cpp $(START_DIR)/anyNonFinite.cpp $(START_DIR)/vAllOrAny.cpp $(START_DIR)/isfinite.cpp $(START_DIR)/svd1.cpp $(START_DIR)/xzsvdc.cpp $(START_DIR)/xnrm2.cpp $(START_DIR)/xdotc.cpp $(START_DIR)/xdot.cpp $(START_DIR)/prod.cpp $(START_DIR)/combineVectorElements.cpp $(START_DIR)/isequal.cpp $(START_DIR)/find_pgon_goal.cpp $(START_DIR)/norm.cpp $(START_DIR)/cross.cpp $(START_DIR)/Leg_Controller_B.cpp $(START_DIR)/atan2.cpp $(START_DIR)/atan21.cpp $(START_DIR)/angle.cpp $(START_DIR)/angle1.cpp $(START_DIR)/mldivide.cpp $(START_DIR)/lusolve.cpp $(START_DIR)/ifWhileCond.cpp $(START_DIR)/step_planner_intelligent.cpp $(START_DIR)/centroid_codeGen.cpp $(START_DIR)/sum.cpp $(START_DIR)/all.cpp $(START_DIR)/allOrAny.cpp $(START_DIR)/cos.cpp $(START_DIR)/cos1.cpp $(START_DIR)/sin.cpp $(START_DIR)/sin1.cpp $(START_DIR)/sqrt.cpp $(START_DIR)/sqrt1.cpp $(START_DIR)/xscal.cpp $(START_DIR)/xaxpy.cpp $(START_DIR)/xrotg.cpp $(START_DIR)/xrot.cpp $(START_DIR)/xswap.cpp $(START_DIR)/sort.cpp $(START_DIR)/sortIdx.cpp $(START_DIR)/sign.cpp $(START_DIR)/sign1.cpp $(START_DIR)/exp.cpp $(START_DIR)/exp1.cpp $(START_DIR)/Body_Pose_Controller.cpp $(START_DIR)/circshift.cpp $(START_DIR)/Leg_Controller.cpp
+SRCS = $(START_DIR)/Robot_Control_data.cpp $(START_DIR)/Robot_Control_initialize.cpp $(START_DIR)/norm.cpp $(START_DIR)/xnrm2.cpp $(START_DIR)/power.cpp $(START_DIR)/abs.cpp $(START_DIR)/abs1.cpp $(START_DIR)/error.cpp $(START_DIR)/Robot_Control.cpp $(START_DIR)/eye.cpp $(START_DIR)/rotz.cpp $(START_DIR)/roty.cpp $(START_DIR)/rotx.cpp $(START_DIR)/CPos_wrt_I.cpp $(START_DIR)/inpolygon.cpp $(START_DIR)/eml_int_forloop_overflow_check.cpp $(START_DIR)/manipulability.cpp $(START_DIR)/contactJacobians.cpp $(START_DIR)/recursiveKin.cpp $(START_DIR)/skew.cpp $(START_DIR)/svd.cpp $(START_DIR)/svd1.cpp $(START_DIR)/xzsvdc.cpp $(START_DIR)/xdotc.cpp $(START_DIR)/xdot.cpp $(START_DIR)/prod.cpp $(START_DIR)/combineVectorElements.cpp $(START_DIR)/isequal.cpp $(START_DIR)/find_pgon_goal.cpp $(START_DIR)/cross.cpp $(START_DIR)/Leg_Controller_B.cpp $(START_DIR)/atan2.cpp $(START_DIR)/atan21.cpp $(START_DIR)/angle.cpp $(START_DIR)/angle1.cpp $(START_DIR)/mldivide.cpp $(START_DIR)/lusolve.cpp $(START_DIR)/ifWhileCond.cpp $(START_DIR)/step_planner_intelligent.cpp $(START_DIR)/centroid_codeGen.cpp $(START_DIR)/sum.cpp $(START_DIR)/blockedSummation.cpp $(START_DIR)/all.cpp $(START_DIR)/allOrAny.cpp $(START_DIR)/getUp.cpp $(START_DIR)/floor.cpp $(START_DIR)/sqrt.cpp $(START_DIR)/sqrt1.cpp $(START_DIR)/cos.cpp $(START_DIR)/cos1.cpp $(START_DIR)/sin.cpp $(START_DIR)/sin1.cpp $(START_DIR)/xscal.cpp $(START_DIR)/xaxpy.cpp $(START_DIR)/xrotg.cpp $(START_DIR)/xrot.cpp $(START_DIR)/xswap.cpp $(START_DIR)/sort.cpp $(START_DIR)/sortIdx.cpp $(START_DIR)/sign.cpp $(START_DIR)/sign1.cpp $(START_DIR)/exp.cpp $(START_DIR)/exp1.cpp $(START_DIR)/Body_Pose_Controller.cpp $(START_DIR)/circshift.cpp $(START_DIR)/Leg_Controller.cpp $(START_DIR)/Robot_Control_rtwutil.cpp $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/sources/utils/MW_nvidia_init.c
 
 ALL_SRCS = $(SRCS)
 
@@ -230,7 +182,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = Robot_Control_data.o rt_nonfinite.o rtGetNaN.o rtGetInf.o Robot_Control_initialize.o Robot_Control.o eye.o isinf.o rotz.o roty.o rotx.o CPos_wrt_I.o inpolygon.o isnan.o abs.o abs1.o manipulability.o contactJacobians.o recursiveKin.o skew.o svd.o anyNonFinite.o vAllOrAny.o isfinite.o svd1.o xzsvdc.o xnrm2.o xdotc.o xdot.o prod.o combineVectorElements.o isequal.o find_pgon_goal.o norm.o cross.o Leg_Controller_B.o atan2.o atan21.o angle.o angle1.o mldivide.o lusolve.o ifWhileCond.o step_planner_intelligent.o centroid_codeGen.o sum.o all.o allOrAny.o cos.o cos1.o sin.o sin1.o sqrt.o sqrt1.o xscal.o xaxpy.o xrotg.o xrot.o xswap.o sort.o sortIdx.o sign.o sign1.o exp.o exp1.o Body_Pose_Controller.o circshift.o Leg_Controller.o
+OBJS = Robot_Control_data.cpp.o Robot_Control_initialize.cpp.o norm.cpp.o xnrm2.cpp.o power.cpp.o abs.cpp.o abs1.cpp.o error.cpp.o Robot_Control.cpp.o eye.cpp.o rotz.cpp.o roty.cpp.o rotx.cpp.o CPos_wrt_I.cpp.o inpolygon.cpp.o eml_int_forloop_overflow_check.cpp.o manipulability.cpp.o contactJacobians.cpp.o recursiveKin.cpp.o skew.cpp.o svd.cpp.o svd1.cpp.o xzsvdc.cpp.o xdotc.cpp.o xdot.cpp.o prod.cpp.o combineVectorElements.cpp.o isequal.cpp.o find_pgon_goal.cpp.o cross.cpp.o Leg_Controller_B.cpp.o atan2.cpp.o atan21.cpp.o angle.cpp.o angle1.cpp.o mldivide.cpp.o lusolve.cpp.o ifWhileCond.cpp.o step_planner_intelligent.cpp.o centroid_codeGen.cpp.o sum.cpp.o blockedSummation.cpp.o all.cpp.o allOrAny.cpp.o getUp.cpp.o floor.cpp.o sqrt.cpp.o sqrt1.cpp.o cos.cpp.o cos1.cpp.o sin.cpp.o sin1.cpp.o xscal.cpp.o xaxpy.cpp.o xrotg.cpp.o xrot.cpp.o xswap.cpp.o sort.cpp.o sortIdx.cpp.o sign.cpp.o sign1.cpp.o exp.cpp.o exp1.cpp.o Body_Pose_Controller.cpp.o circshift.cpp.o Leg_Controller.cpp.o Robot_Control_rtwutil.cpp.o MW_nvidia_init.c.o
 
 ALL_OBJS = $(OBJS)
 
@@ -250,7 +202,7 @@ LIBS =
 ## SYSTEM LIBRARIES
 ###########################################################################
 
-SYSTEM_LIBS = 
+SYSTEM_LIBS = $(LDFLAGS_CUSTOMLIBFLAGS) -lm -lstdc++
 
 ###########################################################################
 ## ADDITIONAL TOOLCHAIN FLAGS
@@ -260,7 +212,7 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CFLAGS += $(CFLAGS_BASIC)
 
@@ -268,55 +220,36 @@ CFLAGS += $(CFLAGS_BASIC)
 # C++ Compiler
 #-----------------
 
-CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES) @$(COMPILER_COMMAND_FILE)
+CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CPPFLAGS += $(CPPFLAGS_BASIC)
-
-#---------------------
-# MEX C++ Compiler
-#---------------------
-
-MEX_CPP_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CPPFLAGS += $(MEX_CPP_Compiler_BASIC)
-
-#-----------------
-# MEX Compiler
-#-----------------
-
-MEX_Compiler_BASIC =  @$(COMPILER_COMMAND_FILE)
-
-MEX_CFLAGS += $(MEX_Compiler_BASIC)
 
 ###########################################################################
 ## INLINED COMMANDS
 ###########################################################################
 
 
-ALL_DEPS:=$(patsubst %.o,%.dep,$(ALL_OBJS))
-all:
+DERIVED_SRCS = $(subst .o,.dep,$(OBJS))
 
-ifndef DISABLE_GCC_FUNCTION_DATA_SECTIONS
-FDATASECTIONS_FLG := -ffunction-sections -fdata-sections
-endif
+build:
+
+%.dep:
 
 
 
 -include codertarget_assembly_flags.mk
--include ../codertarget_assembly_flags.mk
--include ../../codertarget_assembly_flags.mk
--include $(ALL_DEPS)
+-include *.dep
 
 
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build clean info prebuild postbuild download execute
+.PHONY : all build clean info prebuild download execute
 
 
-all : build postbuild
-	@echo "### Successfully generated all binary outputs."
+all : build
+	echo "### Successfully generated all binary outputs."
 
 
 build : prebuild $(PRODUCT)
@@ -325,10 +258,7 @@ build : prebuild $(PRODUCT)
 prebuild : 
 
 
-postbuild : $(PRODUCT)
-
-
-download : postbuild
+download : $(PRODUCT)
 
 
 execute : download
@@ -343,9 +273,9 @@ execute : download
 #---------------------------------
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
-	@echo "### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS)  $(PRODUCT) @$(CMD_FILE)
-	@echo "### Created: $(PRODUCT)"
+	echo "### Creating static library "$(PRODUCT)" ..."
+	$(AR) $(ARFLAGS)  $(PRODUCT) $(OBJS)
+	echo "### Created: $(PRODUCT)"
 
 
 ###########################################################################
@@ -356,395 +286,331 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.o : %.c
+%.c.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.o : %.s
+%.s.o : %.s
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.o : %.S
-	$(AS) $(ASFLAGS) -o "$@" "$<"
-
-
-%.o : %.cpp
+%.cpp.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : %.cc
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : %.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : %.cxx
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+%.c.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.s
+%.s.o : $(RELATIVE_PATH_TO_ANCHOR)/%.s
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.S
-	$(AS) $(ASFLAGS) -o "$@" "$<"
-
-
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+%.cpp.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(START_DIR)/%.c
+%.c.o : $(START_DIR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/%.s
+%.s.o : $(START_DIR)/%.s
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/%.S
-	$(AS) $(ASFLAGS) -o "$@" "$<"
-
-
-%.o : $(START_DIR)/%.cpp
+%.cpp.o : $(START_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/%.cc
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(START_DIR)/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : $(START_DIR)/%.cxx
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.c
+%.c.o : $(MATLAB_WORKSPACE)/D/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.s
+%.s.o : $(MATLAB_WORKSPACE)/D/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.s
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.S
-	$(AS) $(ASFLAGS) -o "$@" "$<"
-
-
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.cc
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.o : D:/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.cxx
+%.cpp.o : $(MATLAB_WORKSPACE)/D/Desktop/Capstone/kinematics-MATLAB/SpringProject/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Robot_Control_data.o : $(START_DIR)/Robot_Control_data.cpp
+Robot_Control_data.cpp.o : $(START_DIR)/Robot_Control_data.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rt_nonfinite.o : $(START_DIR)/rt_nonfinite.cpp
+Robot_Control_initialize.cpp.o : $(START_DIR)/Robot_Control_initialize.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rtGetNaN.o : $(START_DIR)/rtGetNaN.cpp
+norm.cpp.o : $(START_DIR)/norm.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rtGetInf.o : $(START_DIR)/rtGetInf.cpp
+xnrm2.cpp.o : $(START_DIR)/xnrm2.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Robot_Control_initialize.o : $(START_DIR)/Robot_Control_initialize.cpp
+power.cpp.o : $(START_DIR)/power.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Robot_Control.o : $(START_DIR)/Robot_Control.cpp
+abs.cpp.o : $(START_DIR)/abs.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-eye.o : $(START_DIR)/eye.cpp
+abs1.cpp.o : $(START_DIR)/abs1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-isinf.o : $(START_DIR)/isinf.cpp
+error.cpp.o : $(START_DIR)/error.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rotz.o : $(START_DIR)/rotz.cpp
+Robot_Control.cpp.o : $(START_DIR)/Robot_Control.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-roty.o : $(START_DIR)/roty.cpp
+eye.cpp.o : $(START_DIR)/eye.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rotx.o : $(START_DIR)/rotx.cpp
+rotz.cpp.o : $(START_DIR)/rotz.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-CPos_wrt_I.o : $(START_DIR)/CPos_wrt_I.cpp
+roty.cpp.o : $(START_DIR)/roty.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-inpolygon.o : $(START_DIR)/inpolygon.cpp
+rotx.cpp.o : $(START_DIR)/rotx.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-isnan.o : $(START_DIR)/isnan.cpp
+CPos_wrt_I.cpp.o : $(START_DIR)/CPos_wrt_I.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-abs.o : $(START_DIR)/abs.cpp
+inpolygon.cpp.o : $(START_DIR)/inpolygon.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-abs1.o : $(START_DIR)/abs1.cpp
+eml_int_forloop_overflow_check.cpp.o : $(START_DIR)/eml_int_forloop_overflow_check.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-manipulability.o : $(START_DIR)/manipulability.cpp
+manipulability.cpp.o : $(START_DIR)/manipulability.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-contactJacobians.o : $(START_DIR)/contactJacobians.cpp
+contactJacobians.cpp.o : $(START_DIR)/contactJacobians.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-recursiveKin.o : $(START_DIR)/recursiveKin.cpp
+recursiveKin.cpp.o : $(START_DIR)/recursiveKin.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-skew.o : $(START_DIR)/skew.cpp
+skew.cpp.o : $(START_DIR)/skew.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-svd.o : $(START_DIR)/svd.cpp
+svd.cpp.o : $(START_DIR)/svd.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-anyNonFinite.o : $(START_DIR)/anyNonFinite.cpp
+svd1.cpp.o : $(START_DIR)/svd1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-vAllOrAny.o : $(START_DIR)/vAllOrAny.cpp
+xzsvdc.cpp.o : $(START_DIR)/xzsvdc.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-isfinite.o : $(START_DIR)/isfinite.cpp
+xdotc.cpp.o : $(START_DIR)/xdotc.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-svd1.o : $(START_DIR)/svd1.cpp
+xdot.cpp.o : $(START_DIR)/xdot.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xzsvdc.o : $(START_DIR)/xzsvdc.cpp
+prod.cpp.o : $(START_DIR)/prod.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xnrm2.o : $(START_DIR)/xnrm2.cpp
+combineVectorElements.cpp.o : $(START_DIR)/combineVectorElements.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xdotc.o : $(START_DIR)/xdotc.cpp
+isequal.cpp.o : $(START_DIR)/isequal.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xdot.o : $(START_DIR)/xdot.cpp
+find_pgon_goal.cpp.o : $(START_DIR)/find_pgon_goal.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-prod.o : $(START_DIR)/prod.cpp
+cross.cpp.o : $(START_DIR)/cross.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-combineVectorElements.o : $(START_DIR)/combineVectorElements.cpp
+Leg_Controller_B.cpp.o : $(START_DIR)/Leg_Controller_B.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-isequal.o : $(START_DIR)/isequal.cpp
+atan2.cpp.o : $(START_DIR)/atan2.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-find_pgon_goal.o : $(START_DIR)/find_pgon_goal.cpp
+atan21.cpp.o : $(START_DIR)/atan21.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-norm.o : $(START_DIR)/norm.cpp
+angle.cpp.o : $(START_DIR)/angle.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-cross.o : $(START_DIR)/cross.cpp
+angle1.cpp.o : $(START_DIR)/angle1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Leg_Controller_B.o : $(START_DIR)/Leg_Controller_B.cpp
+mldivide.cpp.o : $(START_DIR)/mldivide.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-atan2.o : $(START_DIR)/atan2.cpp
+lusolve.cpp.o : $(START_DIR)/lusolve.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-atan21.o : $(START_DIR)/atan21.cpp
+ifWhileCond.cpp.o : $(START_DIR)/ifWhileCond.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-angle.o : $(START_DIR)/angle.cpp
+step_planner_intelligent.cpp.o : $(START_DIR)/step_planner_intelligent.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-angle1.o : $(START_DIR)/angle1.cpp
+centroid_codeGen.cpp.o : $(START_DIR)/centroid_codeGen.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-mldivide.o : $(START_DIR)/mldivide.cpp
+sum.cpp.o : $(START_DIR)/sum.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-lusolve.o : $(START_DIR)/lusolve.cpp
+blockedSummation.cpp.o : $(START_DIR)/blockedSummation.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-ifWhileCond.o : $(START_DIR)/ifWhileCond.cpp
+all.cpp.o : $(START_DIR)/all.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-step_planner_intelligent.o : $(START_DIR)/step_planner_intelligent.cpp
+allOrAny.cpp.o : $(START_DIR)/allOrAny.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-centroid_codeGen.o : $(START_DIR)/centroid_codeGen.cpp
+getUp.cpp.o : $(START_DIR)/getUp.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sum.o : $(START_DIR)/sum.cpp
+floor.cpp.o : $(START_DIR)/floor.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-all.o : $(START_DIR)/all.cpp
+sqrt.cpp.o : $(START_DIR)/sqrt.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-allOrAny.o : $(START_DIR)/allOrAny.cpp
+sqrt1.cpp.o : $(START_DIR)/sqrt1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-cos.o : $(START_DIR)/cos.cpp
+cos.cpp.o : $(START_DIR)/cos.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-cos1.o : $(START_DIR)/cos1.cpp
+cos1.cpp.o : $(START_DIR)/cos1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sin.o : $(START_DIR)/sin.cpp
+sin.cpp.o : $(START_DIR)/sin.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sin1.o : $(START_DIR)/sin1.cpp
+sin1.cpp.o : $(START_DIR)/sin1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sqrt.o : $(START_DIR)/sqrt.cpp
+xscal.cpp.o : $(START_DIR)/xscal.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sqrt1.o : $(START_DIR)/sqrt1.cpp
+xaxpy.cpp.o : $(START_DIR)/xaxpy.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xscal.o : $(START_DIR)/xscal.cpp
+xrotg.cpp.o : $(START_DIR)/xrotg.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xaxpy.o : $(START_DIR)/xaxpy.cpp
+xrot.cpp.o : $(START_DIR)/xrot.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xrotg.o : $(START_DIR)/xrotg.cpp
+xswap.cpp.o : $(START_DIR)/xswap.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xrot.o : $(START_DIR)/xrot.cpp
+sort.cpp.o : $(START_DIR)/sort.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-xswap.o : $(START_DIR)/xswap.cpp
+sortIdx.cpp.o : $(START_DIR)/sortIdx.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sort.o : $(START_DIR)/sort.cpp
+sign.cpp.o : $(START_DIR)/sign.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sortIdx.o : $(START_DIR)/sortIdx.cpp
+sign1.cpp.o : $(START_DIR)/sign1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sign.o : $(START_DIR)/sign.cpp
+exp.cpp.o : $(START_DIR)/exp.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-sign1.o : $(START_DIR)/sign1.cpp
+exp1.cpp.o : $(START_DIR)/exp1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-exp.o : $(START_DIR)/exp.cpp
+Body_Pose_Controller.cpp.o : $(START_DIR)/Body_Pose_Controller.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-exp1.o : $(START_DIR)/exp1.cpp
+circshift.cpp.o : $(START_DIR)/circshift.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Body_Pose_Controller.o : $(START_DIR)/Body_Pose_Controller.cpp
+Leg_Controller.cpp.o : $(START_DIR)/Leg_Controller.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-circshift.o : $(START_DIR)/circshift.cpp
+Robot_Control_rtwutil.cpp.o : $(START_DIR)/Robot_Control_rtwutil.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-Leg_Controller.o : $(START_DIR)/Leg_Controller.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+MW_nvidia_init.c.o : $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/sources/utils/MW_nvidia_init.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 ###########################################################################
 ## DEPENDENCIES
 ###########################################################################
 
-$(ALL_OBJS) : rtw_proj.tmw $(COMPILER_COMMAND_FILE) $(MAKEFILE)
+$(ALL_OBJS) : rtw_proj.tmw $(MAKEFILE)
 
 
 ###########################################################################
@@ -752,42 +618,40 @@ $(ALL_OBJS) : rtw_proj.tmw $(COMPILER_COMMAND_FILE) $(MAKEFILE)
 ###########################################################################
 
 info : 
-	@echo "### PRODUCT = $(PRODUCT)"
-	@echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
-	@echo "### BUILD_TYPE = $(BUILD_TYPE)"
-	@echo "### INCLUDES = $(INCLUDES)"
-	@echo "### DEFINES = $(DEFINES)"
-	@echo "### ALL_SRCS = $(ALL_SRCS)"
-	@echo "### ALL_OBJS = $(ALL_OBJS)"
-	@echo "### LIBS = $(LIBS)"
-	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
-	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
-	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
-	@echo "### ASFLAGS = $(ASFLAGS)"
-	@echo "### CFLAGS = $(CFLAGS)"
-	@echo "### LDFLAGS = $(LDFLAGS)"
-	@echo "### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
-	@echo "### CPPFLAGS = $(CPPFLAGS)"
-	@echo "### CPP_LDFLAGS = $(CPP_LDFLAGS)"
-	@echo "### CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS)"
-	@echo "### ARFLAGS = $(ARFLAGS)"
-	@echo "### MEX_CFLAGS = $(MEX_CFLAGS)"
-	@echo "### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
-	@echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
-	@echo "### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
-	@echo "### OBJCOPYFLAGS_BIN = $(OBJCOPYFLAGS_BIN)"
-	@echo "### OBJCOPYFLAGS_HEX = $(OBJCOPYFLAGS_HEX)"
-	@echo "### EXESIZE_FLAGS = $(EXESIZE_FLAGS)"
-	@echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
-	@echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
-	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
+	echo "### PRODUCT = $(PRODUCT)"
+	echo "### PRODUCT_TYPE = $(PRODUCT_TYPE)"
+	echo "### BUILD_TYPE = $(BUILD_TYPE)"
+	echo "### INCLUDES = $(INCLUDES)"
+	echo "### DEFINES = $(DEFINES)"
+	echo "### ALL_SRCS = $(ALL_SRCS)"
+	echo "### ALL_OBJS = $(ALL_OBJS)"
+	echo "### LIBS = $(LIBS)"
+	echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
+	echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
+	echo "### ASFLAGS = $(ASFLAGS)"
+	echo "### CFLAGS = $(CFLAGS)"
+	echo "### LDFLAGS = $(LDFLAGS)"
+	echo "### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
+	echo "### CPPFLAGS = $(CPPFLAGS)"
+	echo "### CPP_LDFLAGS = $(CPP_LDFLAGS)"
+	echo "### CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS)"
+	echo "### ARFLAGS = $(ARFLAGS)"
+	echo "### MEX_CFLAGS = $(MEX_CFLAGS)"
+	echo "### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
+	echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
+	echo "### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
+	echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
+	echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
+	echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
 clean : 
 	$(ECHO) "### Deleting all derived files..."
-	$(RM) $(subst /,\,$(PRODUCT))
-	$(RM) $(subst /,\,$(ALL_OBJS))
-	$(RM) *.dep
+	$(RM) $(PRODUCT)
+	$(RM) $(ALL_OBJS)
+	$(RM) *.c.dep
+	$(RM) *.cpp.dep
 	$(ECHO) "### Deleted all derived files."
 
 

@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: cross.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef CROSS_H
 #define CROSS_H
 
@@ -16,16 +17,14 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    void cross(const double a[3], const double b[3], double c[3]);
-  }
+namespace Codegen {
+namespace coder {
+void cross(const double a[3], const double b[3], double c[3]);
+
 }
+} // namespace Codegen
 
 #endif
-
 //
 // File trailer for cross.h
 //

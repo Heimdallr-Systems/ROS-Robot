@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: Robot_Control.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef ROBOT_CONTROL_H
 #define ROBOT_CONTROL_H
 
@@ -16,21 +17,26 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  extern void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
-    const double gamma_m[36], bool init_toggle, double Theta1_d_out[4], double
-    Theta2_d_out[4], double Theta3_d_out[4], double *phi_d_temp_out, double
-    r_II_B_d_temp_out[3], unsigned char floor_toggle_out[4], unsigned char
-    legs_valid_out[4]);
-  void Robot_Control_init();
-  void endPhi_not_empty_init();
-  void endPoint_not_empty_init();
-  void floor_toggle_not_empty_init();
-}
+namespace Codegen {
+extern void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
+                          const double gamma_m[36], bool init_toggle,
+                          const bool legs_on_gnd[4], double Theta1_d_out[4],
+                          double Theta2_d_out[4], double Theta3_d_out[4],
+                          double *phi_d_temp_out, double r_II_B_d_temp_out[3],
+                          unsigned char floor_toggle_out[4],
+                          unsigned char legs_valid_out[4]);
+
+void Robot_Control_init();
+
+void endPhi_not_empty_init();
+
+void endPoint_not_empty_init();
+
+void floor_toggle_not_empty_init();
+
+} // namespace Codegen
 
 #endif
-
 //
 // File trailer for Robot_Control.h
 //

@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: CPos_wrt_I.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef CPOS_WRT_I_H
 #define CPOS_WRT_I_H
 
@@ -16,15 +17,15 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  void CPos_wrt_I(const double Theta1[4], const double Theta2[4], const double
-                  Theta3[4], const double TB[9], const double rBfromI[3], double
-                  rc_FR[3], double rc_FL[3], double rc_BR[3], double rc_BL[3]);
+namespace Codegen {
+void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
+                const double Theta3[4], const double TB[9],
+                const double rBfromI[3], double rc_FR[3], double rc_FL[3],
+                double rc_BR[3], double rc_BL[3]);
+
 }
 
 #endif
-
 //
 // File trailer for CPos_wrt_I.h
 //

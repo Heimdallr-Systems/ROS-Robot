@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: recursiveKin.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef RECURSIVEKIN_H
 #define RECURSIVEKIN_H
 
@@ -16,17 +17,17 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  void recursiveKin(const double dotgamma[18], const double ITn[9], const double
-                    nTN[9], const double nnrN[3], const double IN_hat[54], const
-                    double IN_tilde[54], const double Jn[108], const double
-                    dotJn[108], double ITN[9], double NNwI[3], double dotIIrN[3],
-                    double JN[108], double dotJN[108]);
+namespace Codegen {
+void recursiveKin(const double dotgamma[18], const double ITn[9],
+                  const double nTN[9], const double nnrN[3],
+                  const double IN_hat[54], const double IN_tilde[54],
+                  const double Jn[108], const double dotJn[108], double ITN[9],
+                  double NNwI[3], double dotIIrN[3], double JN[108],
+                  double dotJN[108]);
+
 }
 
 #endif
-
 //
 // File trailer for recursiveKin.h
 //

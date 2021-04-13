@@ -1,35 +1,25 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- * File: _coder_Robot_Control_info.h
- *
- * MATLAB Coder version            : 5.1
- * C/C++ source code generated on  : 17-Mar-2021 14:19:13
- */
+//
+// Academic License - for use in teaching, academic research, and meeting
+// course requirements at degree granting institutions only.  Not for
+// government, commercial, or other organizational use.
+// File: _coder_Robot_Control_info.h
+//
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+//
 
 #ifndef _CODER_ROBOT_CONTROL_INFO_H
 #define _CODER_ROBOT_CONTROL_INFO_H
 
-/* Include Files */
+// Include Files
 #include "mex.h"
-#ifdef __cplusplus
 
-extern "C" {
+// Function Declarations
+MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties();
 
 #endif
-
-  /* Function Declarations */
-  MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
-
-#ifdef __cplusplus
-
-}
-#endif
-#endif
-
-/*
- * File trailer for _coder_Robot_Control_info.h
- *
- * [EOF]
- */
+//
+// File trailer for _coder_Robot_Control_info.h
+//
+// [EOF]
+//

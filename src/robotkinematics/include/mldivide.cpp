@@ -4,23 +4,21 @@
 // government, commercial, or other organizational use.
 // File: mldivide.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "mldivide.h"
 #include "lusolve.h"
-#include "rt_nonfinite.h"
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    static void mldiv(const double A[9], const double B[3], double Y[3]);
-  }
+namespace Codegen {
+namespace coder {
+static void mldiv(const double A[9], const double B[3], double Y[3]);
+
 }
+} // namespace Codegen
 
 // Function Definitions
 //
@@ -29,27 +27,26 @@ namespace Codegen
 //                double Y[3]
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+static void mldiv(const double A[9], const double B[3], double Y[3])
 {
-  namespace coder
-  {
-    static void mldiv(const double A[9], const double B[3], double Y[3])
-    {
-      internal::lusolve(A, B, Y);
-    }
-
-    //
-    // Arguments    : const double A[9]
-    //                const double B[3]
-    //                double Y[3]
-    // Return Type  : void
-    //
-    void mldivide(const double A[9], const double B[3], double Y[3])
-    {
-      mldiv(A, B, Y);
-    }
-  }
+  internal::lusolve(A, B, Y);
 }
+
+//
+// Arguments    : const double A[9]
+//                const double B[3]
+//                double Y[3]
+// Return Type  : void
+//
+void mldivide(const double A[9], const double B[3], double Y[3])
+{
+  mldiv(A, B, Y);
+}
+
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for mldivide.cpp

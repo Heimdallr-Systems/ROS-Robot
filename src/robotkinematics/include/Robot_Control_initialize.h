@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: Robot_Control_initialize.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef ROBOT_CONTROL_INITIALIZE_H
 #define ROBOT_CONTROL_INITIALIZE_H
 
@@ -16,13 +17,12 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  extern void Robot_Control_initialize();
+namespace Codegen {
+extern void Robot_Control_initialize();
+
 }
 
 #endif
-
 //
 // File trailer for Robot_Control_initialize.h
 //

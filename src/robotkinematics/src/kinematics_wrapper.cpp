@@ -26,19 +26,22 @@ double phi_d_temp_out;
 double r_II_B_d_temp_out[3];
 unsigned char floor_toggle_out[4];
 unsigned char legs_valid_out[4];
-bool target_set = 0;
+bool target_set = 1;
+bool legs_on_gnd[4];
 void setTargetPosCallback(const geometry_msgs::PoseStamped msg) {
 //  std::cout<<"Hello from a callback\n";
   target_set = 1;
-  r_II_B_d[0]=1;//msg.pose.position.x;
+  
+  r_II_B_d[0]=.1;//msg.pose.position.x;
   r_II_B_d[1]=0;//msg.pose.position.y;
-  r_II_B_d[2]=.2;
+  r_II_B_d[2]=.1;
   Euler_d[0]=0;
   Euler_d[1]=0;
   Euler_d[2]=0;
-  
 }
+bool pos_rec = 0;
 void getCurrentPos(const geometry_msgs::PoseStamped msg) {
+  pos_rec=1;
   gamma_m[0]=msg.pose.position.x;
   gamma_m[1]=msg.pose.position.y;
   gamma_m[2]=msg.pose.position.z;
@@ -47,11 +50,12 @@ void getCurrentPos(const geometry_msgs::PoseStamped msg) {
   q[1]=msg.pose.orientation.x;
   q[2]=msg.pose.orientation.y;
   q[3]=msg.pose.orientation.z;
+  std::cout << "x: " << gamma_m[0] << ", y: " <<gamma_m[1] << ", z: " << gamma_m[2] << "\n";
   double eul[3];
   quat2eul(q,eul);
-  gamma_m[3]=eul[0];
-  gamma_m[4]=eul[1];
-  gamma_m[5]=eul[2];
+  gamma_m[3]=0; //eul[0];
+  gamma_m[4]=0;//eul[1];
+  gamma_m[5]=0;//eul[2];
 }
 bool moveToInit =0;
 bool robotStateHandler(robotkinematics::goToInit::Request &req, robotkinematics::goToInit::Response &res) {
@@ -67,11 +71,11 @@ bool robotStateHandler(robotkinematics::goToInit::Request &req, robotkinematics:
   return(1);
 }
 void servoCallback(const servo_control::MotorVector& msg) {
-  ROS_INFO("I heard: a thingy");
-  for(int i=0; i<12;i++) {
+  ROS_INFO("Recieving Servo Feedback\n");
+  for(int i=0; i<13;i++) {
     gamma_m[i+6]=msg.data[i];
   }
-  //std::cout <<  << " is the recorded theta1\n";
+  //std::cout << " is the recorded theta1\n";
   
 }
 
@@ -88,6 +92,7 @@ int main(int argc, char **argv) {
   gamma_m[7]=-3.1415/4.0;
   gamma_m[8]=-3.1415/4.0;
   gamma_m[9]=3.1415/4.0;
+
   gamma_m[10]=3.1415/6+.1;
   gamma_m[11]=-3.1415/6;
   gamma_m[12]=3.1415/6;
@@ -101,14 +106,22 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "robot_kinematics");
   for(int i =0; i<4; i++) theta1_d_out[i] = 0; 
   ros::NodeHandle n;
-  ros::Publisher target_pub = n.advertise<servo_control::MotorVector>("kinematics_target",1000);
+  ros::Publisher target_pub = n.advertise<servo_control::MotorVector>("servo_goal_positions",1000);
   ros::Rate loop_rate(10);
-  ros::Subscriber sub=n.subscribe("kinematics_feedback",1000,servoCallback);
+  ros::Subscriber sub=n.subscribe("servo_feedback",1000,servoCallback);
   ros::Subscriber targetPos_sub=n.subscribe("rtabmap/goal",1000,setTargetPosCallback);
-  ros::Subscriber currentPos_sub=n.subscribe("rtabmap/odom",1000,getCurrentPos);
+  ros::Subscriber currentPos_sub=n.subscribe("pose_combined",1000,getCurrentPos);
   ros::ServiceServer initSrv= n.advertiseService("robot_state",robotStateHandler);
 
-  int cnt=0;
+
+  r_II_B_d[0]=.1;//msg.pose.position.x;
+  r_II_B_d[1]=0;//msg.pose.position.y;
+  r_II_B_d[2]=.24;
+  Euler_d[0]=0;
+  Euler_d[1]=0;
+  Euler_d[2]=0;  int cnt=0;
+  for(int i =0;i<3;i++) legs_on_gnd[i]=1;
+  Codegen::Robot_Control_init();
   while(ros::ok()) {
     if(moveToInit==1) {
       servo_control::MotorVector msg;
@@ -138,18 +151,27 @@ int main(int argc, char **argv) {
      target_pub.publish(msg);
     } else {
 //    std::cout <<"in a while loop\n";
-    if(target_set==1) {
+    if(target_set==1 && pos_rec==1) {
       servo_control::MotorVector msg;
       for(int i = 0; i<3; i++) {
         std::cout << "r_II_B_d[" << i << "]: " << r_II_B_d[i] << "\n";
       }
-      Codegen::Robot_Control(r_II_B_d, Euler_d,gamma_m,init_toggle,theta1_d_out,theta2_d_out,theta3_d_out,
+      Codegen::Robot_Control(r_II_B_d, Euler_d,gamma_m,init_toggle,legs_on_gnd,theta1_d_out,theta2_d_out,theta3_d_out,
                     &phi_d_temp_out, r_II_B_d_temp_out, floor_toggle_out,legs_valid_out);
       init_toggle=0;
       std::cout << "theta1[1]: " << theta1_d_out[0] << "\n";
-      for(int i =0; i<4;i++) msg.data[i]=theta1_d_out[i];
-      for(int i =4; i<8;i++) msg.data[i]=theta2_d_out[i];
-      for(int i =8; i<12;i++) msg.data[i]=theta3_d_out[i];
+      for(int i =0; i<4;i++){ 
+        msg.data[i]=theta1_d_out[i];
+        std::cout << "Error in joint " << i << ": " << theta1_d_out[i]-gamma_m[i+6] << "\n";
+      }
+      for(int i =4; i<8;i++){
+         msg.data[i]=theta2_d_out[i-4];
+         std::cout << "Error in joint " << i << ": " << theta2_d_out[i-4]-gamma_m[i+6] << "\n";
+      }
+      for(int i =8; i<12;i++) {
+        msg.data[i]=theta3_d_out[i-8];
+        std::cout << "Error in joint " << i << ": " << theta3_d_out[i-8]-gamma_m[i+6] << "\n";
+      }
       target_pub.publish(msg);
     }
     }

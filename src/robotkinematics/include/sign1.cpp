@@ -4,72 +4,62 @@
 // government, commercial, or other organizational use.
 // File: sign1.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "sign1.h"
-#include "rt_nonfinite.h"
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    namespace internal
-    {
-      namespace scalar
-      {
-        static void realScalarSign(double *x);
-      }
-    }
-  }
+namespace Codegen {
+namespace coder {
+namespace internal {
+namespace scalar {
+static void realScalarSign(double *x);
+
 }
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 // Function Definitions
 //
 // Arguments    : double *x
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+namespace internal {
+namespace scalar {
+static void realScalarSign(double *x)
 {
-  namespace coder
-  {
-    namespace internal
-    {
-      namespace scalar
-      {
-        static void realScalarSign(double *x)
-        {
-          double u;
-          double y;
-          u = *x;
-          if (u < 0.0) {
-            y = -1.0;
-          } else if (u > 0.0) {
-            y = 1.0;
-          } else if (u == 0.0) {
-            y = 0.0;
-          } else {
-            y = rtNaN;
-          }
-
-          *x = y;
-        }
-
-        //
-        // Arguments    : double *x
-        // Return Type  : void
-        //
-        void c_sign(double *x)
-        {
-          realScalarSign(x);
-        }
-      }
-    }
+  double u;
+  double y;
+  u = *x;
+  if (u < 0.0) {
+    y = -1.0;
+  } else if (u > 0.0) {
+    y = 1.0;
+  } else {
+    y = u;
   }
+  *x = y;
 }
+
+//
+// Arguments    : double *x
+// Return Type  : void
+//
+void c_sign(double *x)
+{
+  realScalarSign(x);
+}
+
+} // namespace scalar
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for sign1.cpp

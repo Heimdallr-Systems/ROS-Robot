@@ -4,13 +4,12 @@
 // government, commercial, or other organizational use.
 // File: eye.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "eye.h"
-#include "rt_nonfinite.h"
 #include <cstring>
 
 // Function Definitions
@@ -18,19 +17,18 @@
 // Arguments    : double b_I[9]
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+void eye(double b_I[9])
 {
-  namespace coder
-  {
-    void eye(double b_I[9])
-    {
-      std::memset(&b_I[0], 0, 9U * (sizeof(double)));
-      b_I[0] = 1.0;
-      b_I[4] = 1.0;
-      b_I[8] = 1.0;
-    }
-  }
+  (void)std::memset(&b_I[0], 0, 9U * (sizeof(double)));
+  b_I[0] = 1.0;
+  b_I[4] = 1.0;
+  b_I[8] = 1.0;
 }
+
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for eye.cpp

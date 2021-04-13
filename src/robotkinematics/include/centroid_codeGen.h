@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: centroid_codeGen.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef CENTROID_CODEGEN_H
 #define CENTROID_CODEGEN_H
 
@@ -16,14 +17,13 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  void centroid_codeGen(const double x[4], const double y[4], double *Cx, double
-                        *Cy);
+namespace Codegen {
+void centroid_codeGen(const double x[4], const double y[4], double *Cx,
+                      double *Cy);
+
 }
 
 #endif
-
 //
 // File trailer for centroid_codeGen.h
 //

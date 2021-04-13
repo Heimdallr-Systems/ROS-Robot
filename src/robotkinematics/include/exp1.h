@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: exp1.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef EXP1_H
 #define EXP1_H
 
@@ -16,22 +17,18 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  namespace coder
-  {
-    namespace internal
-    {
-      namespace scalar
-      {
-        void c_exp(creal_T *x);
-      }
-    }
-  }
+namespace Codegen {
+namespace coder {
+namespace internal {
+namespace scalar {
+void c_exp(creal_T *x);
+
 }
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 #endif
-
 //
 // File trailer for exp1.h
 //

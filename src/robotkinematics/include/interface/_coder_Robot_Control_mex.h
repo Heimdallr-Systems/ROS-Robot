@@ -1,41 +1,36 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- * File: _coder_Robot_Control_mex.h
- *
- * MATLAB Coder version            : 5.1
- * C/C++ source code generated on  : 17-Mar-2021 14:19:13
- */
+//
+// Academic License - for use in teaching, academic research, and meeting
+// course requirements at degree granting institutions only.  Not for
+// government, commercial, or other organizational use.
+// File: _coder_Robot_Control_mex.h
+//
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+//
 
 #ifndef _CODER_ROBOT_CONTROL_MEX_H
 #define _CODER_ROBOT_CONTROL_MEX_H
 
-/* Include Files */
+// Include Files
 #include "emlrt.h"
 #include "mex.h"
 #include "tmwtypes.h"
-#ifdef __cplusplus
 
-extern "C" {
+// Function Declarations
+void Robot_Control_mexFunction(int32_T nlhs, mxArray *plhs[7], int32_T nrhs,
+                               const mxArray *prhs[5]);
+
+void getUp_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
+                       const mxArray *prhs[2]);
+
+MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
+                                     int32_T nrhs, const mxArray *prhs[]);
+
+emlrtCTX mexFunctionCreateRootTLS();
 
 #endif
-
-  /* Function Declarations */
-  void Robot_Control_mexFunction(int32_T nlhs, mxArray *plhs[7], int32_T nrhs,
-    const mxArray *prhs[4]);
-  MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T
-    nrhs, const mxArray *prhs[]);
-  emlrtCTX mexFunctionCreateRootTLS(void);
-
-#ifdef __cplusplus
-
-}
-#endif
-#endif
-
-/*
- * File trailer for _coder_Robot_Control_mex.h
- *
- * [EOF]
- */
+//
+// File trailer for _coder_Robot_Control_mex.h
+//
+// [EOF]
+//

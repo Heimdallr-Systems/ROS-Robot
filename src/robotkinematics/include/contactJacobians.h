@@ -4,9 +4,10 @@
 // government, commercial, or other organizational use.
 // File: contactJacobians.h
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
+
 #ifndef CONTACTJACOBIANS_H
 #define CONTACTJACOBIANS_H
 
@@ -16,14 +17,14 @@
 #include <cstdlib>
 
 // Function Declarations
-namespace Codegen
-{
-  void contactJacobians(const double state[36], double GeoJc_FR[108], double
-                        GeoJc_FL[108], double GeoJc_BR[108], double GeoJc_BL[108]);
+namespace Codegen {
+void contactJacobians(const double state[36], double GeoJc_FR[108],
+                      double GeoJc_FL[108], double GeoJc_BR[108],
+                      double GeoJc_BL[108]);
+
 }
 
 #endif
-
 //
 // File trailer for contactJacobians.h
 //

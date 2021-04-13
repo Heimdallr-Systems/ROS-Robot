@@ -4,15 +4,14 @@
 // government, commercial, or other organizational use.
 // File: svd1.cpp
 //
-// MATLAB Coder version            : 5.1
-// C/C++ source code generated on  : 17-Mar-2021 14:19:13
+// MATLAB Coder version            : 5.2
+// C/C++ source code generated on  : 12-Apr-2021 14:32:25
 //
 
 // Include Files
 #include "svd1.h"
-#include "rt_nonfinite.h"
 #include "xzsvdc.h"
-#include <cstring>
+#include <algorithm>
 
 // Function Definitions
 //
@@ -22,21 +21,19 @@
 //                double V[324]
 // Return Type  : void
 //
-namespace Codegen
+namespace Codegen {
+namespace coder {
+namespace internal {
+void b_svd(const double A[108], double U[36], double s[6], double V[324])
 {
-  namespace coder
-  {
-    namespace internal
-    {
-      void b_svd(const double A[108], double U[36], double s[6], double V[324])
-      {
-        double b_A[108];
-        std::memcpy(&b_A[0], &A[0], 108U * (sizeof(double)));
-        reflapack::xzsvdc(b_A, U, s, V);
-      }
-    }
-  }
+  double b_A[108];
+  (void)std::copy(&A[0], &A[108], &b_A[0]);
+  reflapack::xzsvdc(b_A, U, s, V);
 }
+
+} // namespace internal
+} // namespace coder
+} // namespace Codegen
 
 //
 // File trailer for svd1.cpp
