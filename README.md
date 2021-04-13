@@ -24,7 +24,7 @@ it is generated from can be found in [Heimdallr-Systems/kinematics-MATLAB](https
 
 Reads data from the BNO055 9DOF IMU. 
 
-_Note: This is implemented as a git submodule, and will require submodule initialization to use_
+_Note: This is implemented as a git submodule, and will require submodule initialization to use. The easiest way is to add the flag `--recurse-submodules` when cloning the repo._
 
 ### servo_control
 
