@@ -13,7 +13,7 @@ tilt_increment=4.0*pan_increment*(tilt_max/pan_max)
 pan_dir=1.0
 tilt_dir=1.0
 wait_cnt=0
-loop_rate=20
+loop_rate=10
 wait_max=2*loop_rate
 full_rotation_cnt=0
 if __name__=='__main__':
@@ -35,15 +35,17 @@ if __name__=='__main__':
 
         pan_angle+=pan_dir*pan_increment
         tilt_angle+=tilt_dir*tilt_increment
-        pan.publish(pan_angle)
-        tilt.publish(tilt_angle+tilt_offset)
         print("Pan angle: " + str(pan_angle*180.0/pi) + ", tilt angle: " + str(tilt_angle*180.0/pi))
       else:
         wait_cnt+=1
         if(wait_cnt==wait_max):
           wait_cnt=0
           full_rotation_cnt+=1
+      pan.publish(pan_angle)
+      tilt.publish(tilt_angle+tilt_offset)
+
       rate.sleep()
+
   except rospy.ROSInterruptException:
     pass
 
