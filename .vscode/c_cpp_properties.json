@@ -6,10 +6,10 @@
         "limitSymbolsToIncludedHeaders": true
       },
       "includePath": [
-        "/home/heimdallr/ros1_ws/devel/include/**",
+        "${workspaceFolder}/devel/include/**",
         "/opt/ros/melodic/include/**",
-        "/home/heimdallr/ros1_ws/src/imu_bno055/include/**",
-        "/home/heimdallr/ros1_ws/src/robotkinematics/include/**",
+        "${workspaceFolder}/src/imu_bno055/include/**",
+        "${workspaceFolder}/src/robotkinematics/include/**",
         "/usr/include/**"
       ],
       "name": "ROS"
