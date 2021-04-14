@@ -59,5 +59,5 @@ readADC(adcVals);
     printf("Done!");
     return 0;
 }
-*/
 
+*/
