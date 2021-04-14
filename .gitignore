@@ -367,3 +367,8 @@ dkms.conf
 *.cubin
 *.fatbin
 
+
+
+
+## Custom overrides 
+!src/servo_control/include/Makefile
