@@ -5,7 +5,7 @@
 // File: error.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -17,7 +17,7 @@
 
 // Function Declarations
 namespace Codegen {
-static void rtErrorWithMessageID(const char *aFcnName, int aLineNum);
+static void b_rtErrorWithMessageID(const char *aFcnName, int aLineNum);
 
 }
 
@@ -28,7 +28,7 @@ static void rtErrorWithMessageID(const char *aFcnName, int aLineNum);
 // Return Type  : void
 //
 namespace Codegen {
-static void rtErrorWithMessageID(const char *aFcnName, int aLineNum)
+static void b_rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 {
   std::stringstream outStream;
   outStream
@@ -47,14 +47,14 @@ static void rtErrorWithMessageID(const char *aFcnName, int aLineNum)
 namespace coder {
 void error()
 {
-  static rtRunTimeErrorInfo b_emlrtRTEI = {
+  static rtRunTimeErrorInfo c_emlrtRTEI{
       24,      // lineNo
       9,       // colNo
       "error", // fName
       "D:\\Program "
       "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\lang\\error.m" // pName
   };
-  rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
+  b_rtErrorWithMessageID(c_emlrtRTEI.fName, c_emlrtRTEI.lineNo);
 }
 
 } // namespace coder

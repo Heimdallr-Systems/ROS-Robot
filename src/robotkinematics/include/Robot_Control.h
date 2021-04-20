@@ -5,7 +5,7 @@
 // File: Robot_Control.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef ROBOT_CONTROL_H
@@ -23,8 +23,7 @@ extern void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
                           const bool legs_on_gnd[4], double Theta1_d_out[4],
                           double Theta2_d_out[4], double Theta3_d_out[4],
                           double *phi_d_temp_out, double r_II_B_d_temp_out[3],
-                          unsigned char floor_toggle_out[4],
-                          unsigned char legs_valid_out[4]);
+                          bool floor_toggle_out[4], bool legs_valid_out[4]);
 
 void Robot_Control_init();
 

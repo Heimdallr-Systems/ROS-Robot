@@ -5,7 +5,7 @@
 // File: isequal.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -19,7 +19,7 @@
 //
 namespace Codegen {
 namespace coder {
-bool isequal(const double varargin_1[3], const double varargin_2[3])
+bool b_isequal(const double varargin_1[3], const double varargin_2[3])
 {
   int k;
   bool b_p;
@@ -31,6 +31,32 @@ bool isequal(const double varargin_1[3], const double varargin_2[3])
   exitg1 = false;
   while ((!exitg1) && (k < 3)) {
     if (varargin_1[k] != varargin_2[k]) {
+      b_p = false;
+      exitg1 = true;
+    } else {
+      k++;
+    }
+  }
+  return b_p || p;
+}
+
+//
+// Arguments    : const double varargin_1[4]
+//                const bool varargin_2[4]
+// Return Type  : bool
+//
+bool isequal(const double varargin_1[4], const bool varargin_2[4])
+{
+  int k;
+  bool b_p;
+  bool exitg1;
+  bool p;
+  p = false;
+  b_p = true;
+  k = 0;
+  exitg1 = false;
+  while ((!exitg1) && (k < 4)) {
+    if (varargin_1[k] != (static_cast<double>(varargin_2[k]))) {
       b_p = false;
       exitg1 = true;
     } else {

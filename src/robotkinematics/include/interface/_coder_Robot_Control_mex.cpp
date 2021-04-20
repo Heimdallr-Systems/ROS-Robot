@@ -5,7 +5,7 @@
 // File: _coder_Robot_Control_mex.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -13,6 +13,44 @@
 #include "_coder_Robot_Control_api.h"
 
 // Function Definitions
+//
+// Arguments    : int32_T nlhs
+//                mxArray *plhs[4]
+//                int32_T nrhs
+//                const mxArray *prhs[7]
+// Return Type  : void
+//
+void CallTheDead_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
+                             const mxArray *prhs[7])
+{
+  emlrtStack st{
+      nullptr, // site
+      nullptr, // tls
+      nullptr  // prev
+  };
+  const mxArray *outputs[4];
+  int32_T b_nlhs;
+  st.tls = emlrtRootTLSGlobal;
+  // Check for proper number of arguments.
+  if (nrhs != 7) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 7, 4,
+                        11, "CallTheDead");
+  }
+  if (nlhs > 4) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 11,
+                        "CallTheDead");
+  }
+  // Call the function.
+  CallTheDead_api(prhs, nlhs, outputs);
+  // Copy over outputs to the caller.
+  if (nlhs < 1) {
+    b_nlhs = 1;
+  } else {
+    b_nlhs = nlhs;
+  }
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
 //
 // Arguments    : int32_T nlhs
 //                mxArray *plhs[7]
@@ -23,10 +61,10 @@
 void Robot_Control_mexFunction(int32_T nlhs, mxArray *plhs[7], int32_T nrhs,
                                const mxArray *prhs[5])
 {
-  emlrtStack st = {
-      NULL, // site
-      NULL, // tls
-      NULL  // prev
+  emlrtStack st{
+      nullptr, // site
+      nullptr, // tls
+      nullptr  // prev
   };
   const mxArray *outputs[7];
   int32_T b_nlhs;
@@ -61,10 +99,10 @@ void Robot_Control_mexFunction(int32_T nlhs, mxArray *plhs[7], int32_T nrhs,
 void getUp_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
                        const mxArray *prhs[2])
 {
-  emlrtStack st = {
-      NULL, // site
-      NULL, // tls
-      NULL  // prev
+  emlrtStack st{
+      nullptr, // site
+      nullptr, // tls
+      nullptr  // prev
   };
   const mxArray *outputs[2];
   int32_T b_nlhs;
@@ -99,11 +137,12 @@ void getUp_mexFunction(int32_T nlhs, mxArray *plhs[2], int32_T nrhs,
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[2] = {"getUp", "Robot_Control"};
-  emlrtStack st = {
-      NULL, // site
-      NULL, // tls
-      NULL  // prev
+  static const char_T *emlrtEntryPoints[3]{"CallTheDead", "getUp",
+                                           "Robot_Control"};
+  emlrtStack st{
+      nullptr, // site
+      nullptr, // tls
+      nullptr  // prev
   };
   mexAtExit(&Robot_Control_atexit);
   // Module initialization.
@@ -113,11 +152,14 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     emlrtShouldCleanupOnError((emlrtCTX *)emlrtRootTLSGlobal, false);
     // Dispatch the entry-point.
     switch (emlrtGetEntryPointIndexR2016a(
-        &st, nrhs, &prhs[0], (const char_T **)(&emlrtEntryPoints[0]), 2)) {
+        &st, nrhs, &prhs[0], (const char_T **)(&emlrtEntryPoints[0]), 3)) {
     case 0:
-      getUp_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+      CallTheDead_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
       break;
     case 1:
+      getUp_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+      break;
+    case 2:
       Robot_Control_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
       break;
     default:
@@ -138,8 +180,8 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
 //
 emlrtCTX mexFunctionCreateRootTLS()
 {
-  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL);
+  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, nullptr, 1,
+                           nullptr);
   return emlrtRootTLSGlobal;
 }
 

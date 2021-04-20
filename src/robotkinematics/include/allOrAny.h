@@ -5,7 +5,7 @@
 // File: allOrAny.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef ALLORANY_H
@@ -20,7 +20,7 @@
 namespace Codegen {
 namespace coder {
 namespace internal {
-bool vectorAll(const unsigned char x[4]);
+bool vectorAll(const bool x[4]);
 
 }
 } // namespace coder

@@ -5,7 +5,7 @@
 // File: xzsvdc.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef XZSVDC_H
@@ -21,9 +21,11 @@ namespace Codegen {
 namespace coder {
 namespace internal {
 namespace reflapack {
-void xzsvdc(double A[108], double U[36], double S[6], double V[324]);
+void b_xzsvdc(double A[108], double U[36], double S[6], double V[324]);
 
-}
+void xzsvdc(double A[9], double U[9], double S[3], double V[9]);
+
+} // namespace reflapack
 } // namespace internal
 } // namespace coder
 } // namespace Codegen

@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Robot_Control'. 
 ## 
 ## Makefile     : Robot_Control_rtw.mk
-## Generated on : Mon Apr 12 14:32:54 2021
+## Generated on : Wed Apr 14 15:29:02 2021
 ## Final product: ./Robot_Control.a
 ## Product type : static-library
 ## 
@@ -174,7 +174,7 @@ DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/Robot_Control_data.cpp $(START_DIR)/Robot_Control_initialize.cpp $(START_DIR)/norm.cpp $(START_DIR)/xnrm2.cpp $(START_DIR)/power.cpp $(START_DIR)/abs.cpp $(START_DIR)/abs1.cpp $(START_DIR)/error.cpp $(START_DIR)/Robot_Control.cpp $(START_DIR)/eye.cpp $(START_DIR)/rotz.cpp $(START_DIR)/roty.cpp $(START_DIR)/rotx.cpp $(START_DIR)/CPos_wrt_I.cpp $(START_DIR)/inpolygon.cpp $(START_DIR)/eml_int_forloop_overflow_check.cpp $(START_DIR)/manipulability.cpp $(START_DIR)/contactJacobians.cpp $(START_DIR)/recursiveKin.cpp $(START_DIR)/skew.cpp $(START_DIR)/svd.cpp $(START_DIR)/svd1.cpp $(START_DIR)/xzsvdc.cpp $(START_DIR)/xdotc.cpp $(START_DIR)/xdot.cpp $(START_DIR)/prod.cpp $(START_DIR)/combineVectorElements.cpp $(START_DIR)/isequal.cpp $(START_DIR)/find_pgon_goal.cpp $(START_DIR)/cross.cpp $(START_DIR)/Leg_Controller_B.cpp $(START_DIR)/atan2.cpp $(START_DIR)/atan21.cpp $(START_DIR)/angle.cpp $(START_DIR)/angle1.cpp $(START_DIR)/mldivide.cpp $(START_DIR)/lusolve.cpp $(START_DIR)/ifWhileCond.cpp $(START_DIR)/step_planner_intelligent.cpp $(START_DIR)/centroid_codeGen.cpp $(START_DIR)/sum.cpp $(START_DIR)/blockedSummation.cpp $(START_DIR)/all.cpp $(START_DIR)/allOrAny.cpp $(START_DIR)/getUp.cpp $(START_DIR)/floor.cpp $(START_DIR)/sqrt.cpp $(START_DIR)/sqrt1.cpp $(START_DIR)/cos.cpp $(START_DIR)/cos1.cpp $(START_DIR)/sin.cpp $(START_DIR)/sin1.cpp $(START_DIR)/xscal.cpp $(START_DIR)/xaxpy.cpp $(START_DIR)/xrotg.cpp $(START_DIR)/xrot.cpp $(START_DIR)/xswap.cpp $(START_DIR)/sort.cpp $(START_DIR)/sortIdx.cpp $(START_DIR)/sign.cpp $(START_DIR)/sign1.cpp $(START_DIR)/exp.cpp $(START_DIR)/exp1.cpp $(START_DIR)/Body_Pose_Controller.cpp $(START_DIR)/circshift.cpp $(START_DIR)/Leg_Controller.cpp $(START_DIR)/Robot_Control_rtwutil.cpp $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/sources/utils/MW_nvidia_init.c
+SRCS = $(START_DIR)/Robot_Control_data.cpp $(START_DIR)/Robot_Control_initialize.cpp $(START_DIR)/CPos_wrt_B.cpp $(START_DIR)/rotz.cpp $(START_DIR)/rotx.cpp $(START_DIR)/CPos_wrt_I.cpp $(START_DIR)/isequal.cpp $(START_DIR)/IK_Solver_BodyRot_BodyPos.cpp $(START_DIR)/combineVectorElements.cpp $(START_DIR)/findTrue4Elem.cpp $(START_DIR)/svd.cpp $(START_DIR)/svd1.cpp $(START_DIR)/xzsvdc.cpp $(START_DIR)/xnrm2.cpp $(START_DIR)/abs.cpp $(START_DIR)/abs1.cpp $(START_DIR)/power.cpp $(START_DIR)/eml_int_forloop_overflow_check.cpp $(START_DIR)/xdotc.cpp $(START_DIR)/xdot.cpp $(START_DIR)/det.cpp $(START_DIR)/ixamax.cpp $(START_DIR)/diag.cpp $(START_DIR)/norm.cpp $(START_DIR)/error.cpp $(START_DIR)/Robot_Control.cpp $(START_DIR)/eye.cpp $(START_DIR)/roty.cpp $(START_DIR)/inpolygon.cpp $(START_DIR)/manipulability.cpp $(START_DIR)/contactJacobians.cpp $(START_DIR)/recursiveKin.cpp $(START_DIR)/skew.cpp $(START_DIR)/prod.cpp $(START_DIR)/find_pgon_goal.cpp $(START_DIR)/cross.cpp $(START_DIR)/Leg_Controller_B.cpp $(START_DIR)/atan2.cpp $(START_DIR)/atan21.cpp $(START_DIR)/angle.cpp $(START_DIR)/angle1.cpp $(START_DIR)/mldivide.cpp $(START_DIR)/lusolve.cpp $(START_DIR)/ifWhileCond.cpp $(START_DIR)/step_planner_intelligent.cpp $(START_DIR)/centroid_codeGen.cpp $(START_DIR)/sum.cpp $(START_DIR)/blockedSummation.cpp $(START_DIR)/all.cpp $(START_DIR)/allOrAny.cpp $(START_DIR)/CallTheDead.cpp $(START_DIR)/cos.cpp $(START_DIR)/cos1.cpp $(START_DIR)/sin.cpp $(START_DIR)/sin1.cpp $(START_DIR)/sumprod.cpp $(START_DIR)/floor.cpp $(START_DIR)/sqrt.cpp $(START_DIR)/sqrt1.cpp $(START_DIR)/xscal.cpp $(START_DIR)/xaxpy.cpp $(START_DIR)/xrotg.cpp $(START_DIR)/xrot.cpp $(START_DIR)/xswap.cpp $(START_DIR)/xgetrf.cpp $(START_DIR)/xzgetrf.cpp $(START_DIR)/xgeru.cpp $(START_DIR)/xger.cpp $(START_DIR)/getUp.cpp $(START_DIR)/sort.cpp $(START_DIR)/sortIdx.cpp $(START_DIR)/sign.cpp $(START_DIR)/sign1.cpp $(START_DIR)/exp.cpp $(START_DIR)/exp1.cpp $(START_DIR)/Body_Pose_Controller.cpp $(START_DIR)/circshift.cpp $(START_DIR)/Leg_Controller.cpp $(START_DIR)/Robot_Control_rtwutil.cpp $(MATLAB_WORKSPACE)/C/ProgramData/MATLAB/SupportPackages/R2021a/toolbox/target/supportpackages/nvidia/sources/utils/MW_nvidia_init.c
 
 ALL_SRCS = $(SRCS)
 
@@ -182,7 +182,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = Robot_Control_data.cpp.o Robot_Control_initialize.cpp.o norm.cpp.o xnrm2.cpp.o power.cpp.o abs.cpp.o abs1.cpp.o error.cpp.o Robot_Control.cpp.o eye.cpp.o rotz.cpp.o roty.cpp.o rotx.cpp.o CPos_wrt_I.cpp.o inpolygon.cpp.o eml_int_forloop_overflow_check.cpp.o manipulability.cpp.o contactJacobians.cpp.o recursiveKin.cpp.o skew.cpp.o svd.cpp.o svd1.cpp.o xzsvdc.cpp.o xdotc.cpp.o xdot.cpp.o prod.cpp.o combineVectorElements.cpp.o isequal.cpp.o find_pgon_goal.cpp.o cross.cpp.o Leg_Controller_B.cpp.o atan2.cpp.o atan21.cpp.o angle.cpp.o angle1.cpp.o mldivide.cpp.o lusolve.cpp.o ifWhileCond.cpp.o step_planner_intelligent.cpp.o centroid_codeGen.cpp.o sum.cpp.o blockedSummation.cpp.o all.cpp.o allOrAny.cpp.o getUp.cpp.o floor.cpp.o sqrt.cpp.o sqrt1.cpp.o cos.cpp.o cos1.cpp.o sin.cpp.o sin1.cpp.o xscal.cpp.o xaxpy.cpp.o xrotg.cpp.o xrot.cpp.o xswap.cpp.o sort.cpp.o sortIdx.cpp.o sign.cpp.o sign1.cpp.o exp.cpp.o exp1.cpp.o Body_Pose_Controller.cpp.o circshift.cpp.o Leg_Controller.cpp.o Robot_Control_rtwutil.cpp.o MW_nvidia_init.c.o
+OBJS = Robot_Control_data.cpp.o Robot_Control_initialize.cpp.o CPos_wrt_B.cpp.o rotz.cpp.o rotx.cpp.o CPos_wrt_I.cpp.o isequal.cpp.o IK_Solver_BodyRot_BodyPos.cpp.o combineVectorElements.cpp.o findTrue4Elem.cpp.o svd.cpp.o svd1.cpp.o xzsvdc.cpp.o xnrm2.cpp.o abs.cpp.o abs1.cpp.o power.cpp.o eml_int_forloop_overflow_check.cpp.o xdotc.cpp.o xdot.cpp.o det.cpp.o ixamax.cpp.o diag.cpp.o norm.cpp.o error.cpp.o Robot_Control.cpp.o eye.cpp.o roty.cpp.o inpolygon.cpp.o manipulability.cpp.o contactJacobians.cpp.o recursiveKin.cpp.o skew.cpp.o prod.cpp.o find_pgon_goal.cpp.o cross.cpp.o Leg_Controller_B.cpp.o atan2.cpp.o atan21.cpp.o angle.cpp.o angle1.cpp.o mldivide.cpp.o lusolve.cpp.o ifWhileCond.cpp.o step_planner_intelligent.cpp.o centroid_codeGen.cpp.o sum.cpp.o blockedSummation.cpp.o all.cpp.o allOrAny.cpp.o CallTheDead.cpp.o cos.cpp.o cos1.cpp.o sin.cpp.o sin1.cpp.o sumprod.cpp.o floor.cpp.o sqrt.cpp.o sqrt1.cpp.o xscal.cpp.o xaxpy.cpp.o xrotg.cpp.o xrot.cpp.o xswap.cpp.o xgetrf.cpp.o xzgetrf.cpp.o xgeru.cpp.o xger.cpp.o getUp.cpp.o sort.cpp.o sortIdx.cpp.o sign.cpp.o sign1.cpp.o exp.cpp.o exp1.cpp.o Body_Pose_Controller.cpp.o circshift.cpp.o Leg_Controller.cpp.o Robot_Control_rtwutil.cpp.o MW_nvidia_init.c.o
 
 ALL_OBJS = $(OBJS)
 
@@ -342,15 +342,51 @@ Robot_Control_initialize.cpp.o : $(START_DIR)/Robot_Control_initialize.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-norm.cpp.o : $(START_DIR)/norm.cpp
+CPos_wrt_B.cpp.o : $(START_DIR)/CPos_wrt_B.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+rotz.cpp.o : $(START_DIR)/rotz.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+rotx.cpp.o : $(START_DIR)/rotx.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+CPos_wrt_I.cpp.o : $(START_DIR)/CPos_wrt_I.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+isequal.cpp.o : $(START_DIR)/isequal.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+IK_Solver_BodyRot_BodyPos.cpp.o : $(START_DIR)/IK_Solver_BodyRot_BodyPos.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+combineVectorElements.cpp.o : $(START_DIR)/combineVectorElements.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+findTrue4Elem.cpp.o : $(START_DIR)/findTrue4Elem.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+svd.cpp.o : $(START_DIR)/svd.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+svd1.cpp.o : $(START_DIR)/svd1.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xzsvdc.cpp.o : $(START_DIR)/xzsvdc.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
 xnrm2.cpp.o : $(START_DIR)/xnrm2.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-power.cpp.o : $(START_DIR)/power.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -359,6 +395,38 @@ abs.cpp.o : $(START_DIR)/abs.cpp
 
 
 abs1.cpp.o : $(START_DIR)/abs1.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+power.cpp.o : $(START_DIR)/power.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+eml_int_forloop_overflow_check.cpp.o : $(START_DIR)/eml_int_forloop_overflow_check.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xdotc.cpp.o : $(START_DIR)/xdotc.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xdot.cpp.o : $(START_DIR)/xdot.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+det.cpp.o : $(START_DIR)/det.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+ixamax.cpp.o : $(START_DIR)/ixamax.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+diag.cpp.o : $(START_DIR)/diag.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+norm.cpp.o : $(START_DIR)/norm.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -374,27 +442,11 @@ eye.cpp.o : $(START_DIR)/eye.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rotz.cpp.o : $(START_DIR)/rotz.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
 roty.cpp.o : $(START_DIR)/roty.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-rotx.cpp.o : $(START_DIR)/rotx.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-CPos_wrt_I.cpp.o : $(START_DIR)/CPos_wrt_I.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
 inpolygon.cpp.o : $(START_DIR)/inpolygon.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-eml_int_forloop_overflow_check.cpp.o : $(START_DIR)/eml_int_forloop_overflow_check.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -414,35 +466,7 @@ skew.cpp.o : $(START_DIR)/skew.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-svd.cpp.o : $(START_DIR)/svd.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-svd1.cpp.o : $(START_DIR)/svd1.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-xzsvdc.cpp.o : $(START_DIR)/xzsvdc.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-xdotc.cpp.o : $(START_DIR)/xdotc.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-xdot.cpp.o : $(START_DIR)/xdot.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
 prod.cpp.o : $(START_DIR)/prod.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-combineVectorElements.cpp.o : $(START_DIR)/combineVectorElements.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-isequal.cpp.o : $(START_DIR)/isequal.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -510,19 +534,7 @@ allOrAny.cpp.o : $(START_DIR)/allOrAny.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-getUp.cpp.o : $(START_DIR)/getUp.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-floor.cpp.o : $(START_DIR)/floor.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-sqrt.cpp.o : $(START_DIR)/sqrt.cpp
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-sqrt1.cpp.o : $(START_DIR)/sqrt1.cpp
+CallTheDead.cpp.o : $(START_DIR)/CallTheDead.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -539,6 +551,22 @@ sin.cpp.o : $(START_DIR)/sin.cpp
 
 
 sin1.cpp.o : $(START_DIR)/sin1.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+sumprod.cpp.o : $(START_DIR)/sumprod.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+floor.cpp.o : $(START_DIR)/floor.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+sqrt.cpp.o : $(START_DIR)/sqrt.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+sqrt1.cpp.o : $(START_DIR)/sqrt1.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -559,6 +587,26 @@ xrot.cpp.o : $(START_DIR)/xrot.cpp
 
 
 xswap.cpp.o : $(START_DIR)/xswap.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xgetrf.cpp.o : $(START_DIR)/xgetrf.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xzgetrf.cpp.o : $(START_DIR)/xzgetrf.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xgeru.cpp.o : $(START_DIR)/xgeru.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+xger.cpp.o : $(START_DIR)/xger.cpp
+	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+
+
+getUp.cpp.o : $(START_DIR)/getUp.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 

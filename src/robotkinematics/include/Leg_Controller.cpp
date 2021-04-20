@@ -5,7 +5,7 @@
 // File: Leg_Controller.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -25,7 +25,7 @@
 #include "sin.h"
 #include "sqrt.h"
 #include <stdio.h>
-
+#include <iostream>
 // Function Definitions
 //
 // This function operates similar to IK_Solver_Legs_Inertial, but instead is
@@ -159,7 +159,7 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
   while (loop_toggle == 0) {
     ii = _u16_u32_((static_cast<unsigned int>(ii)) + 1U);
     if ((static_cast<int>(ii)) == 1000) {
-      (void)printf("Limit Reached");
+      (void)printf("Leg Controller: Limit Reached");
       fflush(stdout);
       coder::error();
     }
@@ -199,31 +199,31 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       s_FR = r_1prime1_c_FR[2] - r_1prime1_2_FR[2];
       s_FR_2 = r_1prime1_c_FR_2[2] - r_1prime1_2_FR[2];
       if (coder::fltpower_domain_error(r_FR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_FR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FR =
           ((((r_FR * r_FR) + (s_FR * s_FR)) - 0.0225) - 0.041615999999999993) /
           0.061199999999999991;
       if (coder::fltpower_domain_error(r_FR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_FR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FR_2 = ((((r_FR_2 * r_FR_2) + (s_FR_2 * s_FR_2)) - 0.0225) -
                 0.041615999999999993) /
@@ -237,24 +237,24 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
         double Theta3_FR_2_Temp_2;
         double d15;
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d15 = 1.0 - (D_FR_2 * D_FR_2);
         d16 = d15;
         coder::b_sqrt(&d16);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d26 = d15;
         coder::b_sqrt(&d26);
         Theta3_FR_2_Temp_2 = coder::b_atan2(-d26, D_FR_2);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d33 = d15;
         coder::b_sqrt(&d33);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d37 = d15;
         coder::b_sqrt(&d37);
@@ -267,33 +267,34 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
                      coder::b_atan2(0.204 * d40, (0.204 * d43) + 0.15));
       }
       if (D_FR > 0.999) {
-        loop_toggle = 0;
+       std::cout << "Leg Step Scooted Back" << std::endl;
+	    loop_toggle = 0;
         r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
         r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
         r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+        r_II_c_d[2] = 0;//r_II_c_0[2];
       } else {
         double Theta3_FR_2_Temp;
         double d27;
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d27 = 1.0 - (D_FR * D_FR);
         d28 = d27;
         coder::b_sqrt(&d28);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d34 = d27;
         coder::b_sqrt(&d34);
         Theta3_FR_2_Temp = coder::b_atan2(-d34, D_FR);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d38 = d27;
         coder::b_sqrt(&d38);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d44 = d27;
         coder::b_sqrt(&d44);
@@ -328,16 +329,16 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       rotz((*Theta1) + 3.1415926535897931, b_dv6);
       coder::mldivide(b_dv6, r_B1_c_FL, r_11_c_FL_2);
       if (coder::fltpower_domain_error(r_11_c_FL[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_FL[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FL = (((((r_11_c_FL[1] - 0.054) * (r_11_c_FL[1] - 0.054)) +
                 (r_11_c_FL[2] * r_11_c_FL[2])) -
@@ -345,16 +346,16 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
               0.041615999999999993) /
              0.061199999999999991;
       if (coder::fltpower_domain_error(r_11_c_FL_2[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_FL_2[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FL_2 = (((((r_11_c_FL_2[1] - 0.054) * (r_11_c_FL_2[1] - 0.054)) +
                   (r_11_c_FL_2[2] * r_11_c_FL_2[2])) -
@@ -368,13 +369,13 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       } else {
         double d1;
         if (coder::fltpower_domain_error(D_FL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d1 = 1.0 - (D_FL_2 * D_FL_2);
         d3 = d1;
         coder::b_sqrt(&d3);
         if (coder::fltpower_domain_error(D_FL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d5 = d1;
         coder::b_sqrt(&d5);
@@ -391,17 +392,17 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
         r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
         r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
         r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+        r_II_c_d[2] = 0;//r_II_c_0[2];
       } else {
         double d6;
         if (coder::fltpower_domain_error(D_FL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d6 = 1.0 - (D_FL * D_FL);
         d9 = d6;
         coder::b_sqrt(&d9);
         if (coder::fltpower_domain_error(D_FL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d18 = d6;
         coder::b_sqrt(&d18);
@@ -447,31 +448,31 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       s_BR = r_1prime1_c_BR[2] - r_1prime1_2_BR[2];
       s_BR_2 = r_1prime1_c_BR_2[2] - r_1prime1_2_BR[2];
       if (coder::fltpower_domain_error(r_BR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_BR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BR =
           ((((r_BR * r_BR) + (s_BR * s_BR)) - 0.0225) - 0.041615999999999993) /
           0.061199999999999991;
       if (coder::fltpower_domain_error(r_BR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_BR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BR_2 = ((((r_BR_2 * r_BR_2) + (s_BR_2 * s_BR_2)) - 0.0225) -
                 0.041615999999999993) /
@@ -484,24 +485,24 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
         double Theta3_BR_2_Temp_2;
         double d11;
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d11 = 1.0 - (D_BR_2 * D_BR_2);
         d13 = d11;
         coder::b_sqrt(&d13);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d21 = d11;
         coder::b_sqrt(&d21);
         Theta3_BR_2_Temp_2 = coder::b_atan2(-d21, D_BR_2);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d31 = d11;
         coder::b_sqrt(&d31);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d35 = d11;
         coder::b_sqrt(&d35);
@@ -518,29 +519,29 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
         r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
         r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
         r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+        r_II_c_d[2] = 0;//r_II_c_0[2];
       } else {
         double Theta3_BR_2_Temp;
         double d22;
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d22 = 1.0 - (D_BR * D_BR);
         d24 = d22;
         coder::b_sqrt(&d24);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d32 = d22;
         coder::b_sqrt(&d32);
         Theta3_BR_2_Temp = coder::b_atan2(-d32, D_BR);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d36 = d22;
         coder::b_sqrt(&d36);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d42 = d22;
         coder::b_sqrt(&d42);
@@ -575,16 +576,16 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       rotz((*Theta1) + 3.1415926535897931, b_dv7);
       coder::mldivide(b_dv7, r_B1_c_BL, r_11_c_BL_2);
       if (coder::fltpower_domain_error(r_11_c_BL[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_BL[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BL = (((((r_11_c_BL[1] - 0.054) * (r_11_c_BL[1] - 0.054)) +
                 (r_11_c_BL[2] * r_11_c_BL[2])) -
@@ -592,16 +593,16 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
               0.041615999999999993) /
              0.061199999999999991;
       if (coder::fltpower_domain_error(r_11_c_BL_2[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_BL_2[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BL_2 = (((((r_11_c_BL_2[1] - 0.054) * (r_11_c_BL_2[1] - 0.054)) +
                   (r_11_c_BL_2[2] * r_11_c_BL_2[2])) -
@@ -615,13 +616,13 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       } else {
         double d2;
         if (coder::fltpower_domain_error(D_BL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d2 = 1.0 - (D_BL_2 * D_BL_2);
         d4 = d2;
         coder::b_sqrt(&d4);
         if (coder::fltpower_domain_error(D_BL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d7 = d2;
         coder::b_sqrt(&d7);
@@ -638,17 +639,17 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
         r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
         r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
         r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+        r_II_c_d[2] = 0;//r_II_c_0[2];
       } else {
         double d8;
         if (coder::fltpower_domain_error(D_BL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d8 = 1.0 - (D_BL * D_BL);
         d10 = d8;
         coder::b_sqrt(&d10);
         if (coder::fltpower_domain_error(D_BL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d20 = d8;
         coder::b_sqrt(&d20);
@@ -756,21 +757,21 @@ void Leg_Controller(double r_II_c_d[3], const double r_II_c_0[3],
       *Theta2 = Theta2_4;
       *Theta3 = Theta3_4;
       if (hardstop_cond_2) {
-        loop_toggle = 0;
-        r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
-        r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
-        r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+       //loop_toggle = 0;
+       // r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
+       // r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
+       // r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
+       // r_II_c_d[2] = r_II_c_0[2];
       }
     } else {
       *Theta2 = Theta2_2;
       *Theta3 = Theta3_2;
       if (hardstop_cond) {
-        loop_toggle = 0;
-        r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
-        r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
-        r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
-        r_II_c_d[2] = r_II_c_0[2];
+       // loop_toggle = 0;
+       // r_II_c_d[0] -= travel_dir_idx_0 * 0.01;
+       // r_II_c_d[1] -= travel_dir_idx_1 * 0.01;
+       // r_II_c_d[2] -= travel_dir_idx_2 * 0.01;
+       // r_II_c_d[2] = r_II_c_0[2];
       }
     }
   }

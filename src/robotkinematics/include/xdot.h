@@ -5,7 +5,7 @@
 // File: xdot.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef XDOT_H
@@ -21,12 +21,15 @@ namespace Codegen {
 namespace coder {
 namespace internal {
 namespace blas {
-double b_xdot(int n, const double x[36], int ix0, const double y[36], int iy0);
-
-double c_xdot(int n, const double x[324], int ix0, const double y[324],
+double b_xdot(int n, const double x[108], int ix0, const double y[108],
               int iy0);
 
-double xdot(int n, const double x[108], int ix0, const double y[108], int iy0);
+double c_xdot(int n, const double x[36], int ix0, const double y[36], int iy0);
+
+double d_xdot(int n, const double x[324], int ix0, const double y[324],
+              int iy0);
+
+double xdot(int n, const double x[9], int ix0, const double y[9], int iy0);
 
 } // namespace blas
 } // namespace internal

@@ -5,7 +5,7 @@
 // File: isequal.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef ISEQUAL_H
@@ -19,9 +19,11 @@
 // Function Declarations
 namespace Codegen {
 namespace coder {
-bool isequal(const double varargin_1[3], const double varargin_2[3]);
+bool b_isequal(const double varargin_1[3], const double varargin_2[3]);
 
-}
+bool isequal(const double varargin_1[4], const bool varargin_2[4]);
+
+} // namespace coder
 } // namespace Codegen
 
 #endif

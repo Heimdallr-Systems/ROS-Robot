@@ -5,7 +5,7 @@
 // File: sortIdx.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -76,7 +76,7 @@ static void merge(int idx[4], double x[4], int offset, int np, int nq,
     if ((1 <= n_tmp) && (n_tmp > 2147483646)) {
       check_forloop_overflow_error(true);
     }
-    for (int j = 0; j < n_tmp; j++) {
+    for (int j{0}; j < n_tmp; j++) {
       int i;
       i = offset + j;
       iwork[j] = idx[i];
@@ -108,7 +108,7 @@ static void merge(int idx[4], double x[4], int offset, int np, int nq,
           if (((p + 1) <= np) && (np > 2147483646)) {
             check_forloop_overflow_error(true);
           }
-          for (int b_j = p + 1; b_j <= np; b_j++) {
+          for (int b_j{p + 1}; b_j <= np; b_j++) {
             int i1;
             i1 = offset1 + b_j;
             idx[i1] = iwork[b_j - 1];
@@ -134,8 +134,8 @@ static void merge(int idx[4], double x[4], int offset, int np, int nq,
 static void merge_block(int idx[4], double x[4], int offset, int n,
                         int preSortLevel, int iwork[4], double xwork[4])
 {
-  static rtBoundsCheckInfo emlrtBCI =
-      {
+  static rtBoundsCheckInfo
+      emlrtBCI{
           0,             // iFirst
           31,            // iLast
           490,           // lineNo
@@ -169,7 +169,7 @@ static void merge_block(int idx[4], double x[4], int offset, int n,
     }
     bLen2 = bLen * 2;
     nPairs = asr_s32(nBlocks, 1U);
-    for (int k = 0; k < nPairs; k++) {
+    for (int k{0}; k < nPairs; k++) {
       merge(idx, x, offset + (k * bLen2), bLen, bLen, iwork, xwork);
     }
     bLen = bLen2;

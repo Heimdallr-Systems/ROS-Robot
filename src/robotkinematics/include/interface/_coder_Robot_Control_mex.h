@@ -5,7 +5,7 @@
 // File: _coder_Robot_Control_mex.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef _CODER_ROBOT_CONTROL_MEX_H
@@ -17,6 +17,9 @@
 #include "tmwtypes.h"
 
 // Function Declarations
+void CallTheDead_mexFunction(int32_T nlhs, mxArray *plhs[4], int32_T nrhs,
+                             const mxArray *prhs[7]);
+
 void Robot_Control_mexFunction(int32_T nlhs, mxArray *plhs[7], int32_T nrhs,
                                const mxArray *prhs[5]);
 

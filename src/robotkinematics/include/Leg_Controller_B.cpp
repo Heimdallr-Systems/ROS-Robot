@@ -5,7 +5,7 @@
 // File: Leg_Controller_B.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -120,16 +120,16 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
     s_FR = r_1prime1_c_FR[2] - r_1prime1_2_FR[2];
     //  cos(theta3)
     if (coder::fltpower_domain_error(r_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(s_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.15)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.204)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     D_FR = ((((r_FR * r_FR) + (s_FR * s_FR)) - 0.0225) - 0.041615999999999993) /
            0.061199999999999991;
@@ -137,25 +137,25 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
     //  to solve standard 2-link problem frame . These will be used to solve for
     //  the theta 2 values
     if (coder::fltpower_domain_error(D_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d16 = 1.0 - (D_FR * D_FR);
     d17 = d16;
     coder::b_sqrt(&d17);
     if (coder::fltpower_domain_error(D_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d19 = d16;
     coder::b_sqrt(&d19);
     Theta3_FR_2_Temp = coder::b_atan2(-d19, D_FR);
     //  Theta 3 values measured in defined way (from zeroed position)
     if (coder::fltpower_domain_error(D_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d20 = d16;
     coder::b_sqrt(&d20);
     if (coder::fltpower_domain_error(D_FR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d21 = d16;
     coder::b_sqrt(&d21);
@@ -185,16 +185,16 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
     rotz(Theta1_FL, b_dv);
     coder::mldivide(b_dv, r_B1_c_FL, r_11_c_FL);
     if (coder::fltpower_domain_error(r_11_c_FL[1] - 0.054)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(r_11_c_FL[2])) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.15)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.204)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     D_FL = (((((r_11_c_FL[1] - 0.054) * (r_11_c_FL[1] - 0.054)) +
               (r_11_c_FL[2] * r_11_c_FL[2])) -
@@ -202,13 +202,13 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
             0.041615999999999993) /
            0.061199999999999991;
     if (coder::fltpower_domain_error(D_FL)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d = 1.0 - (D_FL * D_FL);
     d2 = d;
     coder::b_sqrt(&d2);
     if (coder::fltpower_domain_error(D_FL)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d5 = d;
     coder::b_sqrt(&d5);
@@ -244,38 +244,38 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
     r_BR = r_1prime1_c_BR[1] - r_1prime1_2_BR[1];
     s_BR = r_1prime1_c_BR[2] - r_1prime1_2_BR[2];
     if (coder::fltpower_domain_error(r_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(s_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.15)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.204)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     D_BR = ((((r_BR * r_BR) + (s_BR * s_BR)) - 0.0225) - 0.041615999999999993) /
            0.061199999999999991;
     if (coder::fltpower_domain_error(D_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d4 = 1.0 - (D_BR * D_BR);
     d6 = d4;
     coder::b_sqrt(&d6);
     if (coder::fltpower_domain_error(D_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d10 = d4;
     coder::b_sqrt(&d10);
     Theta3_BR_2_Temp = coder::b_atan2(-d10, D_BR);
     if (coder::fltpower_domain_error(D_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d13 = d4;
     coder::b_sqrt(&d13);
     if (coder::fltpower_domain_error(D_BR)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d14 = d4;
     coder::b_sqrt(&d14);
@@ -304,16 +304,16 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
     rotz(Theta1_BL, b_dv2);
     coder::mldivide(b_dv2, r_B1_c_BL, r_11_c_BL);
     if (coder::fltpower_domain_error(r_11_c_BL[1] - 0.054)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(r_11_c_BL[2])) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.15)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     if (coder::fltpower_domain_error(0.204)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     D_BL = (((((r_11_c_BL[1] - 0.054) * (r_11_c_BL[1] - 0.054)) +
               (r_11_c_BL[2] * r_11_c_BL[2])) -
@@ -321,13 +321,13 @@ void Leg_Controller_B(const double r_BB_c[3], unsigned char b_leg_index,
             0.041615999999999993) /
            0.061199999999999991;
     if (coder::fltpower_domain_error(D_BL)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d1 = 1.0 - (D_BL * D_BL);
     d3 = d1;
     coder::b_sqrt(&d3);
     if (coder::fltpower_domain_error(D_BL)) {
-      c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+      c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
     }
     d7 = d1;
     coder::b_sqrt(&d7);

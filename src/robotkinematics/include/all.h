@@ -5,7 +5,7 @@
 // File: all.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef ALL_H
@@ -19,7 +19,7 @@
 // Function Declarations
 namespace Codegen {
 namespace coder {
-bool all(const unsigned char x[4]);
+bool all(const bool x[4]);
 
 }
 } // namespace Codegen

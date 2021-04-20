@@ -5,7 +5,7 @@
 // File: manipulability.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -51,11 +51,11 @@ void manipulability(double state[36], double *muFR, double *muFL, double *muBR,
   (void)std::memset(&state[18], 0, 18U * (sizeof(double)));
   contactJacobians(state, GeoJc_FR, GeoJc_FL, GeoJc_BR, GeoJc_BL);
   //  Find SVD
-  coder::svd(GeoJc_FR, a__1, SIG_FR, a__2);
-  coder::svd(GeoJc_FL, a__3, SIG_FL, a__4);
-  coder::svd(GeoJc_BR, a__5, SIG_BR, a__6);
-  coder::svd(GeoJc_BL, a__7, SIG_BL, a__8);
-  for (int ii = 0; ii < 6; ii++) {
+  coder::b_svd(GeoJc_FR, a__1, SIG_FR, a__2);
+  coder::b_svd(GeoJc_FL, a__3, SIG_FL, a__4);
+  coder::b_svd(GeoJc_BR, a__5, SIG_BR, a__6);
+  coder::b_svd(GeoJc_BL, a__7, SIG_BL, a__8);
+  for (int ii{0}; ii < 6; ii++) {
     int sigFR_tmp;
     sigFR_tmp = ii + (6 * ii);
     sigFR[ii] = SIG_FR[sigFR_tmp];

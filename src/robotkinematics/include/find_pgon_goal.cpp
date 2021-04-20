@@ -5,7 +5,7 @@
 // File: find_pgon_goal.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -15,7 +15,7 @@
 #include "inpolygon.h"
 #include "norm.h"
 #include <stdio.h>
-
+#include <iostream>
 // Function Definitions
 //
 // Arguments    : const double r_II_c_FR[3]
@@ -34,7 +34,7 @@ void find_pgon_goal(const double r_II_c_FR[3], const double r_II_c_FL[3],
                     double r_II_B[3], unsigned char lifted_leg, double *x,
                     double *y)
 {
-  static const double b_dv[3] = {0.0, 0.0, 1.0};
+  static const double b_dv[3]{0.0, 0.0, 1.0};
   double b_r_II_B[3];
   double boundary_vec[3];
   double dir_to_pgon[3];
@@ -113,8 +113,9 @@ void find_pgon_goal(const double r_II_c_FR[3], const double r_II_c_FL[3],
     ii = static_cast<unsigned short>(
         static_cast<int>((static_cast<int>(ii)) + 1));
     if (coder::b_inpolygon(r_II_B[0], r_II_B[1], pgonx, pgony)) {
-      r_II_B[0] += dir_to_pgon[0] * 0.035;
-      r_II_B[1] += dir_to_pgon[1] * 0.035;
+      r_II_B[0] += dir_to_pgon[0] * 0.05;//0.035;
+      r_II_B[1] += dir_to_pgon[1] * 0.05;//0.035;
+	 std::cout<< "HI HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI " << std::endl;
       exitg1 = true;
     } else {
       r_II_B[0] += dir_to_pgon[0] * 0.001;

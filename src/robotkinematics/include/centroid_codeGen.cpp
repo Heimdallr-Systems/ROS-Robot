@@ -5,7 +5,7 @@
 // File: centroid_codeGen.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -46,15 +46,15 @@ void centroid_codeGen(const double x[4], const double y[4], double *Cx,
   b_y[3] = y[3];
   b_y[4] = y[0];
   //  Common portion that will be used multiple times.
-  for (int i = 0; i < 5; i++) {
+  for (int i{0}; i < 5; i++) {
     commonBit_tmp[i] = b_x[i];
   }
   coder::circshift(commonBit_tmp);
-  for (int i1 = 0; i1 < 5; i1++) {
+  for (int i1{0}; i1 < 5; i1++) {
     b_commonBit_tmp[i1] = b_y[i1];
   }
   coder::circshift(b_commonBit_tmp);
-  for (int i2 = 0; i2 < 5; i2++) {
+  for (int i2{0}; i2 < 5; i2++) {
     double d;
     double d1;
     double d2;

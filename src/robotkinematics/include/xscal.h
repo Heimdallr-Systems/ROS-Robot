@@ -5,7 +5,7 @@
 // File: xscal.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef XSCAL_H
@@ -21,13 +21,19 @@ namespace Codegen {
 namespace coder {
 namespace internal {
 namespace blas {
-void b_xscal(int n, double a, double x[18], int ix0);
+void b_xscal(int n, double a, double x[3], int ix0);
 
-void b_xscal(double a, double x[324], int ix0);
+void b_xscal(double a, double x[36], int ix0);
 
-void xscal(int n, double a, double x[108], int ix0);
+void c_xscal(int n, double a, double x[108], int ix0);
 
-void xscal(double a, double x[36], int ix0);
+void c_xscal(double a, double x[324], int ix0);
+
+void d_xscal(int n, double a, double x[18], int ix0);
+
+void xscal(int n, double a, double x[9], int ix0);
+
+void xscal(double a, double x[9], int ix0);
 
 } // namespace blas
 } // namespace internal

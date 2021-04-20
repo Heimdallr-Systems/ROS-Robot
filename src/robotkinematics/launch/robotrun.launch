@@ -1,6 +1,6 @@
 <launch>
   <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
   <include file="$(find rtabmap_ros)/launch/rtabmap.launch"/>
-  <include file="$(find robot_goal_gen)/launch/goal_set.launch"/>
-  <node pkg="robotkinematics" type="kinematics_wrapper" name="$(anon base_name)"></node>
+  <!--<include file="$(find robot_goal_gen)/launch/goal_set.launch"/>
+  <node pkg="robotkinematics" type="kinematics_wrapper" name="$(anon base_name)"></node>-->
 </launch>

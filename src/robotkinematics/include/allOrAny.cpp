@@ -5,7 +5,7 @@
 // File: allOrAny.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -13,13 +13,13 @@
 
 // Function Definitions
 //
-// Arguments    : const unsigned char x[4]
+// Arguments    : const bool x[4]
 // Return Type  : bool
 //
 namespace Codegen {
 namespace coder {
 namespace internal {
-bool vectorAll(const unsigned char x[4])
+bool vectorAll(const bool x[4])
 {
   int k;
   bool exitg1;
@@ -28,7 +28,7 @@ bool vectorAll(const unsigned char x[4])
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k < 4)) {
-    if ((static_cast<int>(x[k])) == 0) {
+    if (!x[k]) {
       y = false;
       exitg1 = true;
     } else {

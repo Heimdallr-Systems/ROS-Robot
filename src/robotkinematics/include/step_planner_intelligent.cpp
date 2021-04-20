@@ -5,7 +5,7 @@
 // File: step_planner_intelligent.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -57,16 +57,17 @@ void step_planner_intelligent(const double r_II_b_last[3],
   b_dv[1] = 0.0;
   travel_dir_0[2] = r_II_b[2] - r_II_b_last[2];
   b_dv[2] = 0.0;
-  if (coder::isequal(travel_dir_0, b_dv)) {
+  if (coder::b_isequal(travel_dir_0, b_dv)) {
     travel_dir_0[0] = r_II_b[0] - r_II_c_start[0];
     travel_dir_0[1] = r_II_b[1] - r_II_c_start[1];
     travel_dir_0[2] = r_II_b[2] - r_II_c_start[2];
   }
   d = coder::c_norm(travel_dir_0);
+  step_dist = 0.06;
   r_II_c[0] = r_II_c_start[0] + ((travel_dir_0[0] / d) * step_dist);
   r_II_c[1] = r_II_c_start[1] + ((travel_dir_0[1] / d) * step_dist);
   r_II_c[2] = r_II_c_start[2] + ((travel_dir_0[2] / d) * step_dist);
-  r_II_c[2] -= 0.005;
+  //r_II_c[2] -= 0.005;
   //  r_BB_c_target = r_II_c(:,leg_index)-r_II_b;
   //  determine center coordinates
   //  ideal_leg_pos=round(r_BB_c_target*c_pc_res);

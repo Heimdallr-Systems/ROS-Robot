@@ -5,7 +5,7 @@
 // File: svd1.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -15,20 +15,34 @@
 
 // Function Definitions
 //
+// Arguments    : const double A[9]
+//                double U[9]
+//                double s[3]
+//                double V[9]
+// Return Type  : void
+//
+namespace Codegen {
+namespace coder {
+namespace internal {
+void c_svd(const double A[9], double U[9], double s[3], double V[9])
+{
+  double b_A[9];
+  (void)std::copy(&A[0], &A[9], &b_A[0]);
+  reflapack::xzsvdc(b_A, U, s, V);
+}
+
+//
 // Arguments    : const double A[108]
 //                double U[36]
 //                double s[6]
 //                double V[324]
 // Return Type  : void
 //
-namespace Codegen {
-namespace coder {
-namespace internal {
-void b_svd(const double A[108], double U[36], double s[6], double V[324])
+void d_svd(const double A[108], double U[36], double s[6], double V[324])
 {
   double b_A[108];
   (void)std::copy(&A[0], &A[108], &b_A[0]);
-  reflapack::xzsvdc(b_A, U, s, V);
+  reflapack::b_xzsvdc(b_A, U, s, V);
 }
 
 } // namespace internal

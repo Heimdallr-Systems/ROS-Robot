@@ -5,9 +5,10 @@
 // File: Robot_Control.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
-
+#define steperror .3
+#define bodyerror .11
 // Include Files
 #include "Robot_Control.h"
 #include "Body_Pose_Controller.h"
@@ -56,7 +57,7 @@ static unsigned char step_needed;
 
 static bool calc_manip;
 
-static unsigned char legs_valid[4];
+static bool legs_valid[4];
 
 static bool floor_toggle_not_empty;
 
@@ -118,8 +119,6 @@ static unsigned char _u8_d_(double b);
 
 static unsigned char _u8_u32_(unsigned int b);
 
-static double rt_roundd(double u);
-
 } // namespace Codegen
 
 // Function Definitions
@@ -153,27 +152,6 @@ static unsigned char _u8_u32_(unsigned int b)
 }
 
 //
-// Arguments    : double u
-// Return Type  : double
-//
-static double rt_roundd(double u)
-{
-  double y;
-  if (std::abs(u) < 4.503599627370496E+15) {
-    if (u >= 0.5) {
-      y = std::floor(u + 0.5);
-    } else if (u > -0.5) {
-      y = 0.0;
-    } else {
-      y = std::ceil(u - 0.5);
-    }
-  } else {
-    y = u;
-  }
-  return y;
-}
-
-//
 // Controls Robot's walking algorithm
 //    input: r_II_B_d, Euler_d, gamma_m
 //    output: Theta_d (1-3), phi_d_temp & r_II_b_d_temp (orientation for
@@ -200,8 +178,8 @@ static double rt_roundd(double u)
 //                double Theta3_d_out[4]
 //                double *phi_d_temp_out
 //                double r_II_B_d_temp_out[3]
-//                unsigned char floor_toggle_out[4]
-//                unsigned char legs_valid_out[4]
+//                bool floor_toggle_out[4]
+//                bool legs_valid_out[4]
 // Return Type  : void
 //
 void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
@@ -209,10 +187,9 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
                    const bool legs_on_gnd[4], double Theta1_d_out[4],
                    double Theta2_d_out[4], double Theta3_d_out[4],
                    double *phi_d_temp_out, double r_II_B_d_temp_out[3],
-                   unsigned char floor_toggle_out[4],
-                   unsigned char legs_valid_out[4])
+                   bool floor_toggle_out[4], bool legs_valid_out[4])
 {
-  static rtBoundsCheckInfo ab_emlrtBCI = {
+  static rtBoundsCheckInfo ab_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       462,             // lineNo
@@ -223,7 +200,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo b_emlrtBCI = {
+  static rtBoundsCheckInfo b_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       533,             // lineNo
@@ -234,7 +211,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo bb_emlrtBCI = {
+  static rtBoundsCheckInfo bb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       462,             // lineNo
@@ -245,7 +222,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo c_emlrtBCI = {
+  static rtBoundsCheckInfo c_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       533,             // lineNo
@@ -256,7 +233,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo cb_emlrtBCI = {
+  static rtBoundsCheckInfo cb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       438,             // lineNo
@@ -267,7 +244,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo d_emlrtBCI = {
+  static rtBoundsCheckInfo d_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       728,             // lineNo
@@ -278,7 +255,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo db_emlrtBCI = {
+  static rtBoundsCheckInfo db_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       438,             // lineNo
@@ -289,7 +266,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo e_emlrtBCI = {
+  static rtBoundsCheckInfo e_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       729,             // lineNo
@@ -300,7 +277,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo eb_emlrtBCI = {
+  static rtBoundsCheckInfo eb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       438,             // lineNo
@@ -311,7 +288,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo emlrtBCI = {
+  static rtBoundsCheckInfo emlrtBCI{
       1,               // iFirst
       4,               // iLast
       533,             // lineNo
@@ -322,7 +299,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo f_emlrtBCI = {
+  static rtBoundsCheckInfo f_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       730,             // lineNo
@@ -333,7 +310,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo fb_emlrtBCI = {
+  static rtBoundsCheckInfo fb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       431,             // lineNo
@@ -344,7 +321,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo g_emlrtBCI = {
+  static rtBoundsCheckInfo g_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       734,             // lineNo
@@ -355,7 +332,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo gb_emlrtBCI = {
+  static rtBoundsCheckInfo gb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       431,             // lineNo
@@ -366,7 +343,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo h_emlrtBCI = {
+  static rtBoundsCheckInfo h_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       735,             // lineNo
@@ -377,7 +354,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo hb_emlrtBCI = {
+  static rtBoundsCheckInfo hb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       431,             // lineNo
@@ -388,7 +365,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo i_emlrtBCI = {
+  static rtBoundsCheckInfo i_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       736,             // lineNo
@@ -399,7 +376,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo ib_emlrtBCI = {
+  static rtBoundsCheckInfo ib_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       676,             // lineNo
@@ -410,7 +387,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo j_emlrtBCI = {
+  static rtBoundsCheckInfo j_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       732,             // lineNo
@@ -421,7 +398,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo jb_emlrtBCI = {
+  static rtBoundsCheckInfo jb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       676,             // lineNo
@@ -432,7 +409,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo k_emlrtBCI = {
+  static rtBoundsCheckInfo k_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       732,             // lineNo
@@ -443,7 +420,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo kb_emlrtBCI = {
+  static rtBoundsCheckInfo kb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       676,             // lineNo
@@ -454,7 +431,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo l_emlrtBCI = {
+  static rtBoundsCheckInfo l_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       732,             // lineNo
@@ -465,7 +442,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       3    // checkKind
   };
-  static rtBoundsCheckInfo lb_emlrtBCI = {
+  static rtBoundsCheckInfo lb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       646,             // lineNo
@@ -476,7 +453,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo m_emlrtBCI = {
+  static rtBoundsCheckInfo m_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       526,             // lineNo
@@ -487,7 +464,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo mb_emlrtBCI = {
+  static rtBoundsCheckInfo mb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       646,             // lineNo
@@ -498,7 +475,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo n_emlrtBCI = {
+  static rtBoundsCheckInfo n_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       526,             // lineNo
@@ -509,7 +486,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo nb_emlrtBCI = {
+  static rtBoundsCheckInfo nb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       646,             // lineNo
@@ -520,7 +497,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo o_emlrtBCI = {
+  static rtBoundsCheckInfo o_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       526,             // lineNo
@@ -531,7 +508,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo ob_emlrtBCI = {
+  static rtBoundsCheckInfo ob_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       616,             // lineNo
@@ -542,7 +519,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo p_emlrtBCI = {
+  static rtBoundsCheckInfo p_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       501,             // lineNo
@@ -553,7 +530,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo pb_emlrtBCI = {
+  static rtBoundsCheckInfo pb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       616,             // lineNo
@@ -564,7 +541,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo q_emlrtBCI = {
+  static rtBoundsCheckInfo q_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       501,             // lineNo
@@ -575,7 +552,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo qb_emlrtBCI = {
+  static rtBoundsCheckInfo qb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       616,             // lineNo
@@ -586,7 +563,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo r_emlrtBCI = {
+  static rtBoundsCheckInfo r_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       501,             // lineNo
@@ -597,7 +574,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo rb_emlrtBCI = {
+  static rtBoundsCheckInfo rb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       586,             // lineNo
@@ -608,7 +585,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo s_emlrtBCI = {
+  static rtBoundsCheckInfo s_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       494,             // lineNo
@@ -619,7 +596,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo sb_emlrtBCI = {
+  static rtBoundsCheckInfo sb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       586,             // lineNo
@@ -630,7 +607,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo t_emlrtBCI = {
+  static rtBoundsCheckInfo t_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       494,             // lineNo
@@ -641,7 +618,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo tb_emlrtBCI = {
+  static rtBoundsCheckInfo tb_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       586,             // lineNo
@@ -652,7 +629,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo u_emlrtBCI = {
+  static rtBoundsCheckInfo u_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       494,             // lineNo
@@ -663,7 +640,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo v_emlrtBCI = {
+  static rtBoundsCheckInfo v_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       469,             // lineNo
@@ -674,7 +651,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo w_emlrtBCI = {
+  static rtBoundsCheckInfo w_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       469,             // lineNo
@@ -685,7 +662,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo x_emlrtBCI = {
+  static rtBoundsCheckInfo x_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       469,             // lineNo
@@ -696,7 +673,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       "m", // pName
       0    // checkKind
   };
-  static rtBoundsCheckInfo y_emlrtBCI = {
+  static rtBoundsCheckInfo y_emlrtBCI{
       1,               // iFirst
       4,               // iLast
       462,             // lineNo
@@ -711,7 +688,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
   static double startPoint[3];
   static double endPhi;
   static double startPhi;
-  static unsigned char floor_toggle[4];
+  static bool floor_toggle[4];
   double state[36];
   double r_II_c[12];
   double T_I_B[9];
@@ -828,13 +805,13 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
   double x;
   double y;
   int iidx[4];
-  unsigned char uv[4];
-  unsigned char uv1[4];
-  unsigned char uv2[4];
-  unsigned char uv3[4];
-  unsigned char uv4[4];
-  unsigned char uv5[4];
-  bool bv[3];
+  bool bv[4];
+  bool bv2[4];
+  bool bv3[4];
+  bool bv4[4];
+  bool bv5[4];
+  bool bv6[4];
+  bool bv1[3];
   bool goal_inside_pgon;
   //  Variable Init
   //  leg step distance
@@ -904,14 +881,14 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     calc_manip = true;
     //  initialize toggle for determining if manipulability needs to be
     //  recalculated
-    legs_valid[0] = 1U;
-    floor_toggle[0] = 1U;
-    legs_valid[1] = 1U;
-    floor_toggle[1] = 1U;
-    legs_valid[2] = 1U;
-    floor_toggle[2] = 1U;
-    legs_valid[3] = 1U;
-    floor_toggle[3] = 1U;
+    legs_valid[0] = true;
+    floor_toggle[0] = true;
+    legs_valid[1] = true;
+    floor_toggle[1] = true;
+    legs_valid[2] = true;
+    floor_toggle[2] = true;
+    legs_valid[3] = true;
+    floor_toggle[3] = true;
     legs_stepped = 0U;
     leg_reset_needed = false;
     coder::eye(T_I_B_d_temp);
@@ -939,7 +916,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
   rotz(gamma_m[0], b_dv);
   roty(gamma_m[1], b_dv1);
   rotx(gamma_m[2], b_dv2);
-  for (int i = 0; i < 3; i++) {
+  for (int i{0}; i < 3; i++) {
     double d;
     double d1;
     double d2;
@@ -949,14 +926,14 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     d = b_dv[i];
     d1 = b_dv[i + 3];
     d2 = b_dv[i + 6];
-    for (int i1 = 0; i1 < 3; i1++) {
+    for (int i1{0}; i1 < 3; i1++) {
       b_dv3[i + (3 * i1)] = ((d * b_dv1[3 * i1]) + (d1 * b_dv1[(3 * i1) + 1])) +
                             (d2 * b_dv1[(3 * i1) + 2]);
     }
     d3 = b_dv3[i];
     d4 = b_dv3[i + 3];
     d5 = b_dv3[i + 6];
-    for (int i2 = 0; i2 < 3; i2++) {
+    for (int i2{0}; i2 < 3; i2++) {
       T_I_B[i + (3 * i2)] =
           ((d3 * b_dv2[3 * i2]) + (d4 * b_dv2[(3 * i2) + 1])) +
           (d5 * b_dv2[(3 * i2) + 2]);
@@ -1030,19 +1007,19 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     }
     switch (step_needed) {
     case 1U:
-      leg_index = _u8_d_(rt_roundd(manip_vec[0]));
+      leg_index = _u8_d_(std::round(manip_vec[0]));
       step_needed = 2U;
       break;
     case 2U:
-      leg_index = _u8_d_(rt_roundd(manip_vec[1]));
+      leg_index = _u8_d_(std::round(manip_vec[1]));
       step_needed = 3U;
       break;
     case 3U:
-      leg_index = _u8_d_(rt_roundd(manip_vec[2]));
+      leg_index = _u8_d_(std::round(manip_vec[2]));
       step_needed = 4U;
       break;
     case 4U:
-      leg_index = _u8_d_(rt_roundd(manip_vec[3]));
+      leg_index = _u8_d_(std::round(manip_vec[3]));
       step_needed = 1U;
       calc_manip = true;
       break;
@@ -1064,7 +1041,8 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     endPoint_not_empty = true;
     waypoint_toggle = true;
   } else {
-    waypoint_toggle = ((coder::isequal(endPoint, r_II_B_d)) && waypoint_toggle);
+    waypoint_toggle =
+        ((coder::b_isequal(endPoint, r_II_B_d)) && waypoint_toggle);
   }
   if ((!turn_toggle) || (!endPhi_not_empty)) {
     startPhi = gamma_m[0];
@@ -1102,7 +1080,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       coder::b_sign(&d7);
       phi_d_temp = gamma_m[0] + ((d7 * 3.1415926535897931) / 15.0);
       rotz(phi_d_temp, b_dv);
-      for (int i3 = 0; i3 < 3; i3++) {
+      for (int i3{0}; i3 < 3; i3++) {
         double d10;
         double d14;
         double d15;
@@ -1112,7 +1090,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         d8 = b_dv[i3];
         d9 = b_dv[i3 + 3];
         d10 = b_dv[i3 + 6];
-        for (int i4 = 0; i4 < 3; i4++) {
+        for (int i4{0}; i4 < 3; i4++) {
           b_dv1[i3 + (3 * i4)] =
               ((d8 * T_I_B_d_tmp[3 * i4]) + (d9 * T_I_B_d_tmp[(3 * i4) + 1])) +
               (d10 * T_I_B_d_tmp[(3 * i4) + 2]);
@@ -1120,7 +1098,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         d14 = b_dv1[i3];
         d15 = b_dv1[i3 + 3];
         d16 = b_dv1[i3 + 6];
-        for (int i6 = 0; i6 < 3; i6++) {
+        for (int i6{0}; i6 < 3; i6++) {
           T_I_B_d_temp[i3 + (3 * i6)] = ((d14 * b_T_I_B_d_tmp[3 * i6]) +
                                          (d15 * b_T_I_B_d_tmp[(3 * i6) + 1])) +
                                         (d16 * b_T_I_B_d_tmp[(3 * i6) + 2]);
@@ -1140,10 +1118,10 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     }
     //     %% Turn Stepping Section
     if (leg_reset_needed) {
-      bool guard1 = false;
-      bool guard2 = false;
-      bool guard3 = false;
-      bool guard4 = false;
+      bool guard1{false};
+      bool guard2{false};
+      bool guard3{false};
+      bool guard4{false};
       //  step to reset legs
       guard1 = false;
       guard2 = false;
@@ -1151,7 +1129,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       guard4 = false;
       switch (leg_index) {
       case 1:
-        legs_valid[0] = 0U;
+        legs_valid[0] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           c_r_II_B[0] = r_II_B[0];
           c_r_II_B[1] = r_II_B[1];
@@ -1167,7 +1145,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = 0.78539816339744828;
           Theta2_d_midpt = -0.78539816339744828;
-          Theta3_d_midpt = 2.3561944901923448;
+          Theta3_d_midpt = 3.1415/2.0;//2.3561944901923448;
           step_state = 1U;
           r_II_c_FR_0[0] = r_II_c_FR[0];
           r_II_c_FR_0[1] = r_II_c_FR[1];
@@ -1196,7 +1174,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 3U;
             Leg_Controller_B(r_BB_c_reset_FR, static_cast<unsigned char>(1U),
@@ -1250,7 +1228,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 2:
-        legs_valid[1] = 0U;
+        legs_valid[1] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           d_r_II_B[0] = r_II_B[0];
           d_r_II_B[1] = r_II_B[1];
@@ -1266,7 +1244,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = -0.78539816339744828;
           Theta2_d_midpt = 0.78539816339744828;
-          Theta3_d_midpt = -2.3561944901923448;
+          Theta3_d_midpt = -3.1414/2.0;//-2.3561944901923448;
           step_state = 1U;
           r_II_c_FL_0[0] = r_II_c_FL[0];
           r_II_c_FL_0[1] = r_II_c_FL[1];
@@ -1295,7 +1273,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 3U;
             Leg_Controller_B(r_BB_c_reset_FL, static_cast<unsigned char>(2U),
@@ -1349,7 +1327,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 3:
-        legs_valid[2] = 0U;
+        legs_valid[2] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           e_r_II_B[0] = r_II_B[0];
           e_r_II_B[1] = r_II_B[1];
@@ -1365,7 +1343,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = -0.78539816339744828;
           Theta2_d_midpt = -0.78539816339744828;
-          Theta3_d_midpt = 2.3561944901923448;
+          Theta3_d_midpt = 3.1415/2.0;//2.3561944901923448;
           step_state = 1U;
           r_II_c_BR_0[0] = r_II_c_BR[0];
           r_II_c_BR_0[1] = r_II_c_BR[1];
@@ -1394,7 +1372,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 3U;
             Leg_Controller_B(r_BB_c_reset_BR, static_cast<unsigned char>(3U),
@@ -1448,7 +1426,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 4:
-        legs_valid[3] = 0U;
+        legs_valid[3] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           f_r_II_B[0] = r_II_B[0];
           f_r_II_B[1] = r_II_B[1];
@@ -1464,7 +1442,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = 0.78539816339744828;
           Theta2_d_midpt = 0.78539816339744828;
-          Theta3_d_midpt = -2.3561944901923448;
+          Theta3_d_midpt = -3.1415/2.0;//-2.3561944901923448;
           step_state = 1U;
           r_II_c_BL_0[0] = r_II_c_BL[0];
           r_II_c_BL_0[1] = r_II_c_BL[1];
@@ -1493,7 +1471,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 3U;
             Leg_Controller_B(r_BB_c_reset_BL, static_cast<unsigned char>(4U),
@@ -1551,19 +1529,19 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       }
       if (guard4) {
         step_state = 0U;
-        legs_valid[3] = 1U;
+        legs_valid[3] = true;
         leg_index = 0U;
-        floor_toggle[3] = 1U;
+        floor_toggle[3] = true;
         reached_centroid = 0U;
         reached_rest_centroid = 0U;
         // if error reached
         legs_stepped = _u8_u32_((static_cast<unsigned int>(legs_stepped)) + 1U);
       }
       if (guard3) {
-        legs_valid[2] = 1U;
+        legs_valid[2] = true;
         step_state = 0U;
         leg_index = 0U;
-        floor_toggle[2] = 1U;
+        floor_toggle[2] = true;
         reached_centroid = 0U;
         reached_rest_centroid = 0U;
         // if error reached
@@ -1571,9 +1549,9 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       }
       if (guard2) {
         step_state = 0U;
-        legs_valid[1] = 1U;
+        legs_valid[1] = true;
         leg_index = 0U;
-        floor_toggle[1] = 1U;
+        floor_toggle[1] = true;
         reached_centroid = 0U;
         reached_rest_centroid = 0U;
         // if error reached
@@ -1581,9 +1559,9 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       }
       if (guard1) {
         step_state = 0U;
-        legs_valid[0] = 1U;
+        legs_valid[0] = true;
         leg_index = 0U;
-        floor_toggle[0] = 1U;
+        floor_toggle[0] = true;
         reached_centroid = 0U;
         reached_rest_centroid = 0U;
         legs_stepped = _u8_u32_((static_cast<unsigned int>(legs_stepped)) + 1U);
@@ -1602,7 +1580,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     bool guard2;
     bool guard3;
     bool guard4;
-    bool guard5 = false;
+    bool guard5{false};
     b_r_II_B_d[0] = r_II_B_d[0] - gamma_m[3];
     b_r_II_B_d[1] = r_II_B_d[1] - gamma_m[4];
     b_r_II_B_d[2] = r_II_B_d[2] - gamma_m[5];
@@ -1611,14 +1589,14 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     guard3 = false;
     guard4 = false;
     guard5 = false;
-    if (coder::c_norm(b_r_II_B_d) >= 0.06) {
+    if (coder::c_norm(b_r_II_B_d) >= bodyerror) {
       guard5 = true;
     } else if (((static_cast<int>(step_state)) != 0) || (!goal_inside_pgon)) {
       guard5 = true;
     } else {
       //  move with normal body pose controller
       rotz(Euler_d[0], b_dv);
-      for (int b_i = 0; b_i < 3; b_i++) {
+      for (int b_i{0}; b_i < 3; b_i++) {
         double d11;
         double d12;
         double d13;
@@ -1629,7 +1607,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         d11 = b_dv[b_i];
         d12 = b_dv[b_i + 3];
         d13 = b_dv[b_i + 6];
-        for (int i5 = 0; i5 < 3; i5++) {
+        for (int i5{0}; i5 < 3; i5++) {
           b_dv1[b_i + (3 * i5)] = ((d11 * T_I_B_d_tmp[3 * i5]) +
                                    (d12 * T_I_B_d_tmp[(3 * i5) + 1])) +
                                   (d13 * T_I_B_d_tmp[(3 * i5) + 2]);
@@ -1637,17 +1615,17 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         d17 = b_dv1[b_i];
         d18 = b_dv1[b_i + 3];
         d19 = b_dv1[b_i + 6];
-        for (int i7 = 0; i7 < 3; i7++) {
+        for (int i7{0}; i7 < 3; i7++) {
           b_dv[b_i + (3 * i7)] = ((d17 * b_T_I_B_d_tmp[3 * i7]) +
                                   (d18 * b_T_I_B_d_tmp[(3 * i7) + 1])) +
                                  (d19 * b_T_I_B_d_tmp[(3 * i7) + 2]);
         }
       }
-      uv[0] = floor_toggle[0];
-      uv[1] = floor_toggle[1];
-      uv[2] = floor_toggle[2];
-      uv[3] = floor_toggle[3];
-      Body_Pose_Controller(r_II_c, b_dv, b_r_II_B_d_temp, r_II_B, uv, b_dv4,
+      bv[0] = floor_toggle[0];
+      bv[1] = floor_toggle[1];
+      bv[2] = floor_toggle[2];
+      bv[3] = floor_toggle[3];
+      Body_Pose_Controller(r_II_c, b_dv, b_r_II_B_d_temp, r_II_B, bv, b_dv4,
                            b_dv5, b_dv6);
       Theta3_d[0] = b_dv6[0];
       Theta3_d[1] = b_dv6[1];
@@ -1678,17 +1656,17 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         endPoint[2] = r_II_B_d[2];
         waypoint_toggle = true;
       } else {
-        bv[0] = (endPoint[0] != r_II_B_d[0]);
-        bv[1] = (endPoint[1] != r_II_B_d[1]);
-        bv[2] = (endPoint[2] != r_II_B_d[2]);
+        bv1[0] = (endPoint[0] != r_II_B_d[0]);
+        bv1[1] = (endPoint[1] != r_II_B_d[1]);
+        bv1[2] = (endPoint[2] != r_II_B_d[2]);
         waypoint_toggle =
-            ((!coder::internal::ifWhileCond(bv)) && waypoint_toggle);
+            ((!coder::internal::ifWhileCond(bv1)) && waypoint_toggle);
       }
       //         %% leg stepping algorithm
       //  FR leg needs to step
       switch (leg_index) {
       case 1:
-        legs_valid[0] = 0U;
+        legs_valid[0] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           g_r_II_B[0] = r_II_B[0];
           g_r_II_B[1] = r_II_B[1];
@@ -1704,7 +1682,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = 0.78539816339744828;
           Theta2_d_midpt = -0.78539816339744828;
-          Theta3_d_midpt = 2.3561944901923448;
+          Theta3_d_midpt = 3.1415/2.0;//2.3561944901923448;
           step_state = 1U;
           r_II_c_FR_0[0] = r_II_c_FR[0];
           r_II_c_FR_0[1] = r_II_c_FR[1];
@@ -1733,7 +1711,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 2U;
             step_planner_intelligent(startPoint, endPoint, r_II_c_FR_0, 0.12,
@@ -1762,7 +1740,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 2:
-        legs_valid[1] = 0U;
+        legs_valid[1] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           h_r_II_B[0] = r_II_B[0];
           h_r_II_B[1] = r_II_B[1];
@@ -1778,7 +1756,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = -0.78539816339744828;
           Theta2_d_midpt = 0.78539816339744828;
-          Theta3_d_midpt = -2.3561944901923448;
+          Theta3_d_midpt = -3.1415/2.0;//-2.3561944901923448;
           step_state = 1U;
           r_II_c_FL_0[0] = r_II_c_FL[0];
           r_II_c_FL_0[1] = r_II_c_FL[1];
@@ -1807,7 +1785,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 2U;
             step_planner_intelligent(startPoint, endPoint, r_II_c_FL_0, 0.12,
@@ -1836,7 +1814,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 3:
-        legs_valid[2] = 0U;
+        legs_valid[2] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           i_r_II_B[0] = r_II_B[0];
           i_r_II_B[1] = r_II_B[1];
@@ -1852,7 +1830,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = -0.78539816339744828;
           Theta2_d_midpt = -0.78539816339744828;
-          Theta3_d_midpt = 2.3561944901923448;
+          Theta3_d_midpt = 3.1415/2.0;//2.3561944901923448;
           step_state = 1U;
           r_II_c_BR_0[0] = r_II_c_BR[0];
           r_II_c_BR_0[1] = r_II_c_BR[1];
@@ -1881,7 +1859,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 2U;
             step_planner_intelligent(startPoint, endPoint, r_II_c_BR_0, 0.12,
@@ -1910,7 +1888,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         }
         break;
       case 4:
-        legs_valid[3] = 0U;
+        legs_valid[3] = false;
         if ((static_cast<int>(reached_centroid)) == 0) {
           j_r_II_B[0] = r_II_B[0];
           j_r_II_B[1] = r_II_B[1];
@@ -1926,7 +1904,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           //  hasn't started stepping yet
           Theta1_d_midpt = 0.78539816339744828;
           Theta2_d_midpt = 0.78539816339744828;
-          Theta3_d_midpt = -2.3561944901923448;
+          Theta3_d_midpt = -3.1415/2.0;//-2.3561944901923448;
           step_state = 1U;
           r_II_c_BL_0[0] = r_II_c_BL[0];
           r_II_c_BL_0[1] = r_II_c_BL[1];
@@ -1955,7 +1933,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
           b_Theta1[0] -= Theta1_d_midpt;
           b_Theta1[1] -= Theta2_d_midpt;
           b_Theta1[2] -= Theta3_d_midpt;
-          if (coder::c_norm(b_Theta1) < 0.2) {
+          if (coder::c_norm(b_Theta1) < steperror) {
             //  reached midpoint
             step_state = 2U;
             step_planner_intelligent(startPoint, endPoint, r_II_c_BL_0, 0.12,
@@ -1990,33 +1968,33 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     }
     if (guard4) {
       step_state = 0U;
-      legs_valid[3] = 1U;
+      legs_valid[3] = true;
       leg_index = 0U;
-      floor_toggle[3] = 1U;
+      floor_toggle[3] = true;
       reached_centroid = 0U;
       reached_rest_centroid = 0U;
     }
     if (guard3) {
-      legs_valid[2] = 1U;
+      legs_valid[2] = true;
       step_state = 0U;
       leg_index = 0U;
-      floor_toggle[2] = 1U;
+      floor_toggle[2] = true;
       reached_centroid = 0U;
       reached_rest_centroid = 0U;
     }
     if (guard2) {
       step_state = 0U;
-      legs_valid[1] = 1U;
+      legs_valid[1] = true;
       leg_index = 0U;
-      floor_toggle[1] = 1U;
+      floor_toggle[1] = true;
       reached_centroid = 0U;
       reached_rest_centroid = 0U;
     }
     if (guard1) {
       step_state = 0U;
-      legs_valid[0] = 1U;
+      legs_valid[0] = true;
       leg_index = 0U;
-      floor_toggle[0] = 1U;
+      floor_toggle[0] = true;
       reached_centroid = 0U;
       reached_rest_centroid = 0U;
     }
@@ -2040,12 +2018,12 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     b_r_II_B_d_temp[0] = r_II_B_d_temp[0];
     b_r_II_B_d_temp[1] = r_II_B_d_temp[1];
     b_r_II_B_d_temp[2] = r_II_B_d_temp[2];
-    uv5[0] = 1U;
-    uv5[1] = 1U;
-    uv5[2] = 1U;
-    uv5[3] = 1U;
+    bv6[0] = true;
+    bv6[1] = true;
+    bv6[2] = true;
+    bv6[3] = true;
     (void)std::copy(&T_I_B_d_temp[0], &T_I_B_d_temp[9], &dv25[0]);
-    Body_Pose_Controller(r_II_c, dv25, b_r_II_B_d_temp, r_II_B, uv5, dv26, dv27,
+    Body_Pose_Controller(r_II_c, dv25, b_r_II_B_d_temp, r_II_B, bv6, dv26, dv27,
                          dv28);
     Theta3_d[0] = dv28[0];
     Theta3_d[1] = dv28[1];
@@ -2073,16 +2051,16 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     b_r_II_B[2] = gamma_m[5] - r_II_B_d_temp[2];
     b_r_II_B_d_temp[2] = r_II_B_d_temp[2];
     (void)std::copy(&T_I_B_d_temp[0], &T_I_B_d_temp[9], &b_dv7[0]);
-    uv1[0] = floor_toggle[0];
-    uv1[1] = floor_toggle[1];
-    uv1[2] = floor_toggle[2];
-    uv1[3] = floor_toggle[3];
-    Body_Pose_Controller(r_II_c, b_dv7, b_r_II_B_d_temp, r_II_B, uv1, dv11,
-                         dv12, dv13);
-    Theta3_d[0] = dv13[0];
-    Theta3_d[1] = dv13[1];
-    Theta3_d[2] = dv13[2];
-    Theta3_d[3] = dv13[3];
+    bv2[0] = floor_toggle[0];
+    bv2[1] = floor_toggle[1];
+    bv2[2] = floor_toggle[2];
+    bv2[3] = floor_toggle[3];
+    //Body_Pose_Controller(r_II_c, b_dv7, b_r_II_B_d_temp, r_II_B, bv2, dv11,
+    //                     dv12, dv13);
+    //Theta3_d[0] = dv13[0];
+    //Theta3_d[1] = dv13[1];
+    //Theta3_d[2] = dv13[2];
+    /*Theta3_d[3] = dv13[3];
     Theta2_d[0] = dv12[0];
     Theta2_d[1] = dv12[1];
     Theta2_d[2] = dv12[2];
@@ -2091,15 +2069,15 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
     Theta1_d[1] = dv11[1];
     Theta1_d[2] = dv11[2];
     Theta1_d[3] = dv11[3];
-    r_II_B_d_temp[0] = b_r_II_B_d_temp[0];
+    */r_II_B_d_temp[0] = b_r_II_B_d_temp[0];
     r_II_B_d_temp[1] = b_r_II_B_d_temp[1];
     r_II_B_d_temp[2] = b_r_II_B_d_temp[2];
-    if (coder::c_norm(b_r_II_B) < 0.01) {
+    if (coder::c_norm(b_r_II_B) < bodyerror) {
       reached_rest_centroid = 1U;
     }
     break;
   case 1:
-    waypoint_toggle = false;
+    //waypoint_toggle = false;
     //  rockback before step
     if (!coder::all(legs_valid)) {
       switch (reached_centroid) {
@@ -2109,13 +2087,14 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         b_r_II_B_d_temp[1] = r_II_B_d_temp[1];
         b_r_II_B_d_temp[2] = r_II_B_d_temp[2];
         (void)std::copy(&T_I_B_d_temp[0], &T_I_B_d_temp[9], &b_dv8[0]);
-        uv2[0] = floor_toggle[0];
-        uv2[1] = floor_toggle[1];
-        uv2[2] = floor_toggle[2];
-        uv2[3] = floor_toggle[3];
-        Body_Pose_Controller(r_II_c, b_dv8, b_r_II_B_d_temp, r_II_B, uv2, dv14,
-                             dv15, dv16);
-        Theta3_d[0] = dv16[0];
+        bv3[0] = floor_toggle[0];
+        bv3[1] = floor_toggle[1];
+        bv3[2] = floor_toggle[2];
+        bv3[3] = floor_toggle[3];
+        Body_Pose_Controller(r_II_c, b_dv8, b_r_II_B_d_temp, r_II_B, bv3, dv14,
+                            dv15, dv16);
+        
+		Theta3_d[0] = dv16[0];
         Theta3_d[1] = dv16[1];
         Theta3_d[2] = dv16[2];
         Theta3_d[3] = dv16[3];
@@ -2137,7 +2116,7 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         r_II_B[0] = gamma_m[3] - r_II_B_d_temp[0];
         r_II_B[1] = gamma_m[4] - r_II_B_d_temp[1];
         r_II_B[2] = gamma_m[5] - r_II_B_d_temp[2];
-        if (coder::c_norm(r_II_B) < 0.01) {
+        if (coder::c_norm(r_II_B) < bodyerror) {
           reached_centroid = 1U;
         }
         break;
@@ -2148,24 +2127,24 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
         b_r_II_B_d_temp[1] = r_II_B_d_temp[1];
         b_r_II_B_d_temp[2] = r_II_B_d_temp[2];
         (void)std::copy(&T_I_B_d_temp[0], &T_I_B_d_temp[9], &b_dv10[0]);
-        uv4[0] = floor_toggle[0];
-        uv4[1] = floor_toggle[1];
-        uv4[2] = floor_toggle[2];
-        uv4[3] = floor_toggle[3];
-        Body_Pose_Controller(r_II_c, b_dv10, b_r_II_B_d_temp, r_II_B, uv4, dv20,
-                             dv21, dv22);
-        Theta3_d[0] = dv22[0];
-        Theta3_d[1] = dv22[1];
-        Theta3_d[2] = dv22[2];
-        Theta3_d[3] = dv22[3];
-        Theta2_d[0] = dv21[0];
-        Theta2_d[1] = dv21[1];
-        Theta2_d[2] = dv21[2];
-        Theta2_d[3] = dv21[3];
-        Theta1_d[0] = dv20[0];
-        Theta1_d[1] = dv20[1];
-        Theta1_d[2] = dv20[2];
-        Theta1_d[3] = dv20[3];
+        bv5[0] = floor_toggle[0];
+        bv5[1] = floor_toggle[1];
+        bv5[2] = floor_toggle[2];
+        bv5[3] = floor_toggle[3];
+        //Body_Pose_Controller(r_II_c, b_dv10, b_r_II_B_d_temp, r_II_B, bv5, dv20,
+        //                     dv21, dv22);
+        //Theta3_d[0] = dv22[0];
+        //Theta3_d[1] = dv22[1];
+        //Theta3_d[2] = dv22[2];
+        //Theta3_d[3] = dv22[3];
+        //Theta2_d[0] = dv21[0];
+        //Theta2_d[1] = dv21[1];
+        //Theta2_d[2] = dv21[2];
+        //Theta2_d[3] = dv21[3];
+        //Theta1_d[0] = dv20[0];
+        //Theta1_d[1] = dv20[1];
+        //Theta1_d[2] = dv20[2];
+        //Theta1_d[3] = dv20[3];
         r_II_B_d_temp[0] = b_r_II_B_d_temp[0];
         r_II_B_d_temp[1] = b_r_II_B_d_temp[1];
         r_II_B_d_temp[2] = b_r_II_B_d_temp[2];
@@ -2264,11 +2243,11 @@ void Robot_Control(const double r_II_B_d[3], const double Euler_d[3],
       b_r_II_B_d_temp[1] = r_II_B_d_temp[1];
       b_r_II_B_d_temp[2] = r_II_B_d_temp[2];
       (void)std::copy(&T_I_B_d_temp[0], &T_I_B_d_temp[9], &b_dv9[0]);
-      uv3[0] = floor_toggle[0];
-      uv3[1] = floor_toggle[1];
-      uv3[2] = floor_toggle[2];
-      uv3[3] = floor_toggle[3];
-      Body_Pose_Controller(r_II_c, b_dv9, b_r_II_B_d_temp, r_II_B, uv3, dv17,
+      bv4[0] = floor_toggle[0];
+      bv4[1] = floor_toggle[1];
+      bv4[2] = floor_toggle[2];
+      bv4[3] = floor_toggle[3];
+      Body_Pose_Controller(r_II_c, b_dv9, b_r_II_B_d_temp, r_II_B, bv4, dv17,
                            dv18, dv19);
       Theta3_d[0] = dv19[0];
       Theta3_d[1] = dv19[1];
@@ -2349,10 +2328,10 @@ void Robot_Control_init()
   reached_rest_centroid = 1U;
   step_needed = 1U;
   calc_manip = true;
-  legs_valid[0] = 1U;
-  legs_valid[1] = 1U;
-  legs_valid[2] = 1U;
-  legs_valid[3] = 1U;
+  legs_valid[0] = true;
+  legs_valid[1] = true;
+  legs_valid[2] = true;
+  legs_valid[3] = true;
   legs_stepped = 0U;
   leg_reset_needed = false;
   coder::eye(T_I_B_d_temp);

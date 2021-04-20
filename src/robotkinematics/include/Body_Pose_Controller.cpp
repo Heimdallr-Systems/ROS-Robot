@@ -5,7 +5,7 @@
 // File: Body_Pose_Controller.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -42,7 +42,7 @@
 //                const double T_I_B[9]
 //                double r_II_B_d[3]
 //                const double r_II_B_0[3]
-//                const unsigned char legs_on_gnd[4]
+//                const bool legs_on_gnd[4]
 //                double Theta1[4]
 //                double Theta2[4]
 //                double Theta3[4]
@@ -51,7 +51,7 @@
 namespace Codegen {
 void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
                           double r_II_B_d[3], const double r_II_B_0[3],
-                          const unsigned char legs_on_gnd[4], double Theta1[4],
+                          const bool legs_on_gnd[4], double Theta1[4],
                           double Theta2[4], double Theta3[4])
 {
   creal_T dc;
@@ -215,13 +215,13 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
   while (!loop_toggle) {
     ii = _u16_u32_((static_cast<unsigned int>(ii)) + 1U);
     if ((static_cast<int>(ii)) == 1000) {
-      (void)printf("Limit Reached\n");
+      (void)printf("BPC: Limit Reached\n");
       fflush(stdout);
       coder::error();
     }
     //     %% FR LEG
     loop_toggle = true;
-    if ((static_cast<int>(legs_on_gnd[0])) == 1) {
+    if (legs_on_gnd[0]) {
       double D_FR;
       double D_FR_2;
       double r_FR;
@@ -253,31 +253,31 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       s_FR = r_1prime1_c_FR[2] - r_1prime1_2_FR[2];
       s_FR_2 = r_1prime1_c_FR_2[2] - r_1prime1_2_FR[2];
       if (coder::fltpower_domain_error(r_FR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_FR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FR =
           ((((r_FR * r_FR) + (s_FR * s_FR)) - 0.0225) - 0.041615999999999993) /
           0.061199999999999991;
       if (coder::fltpower_domain_error(r_FR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_FR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FR_2 = ((((r_FR_2 * r_FR_2) + (s_FR_2 * s_FR_2)) - 0.0225) -
                 0.041615999999999993) /
@@ -293,25 +293,25 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
         double Theta3_FR_Temp;
         double d1;
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d1 = 1.0 - (D_FR * D_FR);
         d2 = d1;
         coder::b_sqrt(&d2);
         Theta3_FR_Temp = coder::b_atan2(d2, D_FR);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d5 = d1;
         coder::b_sqrt(&d5);
         Theta3_FR_2_Temp = coder::b_atan2(-d5, D_FR);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d12 = d1;
         coder::b_sqrt(&d12);
         if (coder::fltpower_domain_error(D_FR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d16 = d1;
         coder::b_sqrt(&d16);
@@ -336,24 +336,24 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
         double Theta3_FR_2_Temp_2;
         double d8;
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d8 = 1.0 - (D_FR_2 * D_FR_2);
         d10 = d8;
         coder::b_sqrt(&d10);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d14 = d8;
         coder::b_sqrt(&d14);
         Theta3_FR_2_Temp_2 = coder::b_atan2(-d14, D_FR_2);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d19 = d8;
         coder::b_sqrt(&d19);
         if (coder::fltpower_domain_error(D_FR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d28 = d8;
         coder::b_sqrt(&d28);
@@ -374,7 +374,7 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       Theta3_4_idx_0 = 0.0;
     }
     //     %% FL LEG
-    if ((static_cast<int>(legs_on_gnd[1])) == 1) {
+    if (legs_on_gnd[1]) {
       double D_FL;
       double D_FL_2;
       b_r_II_c[0] = r_II_c[3] - r_II_B_d[0];
@@ -397,16 +397,16 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       rotz(Theta1[1] + 3.1415926535897931, b_dv5);
       coder::mldivide(b_dv5, r_B1_c_FL, r_11_c_FL_2);
       if (coder::fltpower_domain_error(r_11_c_FL[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_FL[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FL = (((((r_11_c_FL[1] - 0.054) * (r_11_c_FL[1] - 0.054)) +
                 (r_11_c_FL[2] * r_11_c_FL[2])) -
@@ -414,16 +414,16 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
               0.041615999999999993) /
              0.061199999999999991;
       if (coder::fltpower_domain_error(r_11_c_FL_2[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_FL_2[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_FL_2 = (((((r_11_c_FL_2[1] - 0.054) * (r_11_c_FL_2[1] - 0.054)) +
                   (r_11_c_FL_2[2] * r_11_c_FL_2[2])) -
@@ -437,13 +437,13 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       } else {
         double d3;
         if (coder::fltpower_domain_error(D_FL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d3 = 1.0 - (D_FL_2 * D_FL_2);
         d4 = d3;
         coder::b_sqrt(&d4);
         if (coder::fltpower_domain_error(D_FL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d6 = d3;
         coder::b_sqrt(&d6);
@@ -465,14 +465,14 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       } else {
         double d7;
         if (coder::fltpower_domain_error(D_FL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d7 = 1.0 - (D_FL * D_FL);
         d9 = d7;
         coder::b_sqrt(&d9);
         Theta3[1] = coder::b_atan2(d9, D_FL);
         if (coder::fltpower_domain_error(D_FL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d15 = d7;
         coder::b_sqrt(&d15);
@@ -497,7 +497,7 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       Theta3_4_idx_1 = 0.0;
     }
     //     %% BR LEG
-    if ((static_cast<int>(legs_on_gnd[2])) == 1) {
+    if (legs_on_gnd[2]) {
       double D_BR;
       double D_BR_2;
       double r_BR;
@@ -531,31 +531,31 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       s_BR = r_1prime1_c_BR[2] - r_1prime1_2_BR[2];
       s_BR_2 = r_1prime1_c_BR_2[2] - r_1prime1_2_BR[2];
       if (coder::fltpower_domain_error(r_BR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_BR)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BR =
           ((((r_BR * r_BR) + (s_BR * s_BR)) - 0.0225) - 0.041615999999999993) /
           0.061199999999999991;
       if (coder::fltpower_domain_error(r_BR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(s_BR_2)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BR_2 = ((((r_BR_2 * r_BR_2) + (s_BR_2 * s_BR_2)) - 0.0225) -
                 0.041615999999999993) /
@@ -568,24 +568,24 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
         double Theta3_BR_2_Temp_2;
         double d20;
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d20 = 1.0 - (D_BR_2 * D_BR_2);
         d22 = d20;
         coder::b_sqrt(&d22);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d30 = d20;
         coder::b_sqrt(&d30);
         Theta3_BR_2_Temp_2 = coder::b_atan2(-d30, D_BR_2);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d40 = d20;
         coder::b_sqrt(&d40);
         if (coder::fltpower_domain_error(D_BR_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d44 = d20;
         coder::b_sqrt(&d44);
@@ -608,25 +608,25 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
         double Theta3_BR_Temp;
         double d31;
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d31 = 1.0 - (D_BR * D_BR);
         d33 = d31;
         coder::b_sqrt(&d33);
         Theta3_BR_Temp = coder::b_atan2(d33, D_BR);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d41 = d31;
         coder::b_sqrt(&d41);
         Theta3_BR_2_Temp = coder::b_atan2(-d41, D_BR);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d46 = d31;
         coder::b_sqrt(&d46);
         if (coder::fltpower_domain_error(D_BR)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d51 = d31;
         coder::b_sqrt(&d51);
@@ -651,7 +651,7 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       Theta3_4_idx_2 = 0.0;
     }
     //     %% BL LEG
-    if ((static_cast<int>(legs_on_gnd[3])) == 1) {
+    if (legs_on_gnd[3]) {
       double D_BL;
       double D_BL_2;
       b_r_II_c[0] = r_II_c[9] - r_II_B_d[0];
@@ -674,16 +674,16 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       rotz(Theta1[3] + 3.1415926535897931, dv11);
       coder::mldivide(dv11, r_B1_c_BL, r_11_c_BL_2);
       if (coder::fltpower_domain_error(r_11_c_BL[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_BL[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BL = (((((r_11_c_BL[1] - 0.054) * (r_11_c_BL[1] - 0.054)) +
                 (r_11_c_BL[2] * r_11_c_BL[2])) -
@@ -691,16 +691,16 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
               0.041615999999999993) /
              0.061199999999999991;
       if (coder::fltpower_domain_error(r_11_c_BL_2[1] - 0.054)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(r_11_c_BL_2[2])) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.15)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       if (coder::fltpower_domain_error(0.204)) {
-        c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+        c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
       }
       D_BL_2 = (((((r_11_c_BL_2[1] - 0.054) * (r_11_c_BL_2[1] - 0.054)) +
                   (r_11_c_BL_2[2] * r_11_c_BL_2[2])) -
@@ -714,13 +714,13 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       } else {
         double d24;
         if (coder::fltpower_domain_error(D_BL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d24 = 1.0 - (D_BL_2 * D_BL_2);
         d26 = d24;
         coder::b_sqrt(&d26);
         if (coder::fltpower_domain_error(D_BL_2)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d35 = d24;
         coder::b_sqrt(&d35);
@@ -742,14 +742,14 @@ void Body_Pose_Controller(const double r_II_c[12], const double T_I_B[9],
       } else {
         double d36;
         if (coder::fltpower_domain_error(D_BL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d36 = 1.0 - (D_BL * D_BL);
         d37 = d36;
         coder::b_sqrt(&d37);
         Theta3[3] = coder::b_atan2(d37, D_BL);
         if (coder::fltpower_domain_error(D_BL)) {
-          c_rtErrorWithMessageID(emlrtRTEI.fName, emlrtRTEI.lineNo);
+          c_rtErrorWithMessageID(b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
         }
         d43 = d36;
         coder::b_sqrt(&d43);

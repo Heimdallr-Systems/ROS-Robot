@@ -5,7 +5,7 @@
 // File: sqrt.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -50,7 +50,7 @@ static void b_rtErrorWithMessageID(const char *b, const char *aFcnName,
 namespace coder {
 void b_sqrt(double *x)
 {
-  static rtRunTimeErrorInfo b_emlrtRTEI = {
+  static rtRunTimeErrorInfo c_emlrtRTEI{
       13,     // lineNo
       9,      // colNo
       "sqrt", // fName
@@ -58,7 +58,7 @@ void b_sqrt(double *x)
       "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\elfun\\sqrt.m" // pName
   };
   if ((*x) < 0.0) {
-    b_rtErrorWithMessageID("sqrt", b_emlrtRTEI.fName, b_emlrtRTEI.lineNo);
+    b_rtErrorWithMessageID("sqrt", c_emlrtRTEI.fName, c_emlrtRTEI.lineNo);
   }
   internal::scalar::c_sqrt(x);
 }

@@ -5,7 +5,7 @@
 // File: getUp.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -39,10 +39,10 @@
 namespace Codegen {
 void getUp(const double Theta[12], unsigned char *stage, double Theta_d[12])
 {
-  static const double b_dv[12] = {0.7854, -0.7854, -0.7854, 0.7854,
-                                  0.2542, -0.2542, 0.2542,  -0.2542,
-                                  1.5095, -1.5095, 1.5095,  -1.5095};
-  static const double b_dv1[12] = {
+  static const double b_dv[12]{0.7854, -0.7854, -0.7854, 0.7854,
+                               0.2542, -0.2542, 0.2542,  -0.2542,
+                               1.5095, -1.5095, 1.5095,  -1.5095};
+  static const double b_dv1[12]{
       0.78539816339744828,  -0.78539816339744828, -0.78539816339744828,
       0.78539816339744828,  -0.78539816339744828, 0.78539816339744828,
       -0.78539816339744828, 0.78539816339744828,  2.3561944901923448,

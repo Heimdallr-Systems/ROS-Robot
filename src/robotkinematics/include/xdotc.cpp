@@ -5,7 +5,7 @@
 // File: xdotc.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -15,9 +15,9 @@
 // Function Definitions
 //
 // Arguments    : int n
-//                const double x[36]
+//                const double x[108]
 //                int ix0
-//                const double y[36]
+//                const double y[108]
 //                int iy0
 // Return Type  : double
 //
@@ -25,9 +25,23 @@ namespace Codegen {
 namespace coder {
 namespace internal {
 namespace blas {
-double b_xdotc(int n, const double x[36], int ix0, const double y[36], int iy0)
+double b_xdotc(int n, const double x[108], int ix0, const double y[108],
+               int iy0)
 {
   return b_xdot(n, x, ix0, y, iy0);
+}
+
+//
+// Arguments    : int n
+//                const double x[36]
+//                int ix0
+//                const double y[36]
+//                int iy0
+// Return Type  : double
+//
+double c_xdotc(int n, const double x[36], int ix0, const double y[36], int iy0)
+{
+  return c_xdot(n, x, ix0, y, iy0);
 }
 
 //
@@ -38,21 +52,21 @@ double b_xdotc(int n, const double x[36], int ix0, const double y[36], int iy0)
 //                int iy0
 // Return Type  : double
 //
-double c_xdotc(int n, const double x[324], int ix0, const double y[324],
+double d_xdotc(int n, const double x[324], int ix0, const double y[324],
                int iy0)
 {
-  return c_xdot(n, x, ix0, y, iy0);
+  return d_xdot(n, x, ix0, y, iy0);
 }
 
 //
 // Arguments    : int n
-//                const double x[108]
+//                const double x[9]
 //                int ix0
-//                const double y[108]
+//                const double y[9]
 //                int iy0
 // Return Type  : double
 //
-double xdotc(int n, const double x[108], int ix0, const double y[108], int iy0)
+double xdotc(int n, const double x[9], int ix0, const double y[9], int iy0)
 {
   return xdot(n, x, ix0, y, iy0);
 }

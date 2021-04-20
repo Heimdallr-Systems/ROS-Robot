@@ -5,7 +5,7 @@
 // File: xrot.h
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 #ifndef XROT_H
@@ -21,9 +21,11 @@ namespace Codegen {
 namespace coder {
 namespace internal {
 namespace blas {
-void b_xrot(double x[36], int ix0, int iy0, double c, double s);
+void b_xrot(double x[324], int ix0, int iy0, double c, double s);
 
-void xrot(double x[324], int ix0, int iy0, double c, double s);
+void c_xrot(double x[36], int ix0, int iy0, double c, double s);
+
+void xrot(double x[9], int ix0, int iy0, double c, double s);
 
 } // namespace blas
 } // namespace internal

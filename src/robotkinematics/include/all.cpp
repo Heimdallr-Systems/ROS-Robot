@@ -5,7 +5,7 @@
 // File: all.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -14,12 +14,12 @@
 
 // Function Definitions
 //
-// Arguments    : const unsigned char x[4]
+// Arguments    : const bool x[4]
 // Return Type  : bool
 //
 namespace Codegen {
 namespace coder {
-bool all(const unsigned char x[4])
+bool all(const bool x[4])
 {
   return internal::vectorAll(x);
 }

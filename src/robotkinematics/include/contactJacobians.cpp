@@ -5,7 +5,7 @@
 // File: contactJacobians.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -153,7 +153,7 @@ void contactJacobians(const double state[36], double GeoJc_FR[108],
   rotz(state[0], b_dv);
   roty(state[1], b_dv1);
   rotx(state[2], b_dv2);
-  for (int i = 0; i < 3; i++) {
+  for (int i{0}; i < 3; i++) {
     double d;
     double d1;
     double d2;
@@ -163,14 +163,14 @@ void contactJacobians(const double state[36], double GeoJc_FR[108],
     d = b_dv[i];
     d1 = b_dv[i + 3];
     d2 = b_dv[i + 6];
-    for (int i1 = 0; i1 < 3; i1++) {
+    for (int i1{0}; i1 < 3; i1++) {
       b_dv3[i + (3 * i1)] = ((d * b_dv1[3 * i1]) + (d1 * b_dv1[(3 * i1) + 1])) +
                             (d2 * b_dv1[(3 * i1) + 2]);
     }
     d3 = b_dv3[i];
     d4 = b_dv3[i + 3];
     d5 = b_dv3[i + 6];
-    for (int i2 = 0; i2 < 3; i2++) {
+    for (int i2{0}; i2 < 3; i2++) {
       T_I_B[i + (3 * i2)] =
           ((d3 * b_dv2[3 * i2]) + (d4 * b_dv2[(3 * i2) + 1])) +
           (d5 * b_dv2[(3 * i2) + 2]);

@@ -5,7 +5,7 @@
 // File: CPos_wrt_I.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
@@ -59,54 +59,54 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   // TB = rotz(BodyRot(1))*roty(BodyRot(2))*rotx(BodyRot(3));
   //  Orientation of FR leg
   rotz(Theta1[0], b_dv);
-  for (int i = 0; i < 3; i++) {
+  for (int i{0}; i < 3; i++) {
     double d;
     double d1;
     double d2;
     d = TB[i];
     d1 = TB[i + 3];
     d2 = TB[i + 6];
-    for (int i2 = 0; i2 < 3; i2++) {
+    for (int i2{0}; i2 < 3; i2++) {
       T1_FR[i + (3 * i2)] = ((d * b_dv[3 * i2]) + (d1 * b_dv[(3 * i2) + 1])) +
                             (d2 * b_dv[(3 * i2) + 2]);
     }
   }
   rotx(Theta2[0], b_dv);
-  for (int i1 = 0; i1 < 3; i1++) {
+  for (int i1{0}; i1 < 3; i1++) {
     double d3;
     double d4;
     double d5;
     d3 = T1_FR[i1];
     d4 = T1_FR[i1 + 3];
     d5 = T1_FR[i1 + 6];
-    for (int i4 = 0; i4 < 3; i4++) {
+    for (int i4{0}; i4 < 3; i4++) {
       T2_FR[i1 + (3 * i4)] = ((d3 * b_dv[3 * i4]) + (d4 * b_dv[(3 * i4) + 1])) +
                              (d5 * b_dv[(3 * i4) + 2]);
     }
   }
   //  Orientation of FR leg
   rotz(Theta1[1], b_dv);
-  for (int i3 = 0; i3 < 3; i3++) {
+  for (int i3{0}; i3 < 3; i3++) {
     double d6;
     double d7;
     double d8;
     d6 = TB[i3];
     d7 = TB[i3 + 3];
     d8 = TB[i3 + 6];
-    for (int i6 = 0; i6 < 3; i6++) {
+    for (int i6{0}; i6 < 3; i6++) {
       T1_FL[i3 + (3 * i6)] = ((d6 * b_dv[3 * i6]) + (d7 * b_dv[(3 * i6) + 1])) +
                              (d8 * b_dv[(3 * i6) + 2]);
     }
   }
   rotx(Theta2[1], b_dv);
-  for (int i5 = 0; i5 < 3; i5++) {
+  for (int i5{0}; i5 < 3; i5++) {
     double d10;
     double d11;
     double d9;
     d9 = T1_FL[i5];
     d10 = T1_FL[i5 + 3];
     d11 = T1_FL[i5 + 6];
-    for (int i8 = 0; i8 < 3; i8++) {
+    for (int i8{0}; i8 < 3; i8++) {
       T2_FL[i5 + (3 * i8)] =
           ((d9 * b_dv[3 * i8]) + (d10 * b_dv[(3 * i8) + 1])) +
           (d11 * b_dv[(3 * i8) + 2]);
@@ -114,28 +114,28 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   }
   //  Orientation of BR leg
   rotz(Theta1[2], b_dv);
-  for (int i7 = 0; i7 < 3; i7++) {
+  for (int i7{0}; i7 < 3; i7++) {
     double d12;
     double d13;
     double d14;
     d12 = TB[i7];
     d13 = TB[i7 + 3];
     d14 = TB[i7 + 6];
-    for (int i10 = 0; i10 < 3; i10++) {
+    for (int i10{0}; i10 < 3; i10++) {
       T1_BR[i7 + (3 * i10)] =
           ((d12 * b_dv[3 * i10]) + (d13 * b_dv[(3 * i10) + 1])) +
           (d14 * b_dv[(3 * i10) + 2]);
     }
   }
   rotx(Theta2[2], b_dv);
-  for (int i9 = 0; i9 < 3; i9++) {
+  for (int i9{0}; i9 < 3; i9++) {
     double d15;
     double d16;
     double d17;
     d15 = T1_BR[i9];
     d16 = T1_BR[i9 + 3];
     d17 = T1_BR[i9 + 6];
-    for (int i12 = 0; i12 < 3; i12++) {
+    for (int i12{0}; i12 < 3; i12++) {
       T2_BR[i9 + (3 * i12)] =
           ((d15 * b_dv[3 * i12]) + (d16 * b_dv[(3 * i12) + 1])) +
           (d17 * b_dv[(3 * i12) + 2]);
@@ -143,28 +143,28 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   }
   //  Orientation of BL leg
   rotz(Theta1[3], b_dv);
-  for (int i11 = 0; i11 < 3; i11++) {
+  for (int i11{0}; i11 < 3; i11++) {
     double d18;
     double d19;
     double d20;
     d18 = TB[i11];
     d19 = TB[i11 + 3];
     d20 = TB[i11 + 6];
-    for (int i14 = 0; i14 < 3; i14++) {
+    for (int i14{0}; i14 < 3; i14++) {
       T1_BL[i11 + (3 * i14)] =
           ((d18 * b_dv[3 * i14]) + (d19 * b_dv[(3 * i14) + 1])) +
           (d20 * b_dv[(3 * i14) + 2]);
     }
   }
   rotx(Theta2[3], b_dv);
-  for (int i13 = 0; i13 < 3; i13++) {
+  for (int i13{0}; i13 < 3; i13++) {
     double d21;
     double d22;
     double d23;
     d21 = T1_BL[i13];
     d22 = T1_BL[i13 + 3];
     d23 = T1_BL[i13 + 6];
-    for (int i15 = 0; i15 < 3; i15++) {
+    for (int i15{0}; i15 < 3; i15++) {
       T2_BL[i13 + (3 * i15)] =
           ((d21 * b_dv[3 * i15]) + (d22 * b_dv[(3 * i15) + 1])) +
           (d23 * b_dv[(3 * i15) + 2]);
@@ -174,7 +174,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   //  Positions of FR Leg
   rotx(Theta3[0], b_dv);
   //  Positions of FL Leg
-  for (int i16 = 0; i16 < 3; i16++) {
+  for (int i16{0}; i16 < 3; i16++) {
     double d24;
     double d25;
     double d26;
@@ -185,7 +185,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
     d26 = 0.0;
     d27 = 0.0;
     d29 = 0.0;
-    for (int i18 = 0; i18 < 3; i18++) {
+    for (int i18{0}; i18 < 3; i18++) {
       double d35;
       int i20;
       i20 = i16 + (3 * i18);
@@ -206,7 +206,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   }
   rotx(Theta3[1], b_dv);
   //  Position of BR Leg
-  for (int i17 = 0; i17 < 3; i17++) {
+  for (int i17{0}; i17 < 3; i17++) {
     double d28;
     double d30;
     double d31;
@@ -215,7 +215,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
     d30 = 0.0;
     d31 = 0.0;
     d32 = 0.0;
-    for (int i21 = 0; i21 < 3; i21++) {
+    for (int i21{0}; i21 < 3; i21++) {
       int T1_FL_tmp;
       T1_FL_tmp = i17 + (3 * i21);
       d31 += T1_FL[T1_FL_tmp] * dv5[i21];
@@ -231,7 +231,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
   }
   rotx(Theta3[2], b_dv);
   //  Position of BL Leg
-  for (int i19 = 0; i19 < 3; i19++) {
+  for (int i19{0}; i19 < 3; i19++) {
     double d34;
     double d36;
     double d37;
@@ -240,7 +240,7 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
     d36 = 0.0;
     d37 = 0.0;
     d39 = 0.0;
-    for (int i23 = 0; i23 < 3; i23++) {
+    for (int i23{0}; i23 < 3; i23++) {
       int T1_BR_tmp;
       T1_BR_tmp = i19 + (3 * i23);
       d37 += T1_BR[T1_BR_tmp] * dv1[i23];
@@ -255,14 +255,14 @@ void CPos_wrt_I(const double Theta1[4], const double Theta2[4],
     b_rBfromI[i19] = rBfromI[i19] + d36;
   }
   rotx(Theta3[3], b_dv);
-  for (int i22 = 0; i22 < 3; i22++) {
+  for (int i22{0}; i22 < 3; i22++) {
     double d38;
     double d40;
     double d41;
     d38 = 0.0;
     d40 = 0.0;
     d41 = 0.0;
-    for (int i24 = 0; i24 < 3; i24++) {
+    for (int i24{0}; i24 < 3; i24++) {
       int T1_BL_tmp;
       T1_BL_tmp = i22 + (3 * i24);
       d40 += T1_BL[T1_BL_tmp] * dv5[i24];

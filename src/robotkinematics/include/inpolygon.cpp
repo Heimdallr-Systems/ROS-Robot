@@ -5,13 +5,14 @@
 // File: inpolygon.cpp
 //
 // MATLAB Coder version            : 5.2
-// C/C++ source code generated on  : 12-Apr-2021 14:32:25
+// C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 
 // Include Files
 #include "inpolygon.h"
 #include "abs.h"
 #include "eml_int_forloop_overflow_check.h"
+#include <cmath>
 
 // Function Declarations
 namespace Codegen {
@@ -80,7 +81,7 @@ static void b_computeRange(const double xv[3], int nloops, const int first[3],
   if ((1 <= nloops) && (nloops > 2147483646)) {
     check_forloop_overflow_error(true);
   }
-  for (int k = 0; k < nloops; k++) {
+  for (int k{0}; k < nloops; k++) {
     int a;
     int b;
     bool overflow;
@@ -90,7 +91,7 @@ static void b_computeRange(const double xv[3], int nloops, const int first[3],
     if (overflow) {
       check_forloop_overflow_error(true);
     }
-    for (int j = a; j <= b; j++) {
+    for (int j{a}; j <= b; j++) {
       double d;
       d = xv[j - 1];
       if (d < (*minxv)) {
@@ -123,7 +124,7 @@ static void b_computeScaleFactors(const double xv[3], const double yv[3],
   if ((1 <= nloops) && (nloops > 2147483646)) {
     check_forloop_overflow_error(true);
   }
-  for (int j = 0; j < nloops; j++) {
+  for (int j{0}; j < nloops; j++) {
     int a;
     int b;
     int i;
@@ -135,7 +136,7 @@ static void b_computeScaleFactors(const double xv[3], const double yv[3],
     if (overflow) {
       check_forloop_overflow_error(true);
     }
-    for (int b_i = a; b_i <= b; b_i++) {
+    for (int b_i{a}; b_i <= b; b_i++) {
       scale[b_i - 1] = scalemax(b_abs(0.5 * (xv[b_i - 1] + xv[b_i])),
                                 b_abs(0.5 * (yv[b_i - 1] + yv[b_i]))) *
                        6.6613381477509392E-16;
@@ -332,7 +333,7 @@ static void computeRange(const double xv[4], int nloops, const int first[4],
   if ((1 <= nloops) && (nloops > 2147483646)) {
     check_forloop_overflow_error(true);
   }
-  for (int k = 0; k < nloops; k++) {
+  for (int k{0}; k < nloops; k++) {
     int a;
     int b;
     bool overflow;
@@ -342,7 +343,7 @@ static void computeRange(const double xv[4], int nloops, const int first[4],
     if (overflow) {
       check_forloop_overflow_error(true);
     }
-    for (int j = a; j <= b; j++) {
+    for (int j{a}; j <= b; j++) {
       double d;
       d = xv[j - 1];
       if (d < (*minxv)) {
@@ -376,7 +377,7 @@ static void computeScaleFactors(const double xv[4], const double yv[4],
   if ((1 <= nloops) && (nloops > 2147483646)) {
     check_forloop_overflow_error(true);
   }
-  for (int j = 0; j < nloops; j++) {
+  for (int j{0}; j < nloops; j++) {
     int a;
     int b;
     int i;
@@ -388,7 +389,7 @@ static void computeScaleFactors(const double xv[4], const double yv[4],
     if (overflow) {
       check_forloop_overflow_error(true);
     }
-    for (int b_i = a; b_i <= b; b_i++) {
+    for (int b_i{a}; b_i <= b; b_i++) {
       scale[b_i - 1] = scalemax(b_abs(0.5 * (xv[b_i - 1] + xv[b_i])),
                                 b_abs(0.5 * (yv[b_i - 1] + yv[b_i]))) *
                        6.6613381477509392E-16;
@@ -659,10 +660,8 @@ static double scalemax(double a, double b)
   double s;
   if ((a > 1.0) && (b > 1.0)) {
     s = a * b;
-  } else if (b > a) {
-    s = b;
   } else {
-    s = a;
+    s = std::fmax(b, a);
   }
   return s;
 }
