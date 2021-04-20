@@ -15,8 +15,8 @@ def joystick_callback(data):
   global nextAngle
   global angleIntegrationSensitivity
   #TODO: Add relative goals, ie new_x=old_x+joy_x
-  xAxis=data.axes[1]
-  yAxis=data.axes[0]
+  xAxis=data.axes[1]*.2
+  yAxis=data.axes[0]*.2
   angleIntegrationSensitivity=.2*(1+data.axes[3])
   nextAngle=angleIntegrationSensitivity*data.axes[2]
   first_message=True
