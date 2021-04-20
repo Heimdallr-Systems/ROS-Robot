@@ -33,7 +33,7 @@ def rad2pulse(rad):
     pend = 1000 # us
     pmiddle = (pend-pstart)/2+pstart # us
     radrange=270*math.pi/180
-    return int(((pend-pstart)/radrange*rad+pmiddle)/2)
+    return int(((pend-pstart)/radrange*rad+pmiddle)/2+100-80)
 def drive_servos(pwm,servo_pos,i):
     # Servo pos is given in radians
     #for i in range(0,min(len(servo_pos),15)):
