@@ -20,7 +20,7 @@ def callback(data):
   pose=0
   # Callback fcn
 #  print(data[0])
-  inv= [4,7,9,10]
+  inv= [4,6,9,11]
   for i in range(0,13):
     pos=data.data[i];
     ovf=0
@@ -28,7 +28,7 @@ def callback(data):
       pos=-pos
       #print("Inverting servo " + str(i) + ". Was " + str(data.data[i]) + ", is now " + str(pos))
     else:
-      pos=pos
+        pos=pos
     if(abs(pos*180.0/pi)>110):
       print("Overflow on port " + str(i))
       if(pos>0):
@@ -36,8 +36,9 @@ def callback(data):
       else:
         pos=-100.0*pi/180.0
         print("set negative: "+str(pos*180.0/pi))
-    print("Driving servo "+str(i) + " to \"" +str(data.data[i]*180.0/math.pi) + "\" degrees.")
+#    print("Driving servo "+str(i) + " to \"" +str(data.data[i]*180.0/math.pi) + "\" degrees.")
     currpose.append(pos)
+#    print(prevpose)
     dest=lpf(pos,prevpose[i])
     prevpose[i]=dest
     a=pca.drive_servos(pwm,dest,i)
@@ -52,7 +53,7 @@ def servoMoveLpf(data):
   pose=0
   # Callback fcn
 #  print(data[0])
-  inv= [4,7,9,10]
+  inv= [4,6,9,11]
   for i in range(0,13):
     pos=data[i];
     ovf=0
@@ -68,7 +69,9 @@ def servoMoveLpf(data):
       else:
         pos=-100.0*pi/180.0
         print("set negative: "+str(pos*180.0/pi))
-    print("Driving servo "+str(i) + " to \"" +str(data[i]*180.0/math.pi) + "\" degrees.")
+ #   print("Driving servo "+str(i) + " to \"" +str(data[i]*180.0/math.pi) + "\" degrees.")
+#    print prevpose;
+#    print("Slowing")
     currpose.append(pos)
     dest=lpf(pos,prevpose[i])
     prevpose[i]=dest
@@ -99,12 +102,12 @@ def getup_handle(req):
 #    servoMoveLpf(step2);
 #    time.sleep(.1)
   for i in range(0,14):
-    #pca.drive_servos(pwm,0,i)
-    inv= [4,7,9,10]
-    if(i in inv):
-      q=pca.drive_servos(pwm,-step2[i],i)
-    else:
-      q=pca.drive_servos(pwm,step2[i],i)
+    pca.drive_servos(pwm,0,i)
+    #inv= [4,6,9,11]
+    #if(i in inv):
+    #  q=pca.drive_servos(pwm,-step2[i],i)
+    #else:
+    #  q=pca.drive_servos(pwm,step2[i],i)
   time.sleep(3)
   if(lastSrvResp):
     lastSrvResp=0
@@ -128,20 +131,24 @@ if __name__ == '__main__':
   pwm=pca.init_pca9685()
   pi=3.1415926535
   servo_poses=[pi/4.0,-pi/4.0, -pi/4.0, pi/4.0, -.1,-.1,-.1,-.1,pi/2.0, pi/2.0,-pi/2.0,-pi/2.0,-pi/4.0,0]
-  servo_poses=[pi/4.0,-pi/4.0,-pi/4.0,pi/4.0,pi/6.0,-pi/6.0,pi/6.0,-pi/6.0,pi/3.0,-pi/3.0,pi/3.0,-pi/3,0,0]
-  prevpose = servo_poses
+  th1=0.7416
+  th2=1.2748
+  servo_poses=[pi/4,-pi/4.0,-pi/4.0,pi/4.0,th1,-th1,th1,-th1,th2,-th2,th2,-th2,0,0]
   servo_poses_1=[pi/4.0,-pi/4.0-pi/3.0, -pi/4.0+pi/4.0, pi/6.0, pi/6.0,pi/6.0,pi/6.0,pi/6.0,pi/2.0, pi/2.0+pi/4.0,pi/2.0+pi/4.0,pi/2.0+pi/3.0,pi/4.0,0]
   step1=[pi/4.0,-pi/4.0,-pi/4.0,pi/4.0, -pi/4.0-.3,pi/4.0+.3,-pi/4.0-.3,pi/4.0+.3,3.0*pi/4.0,-3.0*pi/4.0,3.0*pi/4.0,-3.0*pi/4.0,0,0]
   step2=[0.7854,-0.7854,-0.7854,0.7854,0.2542,-0.2542,0.2542,-0.2542, 1.5095,-1.5095,1.5095,-1.5095,0,-pi/4.0-pi/12.0]
   ports=[0, 1, 2, 3,4,5,6,7,8,9,10,11,12,13]
   for i in range(0,14):
-    #pca.drive_servos(pwm,0,i)
-    inv= [4,7,9,10]
+#    pca.drive_servos(pwm,0,i)
+    inv= [4,6,9,11]
+    
     if(i in inv):
       q=pca.drive_servos(pwm,-servo_poses[i],i)
+      prevpose[i] = -servo_poses[i]
     else:
       q=pca.drive_servos(pwm,servo_poses[i],i)
-#    input("press something")
+      prevpose = servo_poses
+
  # input("press something to begin servo stuff")
  # pca.drive_servos(pwm,-3.0*pi/4.0,10) 
   time.sleep(3)

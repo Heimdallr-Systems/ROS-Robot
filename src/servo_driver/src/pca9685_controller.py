@@ -39,7 +39,7 @@ def drive_servos(pwm,servo_pos,i):
     #for i in range(0,min(len(servo_pos),15)):
     pwm.set_pwm(i,0,rad2pulse(servo_pos))
     feedback = "driving port " + str(i) + " to " + str(rad2pulse(servo_pos))
-    print(feedback)
+#    print(feedback)
     return [pwm,feedback]
 '''pwm=init_pca9685()
 print('Moving servo on channel 0, press Ctrl-C to quit...')

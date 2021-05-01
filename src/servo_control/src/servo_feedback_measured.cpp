@@ -81,10 +81,10 @@ std::vector<std::vector<double>> servoPoses{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
      }
      msg.data[i]=(adcVals[i]-540)*3.0*PI/2.0/1024.0;
      if(i==4) msg.data[i]=-msg.data[i];
-     if(i==7) msg.data[i]=-msg.data[i];
-//     if(i==11) msg.data[i]=-msg.data[i];
+     if(i==6) msg.data[i]=-msg.data[i];
+//     if(i==8) msg.data[i]=-msg.data[i];
      if(i==9) msg.data[i]=-msg.data[i];
-     if(i==10) msg.data[i]=-msg.data[i];
+     if(i==11) msg.data[i]=-msg.data[i];
 
      std::cout << i <<": " << msg.data[i]*180.0/3.1415 << ", ";
    //  std::cout << "how about here?\n";

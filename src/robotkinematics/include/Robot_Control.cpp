@@ -8,7 +8,7 @@
 // C/C++ source code generated on  : 14-Apr-2021 15:32:06
 //
 #define steperror .3
-#define bodyerror .11
+#define bodyerror .1
 // Include Files
 #include "Robot_Control.h"
 #include "Body_Pose_Controller.h"

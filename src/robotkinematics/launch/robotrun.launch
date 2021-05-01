@@ -1,6 +1,9 @@
 <launch>
   <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
   <include file="$(find rtabmap_ros)/launch/rtabmap.launch"/>
-  <!--<include file="$(find robot_goal_gen)/launch/goal_set.launch"/>
-  <node pkg="robotkinematics" type="kinematics_wrapper" name="$(anon base_name)"></node>-->
+  <!--<include file="$(find robot_goal_gen)/launch/goal_set.launch"/>-->
+  <!--<node pkg="robotkinematics" type="kinematics_wrapper" name="$(anon kin_name)"></node>-->
+  <node pkg="servo_control" type="servo_feedback_measured" name="$(anon base_name)"></node>
+  <!--<node pkg="servo_driver" type="pca_driver.py" name="$(anon driver_name)"></node>-->
+  <node pkg="pose_measure" type="frame_tf.py" name="$(anon tf_name)"></node>
 </launch>

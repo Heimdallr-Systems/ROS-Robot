@@ -28,7 +28,7 @@ def RTAB_callback(data):
   quat=[data.pose.orientation.w,data.pose.orientation.x,data.pose.orientation.y,data.pose.orientation.z]
   RTAB_position[0]=data.pose.position.x
   RTAB_position[1]=data.pose.position.y
-  RTAB_position[2]=data.pose.position.z+.26
+  RTAB_position[2]=data.pose.position.z
   RTAB_orien=quat
   have_RTAB_data =1
   print("In RTAB callback")
@@ -87,7 +87,7 @@ def combine_orientation():
   orien_imu=orien.as_quat()'''
   position[0]=position[0]
   position[1]=position[1]
-  position[2]=position[2]
+  position[2]=position[2]-.2
   return [position, RTAB_orien]
 
 if(__name__=='__main__'):

@@ -118,8 +118,8 @@ void find_pgon_goal(const double r_II_c_FR[3], const double r_II_c_FL[3],
 	 std::cout<< "HI HIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHIHI " << std::endl;
       exitg1 = true;
     } else {
-      r_II_B[0] += dir_to_pgon[0] * 0.001;
-      r_II_B[1] += dir_to_pgon[1] * 0.001;
+      r_II_B[0] += dir_to_pgon[0] * 0.01;
+      r_II_B[1] += dir_to_pgon[1] * 0.01; 
     }
   }
   *x = r_II_B[0];

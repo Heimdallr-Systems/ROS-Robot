@@ -9,6 +9,9 @@
 #include "servo_driver/getUp.h"
 #include <math.h>
 #include <unistd.h>
+#define PI 3.1415
+#define TH1 0.7416
+#define TH2 1.2748
 // C++ includes
 #include <sstream>
 #include <iostream>
@@ -64,28 +67,28 @@ void setTargetPosCallback(const geometry_msgs::PoseStamped msg) {
   
   r_II_B_d[0]=msg.pose.position.x*10;
   r_II_B_d[1]=msg.pose.position.y*10;
-  r_II_B_d[2]=.21;
+  r_II_B_d[2]=.26;
   Euler_d[0]=0;
   Euler_d[1]=0;
   Euler_d[2]=0;
 }
-bool pos_rec = 0;
+double pos_rec = 0;
 void getCurrentPos(const geometry_msgs::PoseStamped msg) {
   pos_rec=1;
-  gamma_m[0]=msg.pose.position.x;
-  gamma_m[1]=msg.pose.position.y;
-  gamma_m[2]=msg.pose.position.z;
+  gamma_m[3]=msg.pose.position.x;
+  gamma_m[4]=msg.pose.position.y;
+  gamma_m[5]=msg.pose.position.z;
   double q[4];
   q[0]=msg.pose.orientation.w;
   q[1]=msg.pose.orientation.x;
   q[2]=msg.pose.orientation.y;
   q[3]=msg.pose.orientation.z;
-  std::cout << "x: " << gamma_m[0] << ", y: " <<gamma_m[1] << ", z: " << gamma_m[2] << "\n";
+  std::cout << "x: " << gamma_m[3] << ", y: " <<gamma_m[4] << ", z: " << gamma_m[5] << "\n";
   double eul[3];
   quat2eul(q,eul);
-  gamma_m[3]=0; //eul[0];
-  gamma_m[4]=0;//eul[1];
-  gamma_m[5]=0;//eul[2];
+  gamma_m[0]=eul[0];
+  gamma_m[1]=eul[1];
+  gamma_m[2]=eul[2];
 }
 bool moveToInit =0;
 bool robotStateHandler(robotkinematics::goToInit::Request &req, robotkinematics::goToInit::Response &res) {
@@ -134,19 +137,19 @@ int main(int argc, char **argv) {
   gamma_m[2]=0;
   gamma_m[3]=0;
   gamma_m[4]=0;
-  gamma_m[5]=.24;
+  gamma_m[5]=.26;
   gamma_m[6]=3.1415/4.0;
   gamma_m[7]=-3.1415/4.0;
   gamma_m[8]=-3.1415/4.0;
-  gamma_m[9]=3.1415/4.0;
-  gamma_m[10]=3.1415/6;
-  gamma_m[11]=-3.1415/6;
-  gamma_m[12]=3.1415/6;
-  gamma_m[13]=-3.1415/6;
-  gamma_m[14]=3.1415/3;
-  gamma_m[15]=-3.1415/3;
-  gamma_m[16]=3.1415/3;
-  gamma_m[17]=-3.1415/3;
+  gamma_m[9]=-3.1415/4.0;
+  gamma_m[10]=TH1;
+  gamma_m[11]=-TH1;
+  gamma_m[12]=TH1;
+  gamma_m[13]=-TH1;
+  gamma_m[14]=TH2;
+  gamma_m[15]=-TH2;
+  gamma_m[16]=TH2;
+  gamma_m[17]=-TH2;
   std::cout<<"Hello wqretjh\n";	
   ros::init(argc, argv, "robot_kinematics");
   for(int i =0; i<4; i++) theta1_d_out[i] = 0; 
@@ -155,21 +158,21 @@ int main(int argc, char **argv) {
   ros::Rate loop_rate(20);
   ros::Subscriber sub=n.subscribe("servo_feedback",1000,servoCallback);
   ros::Subscriber targetPos_sub=n.subscribe("rtabmap/goal",1000,setTargetPosCallback);
-  //ros::Subscriber currentPos_sub=n.subscribe("pose_combined",1000,getCurrentPos);
+  ros::Subscriber currentPos_sub=n.subscribe("pose_combined",1000,getCurrentPos);
   ros::ServiceServer initSrv= n.advertiseService("robot_state",robotStateHandler);
   ros::ServiceClient resetSrv=n.serviceClient<servo_driver::getUp>("get_up");
   servo_driver::getUp getUpClient;
 
-  r_II_B_d[0]=0;//msg.pose.position.x;
-  r_II_B_d[1]=0;//msg.pose.position.y;
-  r_II_B_d[2]=.21;
+  r_II_B_d[0]=.1;//msg.pose.position.x;
+  r_II_B_d[1]=1;//msg.pose.position.y;
+  r_II_B_d[2]=.26;
   Euler_d[0]=0;
   Euler_d[1]=0;
   Euler_d[2]=0;  int cnt=0;
   for(int i =0;i<3;i++) legs_on_gnd[i]=1;
 //  Codegen::Robot_Control_init();
   while(ros::ok()) {
-    if(moveToInit==1) {
+    if(moveToInit==1 && pos_rec==1) {
     /* servo_control::MotorVector msg;
      for(int i = 0; i<36; i++) {
        gamma_m[i]=0;
@@ -209,7 +212,7 @@ int main(int argc, char **argv) {
       Codegen::Robot_Control(r_II_B_d, Euler_d,gamma_m,init_toggle,legs_on_gnd,theta1_d_out,theta2_d_out,theta3_d_out,
                     &phi_d_temp, r_II_B_d_temp, floor_toggle_out,legs_valid);
       double err[3];
-      err[0]=r_II_B_d_temp[0]-gamma_m[3];
+/*      err[0]=r_II_B_d_temp[0]-gamma_m[3];
       err[1]=r_II_B_d_temp[1]-gamma_m[4];
       err[2]=r_II_B_d_temp[2]-gamma_m[5];
       std::cout<<"Body pose error: " <<norm_vec(err)<<"\n";
@@ -231,10 +234,10 @@ int main(int argc, char **argv) {
       }
       for(int i = 0; i<12; i++) {
           std::cout << "r_II_C_dead[" << i << "]: " << r_II_C_dead[i] << "\n";
-      }      
+      }*/      
       init_toggle=0;
 
-        for(int i = 0;i<12;i++) Theta[i]=gamma_m[i+6];
+       /* for(int i = 0;i<12;i++) Theta[i]=gamma_m[i+6];
         if(firstRun==1) {
           for(int i =0; i<12;i++) r_II_C_dead[i]=0;
           for(int i =0; i<4;i++) prev_legs_valid[i]=1;
@@ -245,7 +248,7 @@ int main(int argc, char **argv) {
           T_I_B_dead[8]=1;
           r_II_B_dead[0]=0;
           r_II_B_dead[1]=0;
-          r_II_B_dead[2]=.21;
+          r_II_B_dead[2]=.23;
         Codegen::CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstRun,legs_valid,prev_legs_valid,r_II_C_dead);
         firstRun=0;
         } else {
@@ -263,14 +266,14 @@ int main(int argc, char **argv) {
 
       rot2zyx(T_I_B_dead, eulAng);
 //      if(r_II_B_dead[2]>.25) r_II_B_dead[2]=.25;
-      r_II_B_dead[2]=.21;
-      gamma_m[0]=eulAng[0];
+      r_II_B_dead[2]=.23;
+      /*gamma_m[0]=eulAng[0];
       gamma_m[1]=eulAng[1];
       gamma_m[2]=eulAng[2];
       gamma_m[3]=r_II_B_dead[0];
       gamma_m[4]=r_II_B_dead[1];
       gamma_m[5]=r_II_B_dead[2];
-
+      */
       std::cout << "theta1[1]: " << theta1_d_out[0] << "\n";
       for(int i =0; i<4;i++){ 
         msg.data[i]=theta1_d_out[i];
